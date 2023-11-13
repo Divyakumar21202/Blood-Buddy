@@ -1,5 +1,6 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/button.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/text_field.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -31,7 +32,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
+      child: Container(
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -47,6 +49,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(
               height: 20,
             ),
+              DropDownTextField(
+              textFieldDecoration: const InputDecoration(
+                hintText: 'Gender',
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4.0))),
+              ),
+              clearOption: false,
+              textFieldFocusNode: textFieldFocusNode,
+              searchFocusNode: searchFocusNode,
+              // searchAutofocus: true,
+              dropDownItemCount: 2,
+              searchShowCursor: false,
+              enableSearch: true,
+              searchKeyboardType: TextInputType.text,
+              dropDownList: const [
+                DropDownValueModel(name: 'Male', value: "value1"),
+                DropDownValueModel(name: 'Female', value: "value3"),
+              ],
+              onChanged: (val) {},
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+          
             DropDownTextField(
               textFieldDecoration: const InputDecoration(
                 hintText: 'Select Blood Group',
@@ -94,6 +120,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
               keyboardType: TextInputType.visiblePassword,
               isObcureTrue: true,
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            const AuthButton(nameButton: 'Sign Up'),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Already Register ? Click ',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  'Login !',
+                  style: TextStyle(
+                      color: Colors.red[400],
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+             Flexible(
+          flex: 2,
+          child: Container(),
+        ),
           ],
         ),
       ),

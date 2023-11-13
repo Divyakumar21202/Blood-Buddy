@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Donate_List_item/donate_item_view.dart';
+import 'package:smart_odisha_blood/Screens/Auth-Screens/login_screen.dart';
 import 'package:smart_odisha_blood/Screens/Auth-Screens/sign_up_screen.dart';
 import 'package:smart_odisha_blood/Screens/donate_list.dart';
 import 'package:smart_odisha_blood/Screens/home_screen_drawer.dart';
@@ -21,7 +22,7 @@ Widget CurrentPage(int curr) {
       return const DonateListScreen();
       break;
     case 2:
-      return const Center(child: Text('Search Page'));
+      return const LoginScreen();
       break;
     default:
       return const Center(child: Text('Donate Page'));
