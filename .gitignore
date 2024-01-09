@@ -30,10 +30,6 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/lib/Screens
-/lib/common
-/lib/Constant-Widgets
-/lib/features/auth
 
 # Symbolication related
 app.*.symbols

@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Donate_List_item/donate_item_view.dart';
-import 'package:smart_odisha_blood/Screens/Auth-Screens/login_screen.dart';
-import 'package:smart_odisha_blood/Screens/Auth-Screens/sign_up_screen.dart';
+import 'package:smart_odisha_blood/Screens/homeScreen.dart';
+import 'package:smart_odisha_blood/Screens/landingScreen.dart';
+import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_screen.dart';
+import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_screen.dart';
+import 'package:smart_odisha_blood/features/auth/screens/login_screen.dart';
+import 'package:smart_odisha_blood/features/auth/screens/otp_screen.dart';
+import 'package:smart_odisha_blood/features/auth/screens/sign_up_screen.dart';
 import 'package:smart_odisha_blood/Screens/donate_list.dart';
 import 'package:smart_odisha_blood/Screens/home_screen_drawer.dart';
+import 'package:smart_odisha_blood/Screens/splash_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
 Widget CurrentPage(int curr) {
   switch (curr) {
     case 0:
-      return const SignUpScreen();
-      break;
+      return const HomeScreen();
     case 1:
-      return const DonateListScreen();
-      break;
+      return const LandingScreen();
     case 2:
-      return const LoginScreen();
-      break;
+      return const DonateListScreenX();
     default:
-      return const Center(child: Text('Donate Page'));
+      return const DonateScreen();
   }
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MainScreenState extends State<MainScreen> {
   int curr = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,8 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
             text: 'Search',
           ),
           GButton(
-            icon: Icons.add_circle_outline_sharp,
-            text: 'Donate',
+            icon: Icons.history,
+            text: 'History',
           ),
         ],
       ),
@@ -79,16 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  Home({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home Page'),
     );
   }
 }
