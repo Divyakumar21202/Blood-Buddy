@@ -1,27 +1,29 @@
-import 'package:riverpod/riverpod.dart';
-
-final userModelProvider = StateProvider<UserModel?>((ref) => null);
-
 class UserModel {
   final String name;
-  final String bg;
+  final String uid;
   final String mobileNumber;
-  final String gender;
+  final String district;
+  final String village;
+  final String password;
   final String address;
   UserModel({
     required this.name,
-    required this.bg,
+    required this.uid,
     required this.mobileNumber,
-    required this.gender,
+    required this.district,
+    required this.village,
+    required this.password,
     required this.address,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
-      'Bg': bg,
-      'MobileNumber': mobileNumber,
-      'Gender': gender,
+      'uid': uid,
+      'mobileNumber': mobileNumber,
+      'district': district,
+      'village': village,
+      'password': password,
       'address': address,
     };
   }
@@ -29,9 +31,11 @@ class UserModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       name: map['name'] as String,
-      bg: map['Bg'] as String,
-      mobileNumber: map['MobileNumber'] as String,
-      gender: map['Gender'] as String,
+      uid: map['uid'] as String,
+      mobileNumber: map['mobileNumber'] as String,
+      district: map['district'] as String,
+      village: map['village'] as String,
+      password: map['password'] as String,
       address: map['address'] as String,
     );
   }

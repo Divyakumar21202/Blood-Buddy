@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:smart_odisha_blood/Constant-Widgets/Donate_List_item/donate_item_view.dart';
-import 'package:smart_odisha_blood/Screens/homeScreen.dart';
-import 'package:smart_odisha_blood/Screens/landingScreen.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_screen.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_screen.dart';
-import 'package:smart_odisha_blood/features/auth/screens/login_screen.dart';
-import 'package:smart_odisha_blood/features/auth/screens/otp_screen.dart';
-import 'package:smart_odisha_blood/features/auth/screens/sign_up_screen.dart';
-import 'package:smart_odisha_blood/Screens/donate_list.dart';
 import 'package:smart_odisha_blood/Screens/home_screen_drawer.dart';
-import 'package:smart_odisha_blood/Screens/splash_screen.dart';
+import 'package:smart_odisha_blood/features/auth/screens/login_screen.dart';
+import 'package:smart_odisha_blood/features/auth/screens/sign_up_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,9 +15,9 @@ class MainScreen extends StatefulWidget {
 Widget CurrentPage(int curr) {
   switch (curr) {
     case 0:
-      return const HomeScreen();
+      return const LoginScreen();
     case 1:
-      return const LandingScreen();
+      return const SignUpScreen();
     case 2:
       return const DonateListScreenX();
     default:

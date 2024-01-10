@@ -1,8 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:smart_odisha_blood/features/auth/repository/auth_repository.dart';
+import 'package:smart_odisha_blood/models/user_model.dart';
 
 final authRepositoryControllerProvider = Provider((ref) {
   AuthRepository authRepository = ref.read(authRepositoryProvider);
@@ -19,24 +19,41 @@ class AuthRepositoryController {
     authRepository.verifyUser(phoneNumber, context);
   }
 
-  void verifyOtp(BuildContext context, String verificationId, String smsCode) {
+  void verifyOtp(BuildContext context, String VerificationId, String SmsCode) {
     authRepository.verifyOtp(
       context: context,
-      verificationId: verificationId,
-      smsCode: smsCode,
+      VerificationId: VerificationId,
+      SmsCode: SmsCode,
     );
   }
 
-  void SigninWithGmail(
-    BuildContext context,
-    String email,
-    String,
-    String password,
-  ) {
-    authRepository.signUpwithGmail(
-      context,
-      email,
-      password,
+  void uploadUserModel({
+    required BuildContext context,
+    required UserModel userModel,
+  }) {
+    authRepository.uploadUserModel(
+      context: context,
+      userModel: userModel,
+    );
+  }
+
+  Future<Map<String, dynamic>?> getUserModel({
+    required BuildContext context,
+    required String mobileNumber,
+  }) {
+    return authRepository.getUserModel(
+      context: context,
+      mobileNumber: mobileNumber,
+    );
+  }
+
+  void LoginWithPhone({
+    required BuildContext context,
+    required String phoneNumber,
+  }) {
+    authRepository.LoginWithPhone(
+      context: context,
+      phoneNumber: phoneNumber,
     );
   }
 }

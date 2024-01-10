@@ -1,25 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/text_field.dart';
+import 'package:smart_odisha_blood/Screens/mainScreen.dart';
+import 'package:smart_odisha_blood/common/customSnackbar.dart';
+import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart';
+import 'package:smart_odisha_blood/features/auth/screens/registerScreen.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   final TextEditingController _MobileController = TextEditingController();
 
-  FocusNode searchFocusNode = FocusNode();
-  FocusNode textFieldFocusNode = FocusNode();
   @override
   void dispose() {
     super.dispose();
     _passwordController.dispose();
     _MobileController.dispose();
   }
+
+  void confirmUser(
+    String mobileNumber,
+    String password,
+  ) async {
+    CustomSnackBar(
+      content: mobileNumber,
+      context: context,
+    );
+
+    var model = ref.watch(authRepositoryControllerProvider).getUserModel(
+          context: context,
+          mobileNumber: '+91${mobileNumber}',
+        );
+    model.then((value) {
+      if (value == null) {
+        CustomSnackBar(
+          content: 'Number Not Exist\'s',
+          context: context,
+        ).displaySnackBar();
+      }
+      if (value != null) {
+        if (value['password'] == password) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const MainScreen(),
+            ),
+          );
+        } else {
+          CustomSnackBar(
+            content: 'Enter Correct Password',
+            context: context,
+          ).displaySnackBar();
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +129,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 12,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    String password = _passwordController.text.trim();
+                    String mobileNumber = _MobileController.text.trim();
+                    if (mobileNumber.length != 10) {
+                      CustomSnackBar(
+                        content: 'Enter Mobile Number',
+                        context: context,
+                      ).displaySnackBar();
+                    } else if (password.isEmpty) {
+                      CustomSnackBar(
+                        content: 'Enter Password',
+                        context: context,
+                      ).displaySnackBar();
+                    } else {
+                      confirmUser(
+                        mobileNumber,
+                        password,
+                      );
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     padding: const EdgeInsets.symmetric(
@@ -129,7 +189,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const RegisterScreen(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Sign Up',
                         style: TextStyle(

@@ -1,9 +1,7 @@
 import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:smart_odisha_blood/features/auth/screens/sign_up_screen.dart';
+import 'package:smart_odisha_blood/features/auth/screens/login_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
@@ -45,7 +43,7 @@ class LandingScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) =>const SignUpScreen(),
+                    builder: (context) => const LoginScreen(),
                   ),
                 );
               },

@@ -3,25 +3,31 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_odisha_blood/Screens/homeScreen.dart';
+
 import 'package:smart_odisha_blood/Screens/mainScreen.dart';
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
 import 'package:smart_odisha_blood/features/auth/screens/otp_screen.dart';
+import 'package:smart_odisha_blood/features/auth/screens/sign_up_screen.dart';
+import 'package:smart_odisha_blood/models/user_model.dart';
 
 final authRepositoryProvider = Provider(
   (ref) => AuthRepository(
     auth: FirebaseAuth.instance,
     firestore: FirebaseFirestore.instance,
+    ref: ref,
   ),
 );
+
 
 class AuthRepository {
   final FirebaseAuth auth;
   final FirebaseFirestore firestore;
+  final ProviderRef ref;
 
   AuthRepository({
     required this.auth,
     required this.firestore,
+    required this.ref,
   });
 
   void verifyUser(String phoneNumber, BuildContext context) async {
@@ -36,10 +42,6 @@ class AuthRepository {
               .displaySnackBar();
         },
         codeSent: (String identificationId, int? code) async {
-          CustomSnackBar(
-            content: identificationId,
-            context: context,
-          );
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => OtpScreen(
@@ -48,17 +50,7 @@ class AuthRepository {
             ),
           );
         },
-        codeAutoRetrievalTimeout: (val) {
-          CustomSnackBar(
-            content: val,
-            context: context,
-          );
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const MainScreen(),
-            ),
-          );
-        },
+        codeAutoRetrievalTimeout: (val) {},
       );
     } catch (e) {
       CustomSnackBar(
@@ -70,24 +62,51 @@ class AuthRepository {
 
   void verifyOtp({
     required BuildContext context,
-    required String verificationId,
-    required String smsCode,
+    required String VerificationId,
+    required String SmsCode,
   }) async {
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationId,
-        smsCode: smsCode,
+        verificationId: VerificationId,
+        smsCode: SmsCode,
       );
+     
       await auth
           .signInWithCredential(
-            credential,
+        credential,
+      )
+          .then((value) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const SignUpScreen(),
+          ),
+        );
+      });
+    } catch (e) {
+      CustomSnackBar(
+        content: e.toString(),
+        context: context,
+      );
+    }
+  }
+
+  void uploadUserModel({
+    required UserModel userModel,
+    required BuildContext context,
+  }) async {
+    try {
+      await firestore
+          .collection('users')
+          .doc(userModel.uid)
+          .set(
+            userModel.toMap(),
           )
-          .then(
-            (value) => Navigator.of(context).pushAndRemoveUntil(
+          .whenComplete(
+            () => Navigator.push(
+              context,
               MaterialPageRoute(
                 builder: (context) => const MainScreen(),
               ),
-              (route) => false,
             ),
           );
     } catch (e) {
@@ -98,23 +117,51 @@ class AuthRepository {
     }
   }
 
-  void signUpwithGmail(
-    BuildContext context,
-    String email,
-    String password,
-  ) async {
+  Future<Map<String, dynamic>?> getUserModel({
+    required BuildContext context,
+    required String mobileNumber,
+  }) async {
+    Map<String, dynamic>? doc;
     try {
-      auth
-          .createUserWithEmailAndPassword(
-            email: email,
-            password: password,
-          )
-          .whenComplete(
-            () => Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => HomeScreen()),
-              (route) => false,
-            ),
-          );
+      await firestore.collection('users').get().then((value) {
+        doc = value.docs
+            .singleWhere(
+                (element) => element.data()['mobileNumber'] == mobileNumber)
+            .data();
+      });
+    } catch (e) {
+      CustomSnackBar(
+        content: e.toString(),
+        context: context,
+      );
+    }
+    return doc;
+  }
+
+  void LoginWithPhone({
+    required BuildContext context,
+    required String phoneNumber,
+  }) async {
+    try {
+      // auth.currentUser
+      //     ?.linkWithPhoneNumber(
+      //       phoneNumber,
+      //     )
+      //     .whenComplete(
+      //       () => Navigator.of(context).pushReplacement(
+      //         MaterialPageRoute(
+      //           builder: (context) => const MainScreen(),
+      //         ),
+      //       ),
+      //     );
+      await auth.signInWithPhoneNumber(
+        phoneNumber,
+      );
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const MainScreen(),
+        ),
+      );
     } catch (e) {
       CustomSnackBar(
         content: e.toString(),

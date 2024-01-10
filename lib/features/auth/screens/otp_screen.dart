@@ -19,11 +19,11 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
     _controller.dispose();
   }
 
-  void verifyOtp(String code) {
+  void verifyOtp(String Code) {
     ref.watch(authRepositoryControllerProvider).verifyOtp(
           context,
           widget.IdentificationId,
-          code,
+          Code,
         );
   }
 

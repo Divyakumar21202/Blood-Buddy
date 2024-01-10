@@ -1,5 +1,3 @@
-import 'package:smart_odisha_blood/models/donor_model.dart';
-
 List<Map<String, String>> donorList = [
   {
     "BloodGroup": "A+ve",
