@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_odisha_blood/Screens/mainScreen.dart';
+import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_screen.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
@@ -32,15 +33,18 @@ class HomeDrawer extends StatelessWidget {
               title: const Text("Home"),
             ),
             ListTile(
-              onTap: () {},
-              leading: const Icon(Icons.volunteer_activism_rounded),
-              title: const Text("Donate"),
-            ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => const DonateScreen()),
+                  );
+                },
+                leading: const Icon(Icons.volunteer_activism_rounded),
+                title: const Text("Donate")),
             ListTile(
-              onTap: () {},
-              leading: const Icon(Icons.admin_panel_settings_outlined),
-              title: const Text("Admin Panel"),
-            ),
+                onTap: () {},
+                leading: const Icon(Icons.admin_panel_settings_outlined),
+                title: const Text("Admin Panel")),
             ListTile(
               onTap: () {
                 FirebaseAuth.instance.signOut();

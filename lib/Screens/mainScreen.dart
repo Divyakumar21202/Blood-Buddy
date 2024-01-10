@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:smart_odisha_blood/Screens/homeScreen.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_screen.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_screen.dart';
 import 'package:smart_odisha_blood/Screens/home_screen_drawer.dart';
@@ -15,13 +16,13 @@ class MainScreen extends StatefulWidget {
 Widget CurrentPage(int curr) {
   switch (curr) {
     case 0:
-      return const LoginScreen();
+      return const HomeScreen();
     case 1:
-      return const SignUpScreen();
+      return const Center(child: Text('Donor List'));
     case 2:
       return const DonateListScreenX();
     default:
-      return const DonateScreen();
+      return const Center(child: Text('Extra Screen'));
   }
 }
 
