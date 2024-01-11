@@ -1,33 +1,41 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BloodFilterButton extends StatelessWidget {
+class BloodFilterButton extends ConsumerWidget {
+  final bool isSelected;
   final String buttonName;
+  final VoidCallback onTap;
   const BloodFilterButton({
     Key? key,
     required this.buttonName,
+    required this.isSelected,
+    required this.onTap,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(
-        top: 6,
-        bottom: 6,
-        left: 16,
-        right: 16,
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.red,
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.only(
+          top: 6,
+          bottom: 6,
+          left: 16,
+          right: 16,
         ),
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child:  Text(
-        buttonName,
-        style:const TextStyle(
-          fontSize: 18,
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.red : null,
+          border: Border.all(
+            color: Colors.red,
+          ),
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          buttonName,
+          style: const TextStyle(
+            fontSize: 18,
+          ),
         ),
       ),
     );

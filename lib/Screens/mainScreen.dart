@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:smart_odisha_blood/Screens/homeScreen.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_screen.dart';
-import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_screen.dart';
 import 'package:smart_odisha_blood/Screens/home_screen_drawer.dart';
-import 'package:smart_odisha_blood/features/auth/screens/login_screen.dart';
-import 'package:smart_odisha_blood/features/auth/screens/sign_up_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
