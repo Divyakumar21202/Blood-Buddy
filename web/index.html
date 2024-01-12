@@ -36,6 +36,20 @@
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
   </script>
+  
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+const firebaseConfig = {
+  apiKey: "AIzaSyDdAF48P3qUd21gCVfQAisRbOnAYxyz2Os",
+  authDomain: "odisha-blood-camp.firebaseapp.com",
+  projectId: "odisha-blood-camp",
+  storageBucket: "odisha-blood-camp.appspot.com",
+  messagingSenderId: "714933171498",
+  appId: "1:714933171498:web:fff161520798eeff481a53"
+};
+
+const app = initializeApp(firebaseConfig);
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>

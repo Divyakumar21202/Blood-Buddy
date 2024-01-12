@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_odisha_blood/Screens/homeScreen.dart';
 
 import 'package:smart_odisha_blood/Screens/mainScreen.dart';
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
@@ -45,6 +46,7 @@ class AuthRepository {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => OtpScreen(
+                isLogin: false,
                 IdentificationId: identificationId,
               ),
             ),
@@ -64,6 +66,7 @@ class AuthRepository {
     required BuildContext context,
     required String VerificationId,
     required String SmsCode,
+    required bool isLogin,
   }) async {
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
@@ -78,7 +81,8 @@ class AuthRepository {
           .then((value) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const SignUpScreen(),
+            builder: (context) =>
+                isLogin ? const HomeScreen() : const SignUpScreen(),
           ),
         );
       });
@@ -143,20 +147,30 @@ class AuthRepository {
     required String phoneNumber,
   }) async {
     try {
-      
-     await FirebaseAuth.instance.signInWithPhoneNumber(phoneNumber);
-      await auth.signInWithPhoneNumber(
-        phoneNumber,
-        RecaptchaVerifier(
-            auth: FirebaseAuthPlatform.instance,
-            onSuccess: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => const MainScreen(),
-                ),
-                (route) => false,
-              );
-            }),
+      auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) {
+          auth.signInWithCredential(
+            credential,
+          );
+        },
+        verificationFailed: (val) {
+          CustomSnackBar(
+            content: val.toString(),
+            context: context,
+          ).displaySnackBar();
+        },
+        codeSent: (String IdentificationId, int? code){
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => OtpScreen(
+                isLogin: true,
+                IdentificationId: IdentificationId,
+              ),
+            ),
+          );
+        },
+        codeAutoRetrievalTimeout: (val) {},
       );
     } catch (e) {
       CustomSnackBar(

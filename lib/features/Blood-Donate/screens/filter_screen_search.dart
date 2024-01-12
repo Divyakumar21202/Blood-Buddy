@@ -33,6 +33,7 @@ class _FilterScreenSearchState extends ConsumerState<FilterScreenSearch> {
   bool isABn = false;
   bool isOn = false;
   bool isBn = false;
+
   void changeApply() {
     SelectFilterData selectFilterData = SelectFilterData(
       aPpositive: {'A+ve': isAp},

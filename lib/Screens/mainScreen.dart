@@ -51,8 +51,9 @@ class _MainScreenState extends State<MainScreen> {
             text: 'Search',
           ),
           GButton(
-            icon: Icons.history,
-            text: 'History',
+            icon: Icons.message_rounded,
+            text: 'Requests',
+            textSize: 12,
           ),
         ],
       ),

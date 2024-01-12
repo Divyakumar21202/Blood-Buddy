@@ -45,6 +45,9 @@ dependencies:
   csc_picker_i18n: ^0.2.8
   shared_preferences: ^2.2.2
   firebase_auth_platform_interface: ^7.0.9
+  url_launcher: ^6.2.3
+  url_launcher_android: ^6.2.2
+  carousel_slider: ^4.2.1
   
 
 dev_dependencies:

@@ -17,14 +17,14 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for android - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.iOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
@@ -52,11 +52,12 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBqsTFON6LePpPX7iE4gW7c0pK7K3F0LG4',
-    appId: '1:714933171498:android:5df6853a4f621d6c481a53',
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDdAF48P3qUd21gCVfQAisRbOnAYxyz2Os',
+    appId: '1:714933171498:web:fff161520798eeff481a53',
     messagingSenderId: '714933171498',
     projectId: 'odisha-blood-camp',
+    authDomain: 'odisha-blood-camp.firebaseapp.com',
     storageBucket: 'odisha-blood-camp.appspot.com',
   );
 }

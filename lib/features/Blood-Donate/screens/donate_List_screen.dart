@@ -120,13 +120,14 @@ class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
                   }
                   List<DonorModel> list = snapshot.data!;
                   List<DonorModel> filterList1 = [];
+                  List<DonorModel> filterList2 = [];
                   List<DonorModel> filterList = [];
                   if (_searchController.text.isNotEmpty) {
                     filterList1 = list.where((element) {
                       return element.DonorName.toString()
                           .toLowerCase()
                           .contains(
-                            _searchController.text.toLowerCase(),
+                            _searchController.text.toString().toLowerCase(),
                           );
                     }).toList();
                   }
@@ -136,8 +137,33 @@ class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
                             filterData!.city.toLowerCase(),
                           );
                     }).toList();
+                    filterList2 = list.where((element) {
+                      return element.District.toString().toLowerCase().contains(
+                            filterData!.state.toLowerCase(),
+                          );
+                    }).toList();
+                    // if (filterData!.aPpositive['A+ve']!) {
+                    //   filterList = filterList +
+                    //       list.where((element) {
+                    //         return element.BloodGroup.toString()
+                    //             .toLowerCase()
+                    //             .contains(
+                    //               'A+ve'.toLowerCase(),
+                    //             );
+                    //       }).toList();
+                    // }
+                    // if (filterData!.bPositive['B+ve']!) {
+                    //   filterList = filterList +
+                    //       list.where((element) {
+                    //         return element.BloodGroup.toString()
+                    //             .toLowerCase()
+                    //             .contains(
+                    //               'B+ve'.toLowerCase(),
+                    //             );
+                    //       }).toList();
+                    // }
                   }
-                  var finalList = filterList + filterList1;
+                  var finalList = filterList1 + filterList2;
                   if (finalList.isNotEmpty) {
                     list = finalList;
                   }
@@ -151,6 +177,7 @@ class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
                       var singleDonor = list[index].toMap();
                       return DonorCardWidget(
                         singleDonor: singleDonor,
+                        isRequested: true,
                       );
                     },
                   );
