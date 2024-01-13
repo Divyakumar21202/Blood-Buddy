@@ -11,8 +11,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<String> imgList = [
-    'https://img.freepik.com/free-psd/blood-donation-landing-page-template_23-2149095054.jpg?size=626&ext=jpg&uid=R107090669&ga=GA1.1.1948187877.1675699674&semt=ais',
-    'https://img.freepik.com/free-photo/world-blood-donor-day-creative-collage_23-2149378359.jpg?size=626&ext=jpg&uid=R107090669&ga=GA1.1.1948187877.1675699674&semt=ais',
     'https://img.freepik.com/free-vector/happy-world-blood-donor-day-red-white-black-background-social-media-design-banner-free-vector_1340-21636.jpg?size=626&ext=jpg&uid=R107090669&ga=GA1.1.1948187877.1675699674&semt=ais',
     'https://img.freepik.com/free-vector/happy-world-blood-donor-day-red-black-white-background-social-media-design-banner-free-vector_1340-21497.jpg?size=626&ext=jpg&uid=R107090669&ga=GA1.1.1948187877.1675699674&semt=ais',
     'https://img.freepik.com/free-vector/world-blood-donor-day-medical-elements-design_1035-23348.jpg?size=626&ext=jpg&uid=R107090669&ga=GA1.1.1948187877.1675699674&semt=ais',
@@ -56,66 +54,116 @@ class _HomeScreenState extends State<HomeScreen> {
         .toList();
 
     return Scaffold(
-        body: Column(
-      children: [
-        const SizedBox(
-          height: 17,
-        ),
-        CarouselSlider(
-          items: imageSliders,
-          options: CarouselOptions(
-            aspectRatio: 16 / 9,
-            viewportFraction: 0.8,
-            initialPage: 0,
-            enableInfiniteScroll: true,
-            reverse: false,
-            autoPlay: true,
-            autoPlayInterval: const Duration(seconds: 3),
-            autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            autoPlayCurve: Curves.fastOutSlowIn,
-            enlargeCenterPage: true,
-            enlargeFactor: 0.3,
-            scrollDirection: Axis.horizontal,
-          ),
-        ),
-        Container(
-          height: 60,
-        ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: DecoratedBox(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+              Colors.red[900]!,
+              Colors.red[900]!,
+              Colors.red[600]!,
+              Colors.red[300]!,
+              Colors.red[900]!,
+              Colors.red[900]!,
+            ])),
+        child: Column(
           children: [
-            BloodGroupCard(
-              cardName: 'A+',
+            ClipRect(
+              child: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.red,
+                      Colors.redAccent,
+                      Colors.redAccent,
+                      Colors.red,
+                    ],
+                  ),
+                ),
+                child: CarouselSlider(
+                  items: imageSliders,
+                  options: CarouselOptions(
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.8,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    reverse: false,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 3),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    enlargeFactor: 0.3,
+                    scrollDirection: Axis.horizontal,
+                  ),
+                ),
+              ),
             ),
-            BloodGroupCard(
-              cardName: 'B+',
+            const SizedBox(
+              height: 30,
             ),
-            BloodGroupCard(
-              cardName: 'A+',
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  'Available Blood\n300',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
             ),
-            BloodGroupCard(
-              cardName: 'B+',
+            const SizedBox(
+              height: 10,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                BloodGroupCard(
+                  cardName: 'A+',
+                ),
+                BloodGroupCard(
+                  cardName: 'B+',
+                ),
+                BloodGroupCard(
+                  cardName: 'AB+',
+                ),
+              ],
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                BloodGroupCard(
+                  cardName: 'A-',
+                ),
+                BloodGroupCard(
+                  cardName: 'B-',
+                ),
+                BloodGroupCard(
+                  cardName: 'AB-',
+                ),
+              ],
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                BloodGroupCard(
+                  cardName: 'O+',
+                ),
+                BloodGroupCard(
+                  cardName: 'O-',
+                ),
+              ],
             ),
           ],
         ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            BloodGroupCard(
-              cardName: 'A+',
-            ),
-            BloodGroupCard(
-              cardName: 'B+',
-            ),
-            BloodGroupCard(
-              cardName: 'A+',
-            ),
-            BloodGroupCard(
-              cardName: 'B+',
-            ),
-          ],
-        ),
-      ],
-    ));
+      ),
+    );
   }
 }

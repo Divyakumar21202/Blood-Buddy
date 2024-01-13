@@ -21,10 +21,7 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
@@ -58,6 +55,14 @@ class DefaultFirebaseOptions {
     messagingSenderId: '714933171498',
     projectId: 'odisha-blood-camp',
     authDomain: 'odisha-blood-camp.firebaseapp.com',
+    storageBucket: 'odisha-blood-camp.appspot.com',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyBqsTFON6LePpPX7iE4gW7c0pK7K3F0LG4',
+    appId: '1:714933171498:android:5df6853a4f621d6c481a53',
+    messagingSenderId: '714933171498',
+    projectId: 'odisha-blood-camp',
     storageBucket: 'odisha-blood-camp.appspot.com',
   );
 }

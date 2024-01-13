@@ -27,50 +27,59 @@ class _MainScreenState extends State<MainScreen> {
   int curr = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CurrentPage(curr),
-      drawer: const HomeDrawer(),
-      bottomNavigationBar: GNav(
-        gap: 8,
-        onTabChange: (index) {
-          curr = index;
-          setState(() {});
-        },
-        backgroundColor: Colors.redAccent,
-        tabs: const [
-          GButton(
-            icon: Icons.home,
-            text: 'Home',
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.red,
+          gradient: RadialGradient(radius: 500, colors: [
+            Colors.red,
+            Colors.white,
+            Colors.red[800]!,
+          ])),
+      child: Scaffold(
+        body: CurrentPage(curr),
+        drawer: const HomeDrawer(),
+        bottomNavigationBar: GNav(
+          gap: 8,
+          onTabChange: (index) {
+            curr = index;
+            setState(() {});
+          },
+          backgroundColor: Colors.redAccent,
+          tabs: const [
+            GButton(
+              icon: Icons.home,
+              text: 'Home',
+            ),
+            GButton(
+              icon: Icons.library_books_sharp,
+              text: 'Donor List',
+            ),
+            GButton(
+              icon: Icons.search_sharp,
+              text: 'Search',
+            ),
+            GButton(
+              icon: Icons.message_rounded,
+              text: 'Requests',
+              textSize: 12,
+            ),
+          ],
+        ),
+        appBar: AppBar(
+          backgroundColor: Colors.redAccent,
+          actions: const [
+            Icon(
+              Icons.loop_rounded,
+              color: Colors.black,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+          ],
+          title: Text(
+            'Odisha Blood Camp',
+            style: Theme.of(context).textTheme.titleLarge,
           ),
-          GButton(
-            icon: Icons.library_books_sharp,
-            text: 'Donor List',
-          ),
-          GButton(
-            icon: Icons.search_sharp,
-            text: 'Search',
-          ),
-          GButton(
-            icon: Icons.message_rounded,
-            text: 'Requests',
-            textSize: 12,
-          ),
-        ],
-      ),
-      appBar: AppBar(
-        backgroundColor: Colors.redAccent,
-        actions: const [
-          Icon(
-            Icons.loop_rounded,
-            color: Colors.black,
-          ),
-          SizedBox(
-            width: 20,
-          ),
-        ],
-        title: Text(
-          'Odisha Blood Camp',
-          style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
     );
