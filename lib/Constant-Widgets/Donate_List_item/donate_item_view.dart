@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:smart_odisha_blood/Colors/colors.dart';
 
 class DonateItemWidget extends StatelessWidget {
   const DonateItemWidget({super.key});
@@ -9,18 +6,19 @@ class DonateItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-
       children: [
-        const SizedBox(height: 5,),
+        const SizedBox(
+          height: 5,
+        ),
         Container(
-          padding:const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: Colors.red[300],
           ),
           height: 142,
           width: double.infinity,
-          child:  Center(
+          child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -56,7 +54,7 @@ class DonateItemWidget extends StatelessWidget {
             ),
           ),
         ),
-         ],
+      ],
     );
   }
 }

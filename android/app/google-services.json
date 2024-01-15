@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "714933171498",
+    "project_id": "odisha-blood-camp",
+    "storage_bucket": "odisha-blood-camp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714933171498:android:5df6853a4f621d6c481a53",
+        "android_client_info": {
+          "package_name": "com.example.smart_odisha_blood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714933171498-nej2ur3h83417inq7t3lo3082r7b640l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smart_odisha_blood",
+            "certificate_hash": "b6a4856115c313c151680c2e995276bb7b3b1a98"
+          }
+        },
+        {
+          "client_id": "714933171498-i2cpk8qg9fh24ae5l6a5o5vvu3m56ppu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqsTFON6LePpPX7iE4gW7c0pK7K3F0LG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714933171498-i2cpk8qg9fh24ae5l6a5o5vvu3m56ppu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "714933171498-9eecipg77laru6rmoef3tvo9de7aehen.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartOdishaBlood"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
