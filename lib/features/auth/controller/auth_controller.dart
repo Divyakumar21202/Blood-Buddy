@@ -19,11 +19,12 @@ class AuthRepositoryController {
     authRepository.verifyUser(phoneNumber, context);
   }
 
-  void verifyOtp(BuildContext context, String VerificationId, String SmsCode) {
+  void verifyOtp(BuildContext context, String VerificationId, String SmsCode,bool isLogin) {
     authRepository.verifyOtp(
       context: context,
       VerificationId: VerificationId,
       SmsCode: SmsCode,
+      isLogin:isLogin, 
     );
   }
 

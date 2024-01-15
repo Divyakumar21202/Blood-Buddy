@@ -46,11 +46,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       }
       if (value != null) {
         if (value['password'] == password) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => const MainScreen(),
-            ),
-          );
+          ref.read(authRepositoryControllerProvider).LoginWithPhone(
+                context: context,
+                phoneNumber: '+91${mobileNumber}',
+              );
         } else {
           CustomSnackBar(
             content: 'Enter Correct Password',

@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_odisha_blood/Screens/homeScreen.dart';
 
 import 'package:smart_odisha_blood/Screens/mainScreen.dart';
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
@@ -17,7 +19,6 @@ final authRepositoryProvider = Provider(
     ref: ref,
   ),
 );
-
 
 class AuthRepository {
   final FirebaseAuth auth;
@@ -45,6 +46,7 @@ class AuthRepository {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => OtpScreen(
+                isLogin: false,
                 IdentificationId: identificationId,
               ),
             ),
@@ -64,13 +66,14 @@ class AuthRepository {
     required BuildContext context,
     required String VerificationId,
     required String SmsCode,
+    required bool isLogin,
   }) async {
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: VerificationId,
         smsCode: SmsCode,
       );
-     
+
       await auth
           .signInWithCredential(
         credential,
@@ -78,7 +81,8 @@ class AuthRepository {
           .then((value) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const SignUpScreen(),
+            builder: (context) =>
+                isLogin ? const HomeScreen() : const SignUpScreen(),
           ),
         );
       });
@@ -143,24 +147,30 @@ class AuthRepository {
     required String phoneNumber,
   }) async {
     try {
-      // auth.currentUser
-      //     ?.linkWithPhoneNumber(
-      //       phoneNumber,
-      //     )
-      //     .whenComplete(
-      //       () => Navigator.of(context).pushReplacement(
-      //         MaterialPageRoute(
-      //           builder: (context) => const MainScreen(),
-      //         ),
-      //       ),
-      //     );
-      await auth.signInWithPhoneNumber(
-        phoneNumber,
-      );
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const MainScreen(),
-        ),
+      auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) {
+          auth.signInWithCredential(
+            credential,
+          );
+        },
+        verificationFailed: (val) {
+          CustomSnackBar(
+            content: val.toString(),
+            context: context,
+          ).displaySnackBar();
+        },
+        codeSent: (String IdentificationId, int? code){
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => OtpScreen(
+                isLogin: true,
+                IdentificationId: IdentificationId,
+              ),
+            ),
+          );
+        },
+        codeAutoRetrievalTimeout: (val) {},
       );
     } catch (e) {
       CustomSnackBar(

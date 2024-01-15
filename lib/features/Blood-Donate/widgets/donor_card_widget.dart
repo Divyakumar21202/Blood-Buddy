@@ -1,13 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DonorCardWidget extends StatelessWidget {
+  bool isRequested = false;
   final Map<String, dynamic> singleDonor;
-  const DonorCardWidget({
+  DonorCardWidget({
     Key? key,
     required this.singleDonor,
+    required this.isRequested,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,8 +49,18 @@ class DonorCardWidget extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  const Text(
-                    'Contact  : 95876426428',
+                  Row(
+                    children: [
+                      const Text(
+                        'Contact Number :  ',
+                      ),
+                      Text(
+                        '${singleDonor['mobileNumber']}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 12,
@@ -90,10 +102,19 @@ class DonorCardWidget extends StatelessWidget {
                     children: [
                       const Text(
                         'Available',
+                        style: TextStyle(
+                          color: Colors.green,
+                        ),
                       ),
                       TextButton(
-                        onPressed: () {},
-                        child: const Text('Send Request'),
+                        onPressed: (){
+                        },
+                        child: const Text(
+                          'Send Request',
+                          style: TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
                       ),
                     ],
                   ),

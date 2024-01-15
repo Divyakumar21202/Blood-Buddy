@@ -35,6 +35,7 @@ class BloodDonateRepository {
         BloodGroup: BloodGroup,
         City: City,
         District: District,
+        mobileNumber: auth.currentUser!.phoneNumber.toString(),
       );
       firestore.collection('Donors').doc(Uid).set(
             donorModel.toMap(),

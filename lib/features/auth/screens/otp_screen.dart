@@ -5,7 +5,8 @@ import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart
 
 class OtpScreen extends ConsumerStatefulWidget {
   final String IdentificationId;
-  const OtpScreen({super.key, required this.IdentificationId});
+  bool isLogin;
+  OtpScreen({super.key, required this.IdentificationId, required this.isLogin});
 
   @override
   ConsumerState<OtpScreen> createState() => _OtpScreenState();
@@ -24,6 +25,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
           context,
           widget.IdentificationId,
           Code,
+          widget.isLogin,
         );
   }
 
@@ -76,7 +78,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                   content: code,
                   context: context,
                 );
-                
+
                 verifyOtp(
                   code,
                 );

@@ -10,9 +10,9 @@ class BloodGroupCard extends StatelessWidget {
     return Center(
       child: InkWell(
         onTap: () {},
-        splashColor: Colors.red[100],
+        splashColor: Colors.white,
         child: Card(
-          color: Colors.red[200],
+          color: Colors.white24,
           elevation: 1,
           child: SizedBox(
             height: size.height * 0.1,
@@ -22,7 +22,7 @@ class BloodGroupCard extends StatelessWidget {
                 cardName,
                 style: TextStyle(
                   fontSize: size.height * 0.04,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ),

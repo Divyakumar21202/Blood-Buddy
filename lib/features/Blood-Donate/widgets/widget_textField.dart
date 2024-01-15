@@ -16,23 +16,18 @@ class TextFieldWidget extends StatefulWidget {
 class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-      ),
-      child: TextField(
-        controller: widget.controller,
-        decoration: InputDecoration(
-          hintText: widget.hintText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-              12,
-            ),
+    return TextField(
+      controller: widget.controller,
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(
+            12,
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-              12,
-            ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(
+            12,
           ),
         ),
       ),
