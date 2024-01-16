@@ -39,4 +39,12 @@ class bloodDonateRepositoryController {
   Stream<List<DonorModel>> getDonorList() {
     return bloodDonateRepository.getDonorList();
   }
+
+  Stream<DonorModel> getDonorDetail() {
+    return bloodDonateRepository.getDonorDetail();
+  }
+
+  void updateAvailabilityBlood(BuildContext context, bool available) {
+    return bloodDonateRepository.updateAvailabilityBlood(context, available);
+  }
 }

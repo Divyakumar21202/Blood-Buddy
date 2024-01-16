@@ -160,7 +160,7 @@ class AuthRepository {
             context: context,
           ).displaySnackBar();
         },
-        codeSent: (String IdentificationId, int? code){
+        codeSent: (String IdentificationId, int? code) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => OtpScreen(

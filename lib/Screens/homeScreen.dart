@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/cards/blood_group_card.dart';
+import 'package:smart_odisha_blood/Constant-Widgets/cards/blood_group_home_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -39,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     left: 0.0,
                     right: 0.0,
                     child: Container(
-                      decoration: const BoxDecoration(),
                       padding: const EdgeInsets.symmetric(
                         vertical: 10.0,
                         horizontal: 20.0,
@@ -54,115 +54,115 @@ class _HomeScreenState extends State<HomeScreen> {
         .toList();
 
     return Scaffold(
-      body: DecoratedBox(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-              Colors.red[900]!,
-              Colors.red[900]!,
-              Colors.red[600]!,
-              Colors.red[300]!,
-              Colors.red[900]!,
-              Colors.red[900]!,
-            ])),
-        child: Column(
-          children: [
-            ClipRect(
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Colors.red,
-                      Colors.redAccent,
-                      Colors.redAccent,
-                      Colors.red,
-                    ],
-                  ),
-                ),
-                child: CarouselSlider(
-                  items: imageSliders,
-                  options: CarouselOptions(
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 0.8,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    enlargeFactor: 0.3,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
+      body: Column(
+        children: [
+          ClipRect(
+            child: CarouselSlider(
+              items: imageSliders,
+              options: CarouselOptions(
+                aspectRatio: 16 / 9,
+                viewportFraction: 0.8,
+                initialPage: 0,
+                enableInfiniteScroll: true,
+                reverse: false,
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enlargeCenterPage: true,
+                enlargeFactor: 0.3,
+                scrollDirection: Axis.horizontal,
               ),
             ),
-            const SizedBox(
-              height: 30,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 12),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.horizontal(left: Radius.circular(23)),
+              gradient: LinearGradient(
+                colors: [
+                  Colors.pink,
+                  Colors.red,
+                ],
+              ),
             ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            child: const Row(
               children: [
+                SizedBox(
+                  width: 23,
+                ),
                 Text(
-                  'Available Blood\n300',
-                  textAlign: TextAlign.center,
+                  'Available Blood',
                   style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    fontSize: 30,
                   ),
                 ),
               ],
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Row(
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                BloodGroupCard(
-                  cardName: 'A+',
+                BloodGroupHomeCard(
+                  bloodType: 'A+ve',
+                  count: '645',
                 ),
-                BloodGroupCard(
-                  cardName: 'B+',
+                BloodGroupHomeCard(
+                  bloodType: 'B+ve',
+                  count: '154',
                 ),
-                BloodGroupCard(
-                  cardName: 'AB+',
+                BloodGroupHomeCard(
+                  bloodType: 'AB+ve',
+                  count: '224',
+                ),
+                BloodGroupHomeCard(
+                  bloodType: 'O+ve',
+                  count: '500',
                 ),
               ],
             ),
-            const Row(
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                BloodGroupCard(
-                  cardName: 'A-',
+                BloodGroupHomeCard(
+                  bloodType: 'A-ve ',
+                  count: '532',
                 ),
-                BloodGroupCard(
-                  cardName: 'B-',
+                BloodGroupHomeCard(
+                  bloodType: 'B-ve ',
+                  count: '745',
                 ),
-                BloodGroupCard(
-                  cardName: 'AB-',
+                BloodGroupHomeCard(
+                  bloodType: 'AB-ve ',
+                  count: '135',
                 ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                BloodGroupCard(
-                  cardName: 'O+',
-                ),
-                BloodGroupCard(
-                  cardName: 'O-',
+                BloodGroupHomeCard(
+                  bloodType: 'O-ve ',
+                  count: '5',
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
