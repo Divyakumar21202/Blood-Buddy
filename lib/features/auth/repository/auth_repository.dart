@@ -125,7 +125,7 @@ class AuthRepository {
     required BuildContext context,
     required String mobileNumber,
   }) async {
-    Map<String, dynamic>? doc;
+    Map<String, dynamic> doc=UserModel(name: '', uid: '', mobileNumber: '', district: '', village: '', password: '', address: '').toMap();
     try {
       await firestore.collection('users').get().then((value) {
         doc = value.docs

@@ -424,17 +424,6 @@ class _DonorUserDataWidgetState extends ConsumerState<DonorUserDataWidget> {
                         children: [
                           ElevatedButton(
                             onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const DonateEditWidget(),
-                                ),
-                              );
-                            },
-                            child: const Text('Edit Profile'),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
                               ref
                                   .watch(
                                       bloodDonateRepositoryControllerProvider)
@@ -478,7 +467,7 @@ class _DonorUserDataWidgetState extends ConsumerState<DonorUserDataWidget> {
                 child: Card(
                   elevation: 1,
                   surfaceTintColor: Colors.red,
-                  color:const Color.fromARGB(255, 255, 43, 28),
+                  color: const Color.fromARGB(255, 255, 43, 28),
                   child: Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(

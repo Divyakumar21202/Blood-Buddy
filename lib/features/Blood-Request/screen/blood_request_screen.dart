@@ -8,36 +8,40 @@ class BloodRequestScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: StreamBuilder(
-        stream: ref.watch(bloodRequestControllerProvider).getDonorRequestList(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: Text(
-                'Loading...',
-                style: TextStyle(
-                  color: Colors.red,
-                ),
+    return StreamBuilder(
+      stream: ref.watch(bloodRequestControllerProvider).getDonorRequestList(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: Text(
+              'Loading...',
+              style: TextStyle(
+                color: Colors.red,
+              ),
+            ),
+          );
+        }
+        List<Map<String, dynamic>> mpp = snapshot.data!;
+        return ListView.builder(
+          itemCount: mpp.length,
+          itemBuilder: ((context, index) {
+            // String name = mpp[index]['DonorName'];
+            String bloodGroup = mpp[index]['blood'];
+            String name = mpp[index]['name'];
+            String contact = mpp[index]['contact'];
+            return Container(
+              margin: const EdgeInsets.only(
+                top: 12,
+              ),
+              child: RequestCard(
+                name: name,
+                mobileNumber: contact,
+                bloodGroup: bloodGroup,
               ),
             );
-          }
-          var mpp = snapshot.data;
-          return ListView.builder(
-            itemCount: mpp!.length,
-            itemBuilder: ((context, index) {
-              // String name = mpp[index]['name'];
-              String bloodGroup = mpp[index]['RBT'];
-              return RequestCard(
-                name: 'name',
-                mobileNumber: 'mobileNumber',
-                bloodGroup: bloodGroup,
-              );
-            }),
-          );
-        },
-      ),
+          }),
+        );
+      },
     );
   }
 }

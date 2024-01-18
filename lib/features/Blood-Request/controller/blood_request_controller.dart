@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/features/Blood-Request/Repository/blood_request_repo.dart';
 
@@ -13,15 +14,28 @@ class BloodRequestController {
   BloodRequestController({
     required this.bloodRequestRepository,
   });
-  void sendRequest(String receiverUid, String blood, String mobileNumber) {
+  void sendRequest(
+      String blood, String mobileNumber, String name, String receiverUid) {
     bloodRequestRepository.sendRequest(
-      receiverUid: receiverUid,
       blood: blood,
       mobileNumber: mobileNumber,
+      receiverUid: receiverUid,
     );
   }
 
   Stream<List<Map<String, dynamic>>> getDonorRequestList() {
     return bloodRequestRepository.getDonorRequestList();
+  }
+
+  void storeUserRequests({
+    required BuildContext context,
+    required String number,
+    required String blood,
+  }) {
+    bloodRequestRepository.storeUserRequests(
+      context: context,
+      number: number,
+      blood: blood,
+    );
   }
 }

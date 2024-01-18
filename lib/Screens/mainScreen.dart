@@ -4,6 +4,7 @@ import 'package:smart_odisha_blood/Screens/homeScreen.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_screen.dart';
 import 'package:smart_odisha_blood/Screens/home_screen_drawer.dart';
 import 'package:smart_odisha_blood/features/Blood-Request/screen/blood_request_screen.dart';
+import 'package:smart_odisha_blood/features/Chat/scree.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -19,6 +20,8 @@ Widget CurrentPage(int curr) {
       return const DonateListScreenX();
     case 2:
       return const BloodRequestScreen();
+    case 3:
+      return const ChatScreen();
     default:
       return const Center(
           child: Text(
@@ -67,6 +70,10 @@ class _MainScreenState extends State<MainScreen> {
               icon: Icons.message_rounded,
               text: 'Requests',
               textSize: 12,
+            ),
+            GButton(
+              icon: Icons.mark_chat_read,
+              text: 'Chats',
             ),
           ],
         ),

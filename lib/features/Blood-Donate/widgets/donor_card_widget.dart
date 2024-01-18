@@ -1,32 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_odisha_blood/common/customSnackbar.dart';
 import 'package:smart_odisha_blood/features/Blood-Request/controller/blood_request_controller.dart';
 import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DonorCardWidget extends ConsumerWidget {
-  bool isRequested = false;
   final Map<String, dynamic> singleDonor;
-  DonorCardWidget({
+  const DonorCardWidget({
     Key? key,
     required this.singleDonor,
-    required this.isRequested,
   }) : super(key: key);
-  void sendRequest(WidgetRef ref, BuildContext context, String mobileNumber,
-      String blood) async {
+  void sendRequest(WidgetRef ref, BuildContext context, String number,
+      String blood, String name) async {
     var model = await ref.read(authRepositoryControllerProvider).getUserModel(
           context: context,
-          mobileNumber: mobileNumber,
+          mobileNumber: number,
         );
     if (model != null) {
       String receiverUid = model['uid'];
 
-      ref.read(bloodRequestControllerProvider).sendRequest(
-            receiverUid,
-            blood,
-            mobileNumber,
-          );
+      ref
+          .read(bloodRequestControllerProvider)
+          .sendRequest(receiverUid, blood, number, name);
     }
   }
 
@@ -136,28 +131,12 @@ class DonorCardWidget extends ConsumerWidget {
                       TextButton(
                         onPressed: () {
                           ref
-                              .read(authRepositoryControllerProvider)
-                              .getUserModel(
+                              .watch(bloodRequestControllerProvider)
+                              .storeUserRequests(
                                 context: context,
-                                mobileNumber: singleDonor['mobileNumber'],
-                              )
-                              .then((value) {
-                            if (value != null) {
-                              String uid = value['uid'];
-                              ref
-                                  .watch(bloodRequestControllerProvider)
-                                  .sendRequest(
-                                    uid,
-                                    singleDonor['BloodGroup'],
-                                    singleDonor['mobileNumber'],
-                                  );
-                            } else {
-                              CustomSnackBar(
-                                content: 'No model Found',
-                                context: context,
-                              ).displaySnackBar();
-                            }
-                          });
+                                number: singleDonor['mobileNumber'],
+                                blood: singleDonor['BloodGroup'],
+                              );
                         },
                         child: const Text(
                           'Want to\nnotify Donor >',

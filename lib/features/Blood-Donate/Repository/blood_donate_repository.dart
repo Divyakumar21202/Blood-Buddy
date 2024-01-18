@@ -36,9 +36,20 @@ class BloodDonateRepository {
         mobileNumber: auth.currentUser!.phoneNumber.toString(),
         isAvailable: false,
       );
-      firestore.collection('Donors').doc(auth.currentUser!.uid).set(
+      await firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .set(
             donorModel.toMap(),
-          );
+          )
+          .then((value) async {
+        await firestore
+            .collection('Donors')
+            .doc(auth.currentUser!.phoneNumber)
+            .set(
+              donorModel.toMap(),
+            );
+      });
     } catch (e) {
       CustomSnackBar(
         content: e.toString(),
@@ -48,21 +59,23 @@ class BloodDonateRepository {
   }
 
   Stream<List<DonorModel>> getDonorList() {
-    return firestore.collection('Donors').snapshots().asyncMap((event) async {
+    return firestore.collection('users').snapshots().asyncMap((event) async {
       List<DonorModel> list = [];
       for (var document in event.docs) {
-        list.add(
-          DonorModel.fromMap(
-            document.data(),
-          ),
-        );
+        if (document.data()['mobileNumber'] != auth.currentUser!.phoneNumber) {
+          list.add(
+            DonorModel.fromMap(
+              document.data(),
+            ),
+          );
+        }
       }
       return list;
     });
   }
 
   Stream<DonorModel> getDonorDetail() {
-    return firestore.collection('Donors').snapshots().asyncMap((event) async {
+    try {
       DonorModel currentDonor = DonorModel(
         DonorName: '',
         BloodGroup: '',
@@ -71,40 +84,26 @@ class BloodDonateRepository {
         mobileNumber: '',
         isAvailable: false,
       );
-      for (var document in event.docs) {
-        if (document.data()['mobileNumber'] == auth.currentUser!.phoneNumber) {
-          currentDonor = DonorModel.fromMap(
-            document.data(),
-          );
-          break;
-        }
-      }
-      return currentDonor;
-    });
 
-    // return await firestore.collection('Donors').get().then((value) {
-    //   DonorModel currentDonor = DonorModel(
-    //     DonorName: '',
-    //     BloodGroup: '',
-    //     City: '',
-    //     District: '',
-    //     mobileNumber: '',
-    //   );
-    //   for (var document in value.docs) {
-    //     if (document.data()['phoneNumber'] == auth.currentUser!.phoneNumber) {
-    //       currentDonor = DonorModel.fromMap(
-    //         document.data(),
-    //       );
-    //     }
-    //   }
-    //   return currentDonor;
-    // });
+      return firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .snapshots()
+          .asyncMap((event) {
+        var map = event.data()!;
+        currentDonor = DonorModel.fromMap(map);
+
+        return currentDonor;
+      });
+    } catch (e) {
+      throw (e).toString();
+    }
   }
 
   void updateAvailabilityBlood(BuildContext context, bool available) async {
     try {
       await firestore
-          .collection('Donors')
+          .collection('users')
           .doc(auth.currentUser!.uid)
           .update({'isAvailable': available}).then((value) {});
     } catch (e) {

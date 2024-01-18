@@ -76,6 +76,7 @@ class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
                     return CustomLoader();
                   }
                   List<DonorModel> list = snapshot.data!;
+                 
                   List<DonorModel> filterList1 = [];
                   List<DonorModel> filterList2 = [];
                   List<DonorModel> filterList3 = [];
@@ -120,7 +121,6 @@ class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
                       var singleDonor = list[index].toMap();
                       return DonorCardWidget(
                         singleDonor: singleDonor,
-                        isRequested: true,
                       );
                     },
                   );
