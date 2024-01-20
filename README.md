@@ -21,8 +21,8 @@
 <img src="https://github.com/Divyakumar21202/smart_odisha_blood/assets/124331485/5992a806-3fb6-450d-9a89-48f7cfd6e916" width="200" height="500">
 <img src="https://github.com/Divyakumar21202/smart_odisha_blood/assets/124331485/e7277912-8990-4da7-a939-d4ae1f669750" width="200" height="500">
 <img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/17390775-07b3-4e0b-a8c7-c73a6bae418e" width="200" height="500">
-<img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/d94600af-06eb-4023-9775-a98fdede8fb6" height="500" width="200">
-<img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/20117d55-1349-498b-a094-8913b6f02f10" height="500" width="200">
+<img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/aa931748-59bf-4b75-bc2b-e4f81855ebee" height="500" width="200">
+<img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/ea5d11be-598c-4cbf-9196-d662b17acc5a" height="500" width="200">
 <img src="https://github.com/Divyakumar21202/smart_odisha_blood/assets/124331485/32b72703-2c94-4419-b3da-214d0fd43cb6" width="200" height="500">
 <img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/0141f3f6-a438-4a94-a56f-e892f4db98f9" height='500' width='200'>
 
