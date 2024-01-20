@@ -80,7 +80,10 @@ class _MainScreenState extends State<MainScreen> {
         appBar: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [Colors.red, Colors.pink])),
+              gradient: LinearGradient(
+                colors: [Colors.red, Colors.pink],
+              ),
+            ),
           ),
           actions: const [
             Icon(
@@ -92,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ],
           title: Text(
-            'Odisha Blood Camp',
+            'Blood Buddy',
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),

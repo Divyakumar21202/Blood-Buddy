@@ -46,4 +46,8 @@ class bloodDonateRepositoryController {
   void updateAvailabilityBlood(BuildContext context, bool available) {
     return bloodDonateRepository.updateAvailabilityBlood(context, available);
   }
+
+  void updateBloodCount() {
+    bloodDonateRepository.bloodCount();
+  }
 }

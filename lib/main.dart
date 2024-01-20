@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/Screens/landingScreen.dart';
 import 'package:smart_odisha_blood/Screens/mainScreen.dart';
-import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_screen.dart';
 import 'package:smart_odisha_blood/firebase_options.dart';
 
 void main() async {
@@ -32,6 +31,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title:'Blood Buddy',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: const TextTheme(

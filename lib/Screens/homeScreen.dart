@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_odisha_blood/Constant-Widgets/cards/blood_group_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/cards/blood_group_home_card.dart';
+import 'package:smart_odisha_blood/features/Blood-Donate/controller/blood_donate_controller.dart';
+import 'package:smart_odisha_blood/models/blood_info.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,10 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   CarouselController buttonCarouselController = CarouselController();
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.horizontal(left: Radius.circular(23)),
               gradient: LinearGradient(
                 colors: [
-                  Colors.pink,
+                  Color.fromARGB(255, 48, 39, 42),
                   Colors.red,
                 ],
               ),
@@ -108,60 +106,71 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             height: 20,
           ),
-          const SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Consumer(builder: (context, ref, child) {
+            ref
+                .watch(bloodDonateRepositoryControllerProvider)
+                .updateBloodCount();
+            BloodInfoModel model = ref.watch(bloodInfoModelProvider);
+
+            return Column(
               children: [
-                BloodGroupHomeCard(
-                  bloodType: 'A+ve',
-                  count: '645',
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      BloodGroupHomeCard(
+                        bloodType: 'A+ve',
+                        count: model.ap.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'B+ve',
+                        count: model.bp.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'AB+ve',
+                        count: model.abp.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'O+ve',
+                        count: model.op.toString(),
+                      ),
+                    ],
+                  ),
                 ),
-                BloodGroupHomeCard(
-                  bloodType: 'B+ve',
-                  count: '154',
+                const SizedBox(
+                  height: 10,
                 ),
-                BloodGroupHomeCard(
-                  bloodType: 'AB+ve',
-                  count: '224',
+                const SizedBox(
+                  height: 10,
                 ),
-                BloodGroupHomeCard(
-                  bloodType: 'O+ve',
-                  count: '500',
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      BloodGroupHomeCard(
+                        bloodType: 'A-ve ',
+                        count: model.an.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'B-ve ',
+                        count: model.bn.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'AB-ve ',
+                        count: model.abn.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'O-ve ',
+                        count: model.on.toString(),
+                      ),
+                    ],
+                  ),
                 ),
               ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                BloodGroupHomeCard(
-                  bloodType: 'A-ve ',
-                  count: '532',
-                ),
-                BloodGroupHomeCard(
-                  bloodType: 'B-ve ',
-                  count: '745',
-                ),
-                BloodGroupHomeCard(
-                  bloodType: 'AB-ve ',
-                  count: '135',
-                ),
-                BloodGroupHomeCard(
-                  bloodType: 'O-ve ',
-                  count: '5',
-                ),
-              ],
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );

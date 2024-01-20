@@ -1,5 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RequestCard extends StatelessWidget {
   final String name;
@@ -32,7 +32,7 @@ class RequestCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'Name : ${name}',
+                        'Name : $name',
                         style: const TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w500,
@@ -46,7 +46,7 @@ class RequestCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'Contact : ${mobileNumber}',
+                        'Contact : $mobileNumber',
                         style: const TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w500,
@@ -67,7 +67,7 @@ class RequestCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(18.0),
               child: Text(
-                '${bloodGroup}',
+                bloodGroup,
                 style: const TextStyle(
                   fontWeight: FontWeight.w600,
                 ),
@@ -75,29 +75,36 @@ class RequestCard extends StatelessWidget {
             ),
           ),
         ),
+        // Positioned(
+        //   right: 60,
+        //   bottom: 45,
+        //   child: IconButton(
+        //     color: Colors.red,
+        //     onPressed: () {},
+        //     icon: const Icon(
+        //       Icons.call,
+        //     ),
+        //   ),
+        // ),
         Positioned(
-          right: 60,
+          right: 20,
           bottom: 45,
           child: IconButton(
-            color: Colors.white,
-            onPressed: () {},
+            color: Colors.red,
+            onPressed: () async {
+              final Uri uri = Uri(
+                scheme: 'tel',
+                path: mobileNumber.toString(),
+              );
+              if (await canLaunchUrl(uri)) {
+                await launchUrl(uri);
+              }
+            },
             icon: const Icon(
               Icons.call,
             ),
           ),
         ),
-        Positioned(
-          right: 20,
-          bottom: 45,
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.message,
-              color: Colors.white,
-            ),
-          ),
-        ),
-       
       ],
     );
   }
