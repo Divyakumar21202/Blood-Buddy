@@ -58,11 +58,18 @@ class _DonateScreenState extends ConsumerState<DonateScreen> {
                       ),
                     );
                   }
-                  String name = snapshot.data!.DonorName.trim();
-                  String bloodType = snapshot.data!.BloodGroup;
-                  String city = snapshot.data!.City;
-                  String district = snapshot.data!.District;
-                  bool isAvailable = snapshot.data!.isAvailable;
+                  String name = '';
+                  String bloodType = '';
+                  String city = '';
+                  String district = '';
+                  bool isAvailable = false;
+                  if (snapshot.hasData) {
+                    name = snapshot.data!.DonorName.trim();
+                    bloodType = snapshot.data!.BloodGroup;
+                    city = snapshot.data!.City;
+                    district = snapshot.data!.District;
+                    isAvailable = snapshot.data!.isAvailable;
+                  }
                   return name.isNotEmpty
                       ? DonorUserDataWidget(
                           isAvailable: isAvailable,

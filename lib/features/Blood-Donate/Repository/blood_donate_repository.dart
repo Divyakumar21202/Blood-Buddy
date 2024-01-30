@@ -96,7 +96,6 @@ class BloodDonateRepository {
           .asyncMap((event) {
         var map = event.data()!;
         currentDonor = DonorModel.fromMap(map);
-
         return currentDonor;
       });
     } catch (e) {

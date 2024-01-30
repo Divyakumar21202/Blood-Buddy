@@ -3,17 +3,15 @@ class UserModel {
   final String uid;
   final String mobileNumber;
   final String district;
-  final String village;
-  final String password;
-  final String address;
+  final String city;
+  final bool isAvailable;
   UserModel({
     required this.name,
     required this.uid,
     required this.mobileNumber,
     required this.district,
-    required this.village,
-    required this.password,
-    required this.address,
+    required this.city,
+    required this.isAvailable,
   });
 
   Map<String, dynamic> toMap() {
@@ -22,9 +20,8 @@ class UserModel {
       'uid': uid,
       'mobileNumber': mobileNumber,
       'district': district,
-      'village': village,
-      'password': password,
-      'address': address,
+      'city': city,
+      'isAvailable': isAvailable,
     };
   }
 
@@ -34,9 +31,8 @@ class UserModel {
       uid: map['uid'] as String,
       mobileNumber: map['mobileNumber'] as String,
       district: map['district'] as String,
-      village: map['village'] as String,
-      password: map['password'] as String,
-      address: map['address'] as String,
+      city: map['city'] as String,
+      isAvailable: map['isAvailable'] as bool,
     );
   }
 }

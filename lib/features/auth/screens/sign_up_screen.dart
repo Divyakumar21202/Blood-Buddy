@@ -1,3 +1,5 @@
+import 'package:csc_picker_i18n/csc_picker.dart';
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,19 +11,31 @@ import 'package:smart_odisha_blood/features/auth/screens/login_screen.dart';
 import 'package:smart_odisha_blood/models/user_model.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
-  const SignUpScreen({super.key});
+  final String? mobileNumber;
+
+  const SignUpScreen({
+    super.key,
+    required,
+    this.mobileNumber,
+  });
 
   @override
   ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends ConsumerState<SignUpScreen> {
-  final TextEditingController _passwordController = TextEditingController();
+  // final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _MobileController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _districtController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
+
+  String stateValue = '';
+  String countryValue = '';
+  String cityValue = '';
+  String bloodGroup = 'A+ve';
+  final SingleValueDropDownController _dropDownController =
+      SingleValueDropDownController();
   FocusNode searchFocusNode = FocusNode();
   FocusNode textFieldFocusNode = FocusNode();
 
@@ -33,14 +47,20 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    _MobileController.text = widget.mobileNumber!;
+    super.setState(fn);
+  }
+
+  @override
   void dispose() {
     super.dispose();
-    _passwordController.dispose();
+    // _passwordController.dispose();
     _nameController.dispose();
     _MobileController.dispose();
-    _addressController.dispose();
     _districtController.dispose();
     _cityController.dispose();
+    _dropDownController.dispose();
   }
 
   @override
@@ -78,68 +98,177 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   ),
                   AuthTextField(
                     controller: _nameController,
-                    hintText: 'UserName',
+                    hintText: 'Username',
                     onChange: (val) {},
                     keyboardType: TextInputType.text,
                   ),
-                  const SizedBox(
-                    height: 20,
+                  const SizedBox(height: 20),
+                  CSCPicker(
+                    showStates: true,
+                    showCities: true,
+
+                    flagState: CountryFlag.DISABLE,
+
+                    ///Dropdown box decoration to style your dropdown selector [OPTIONAL PARAMETER] (USE with disabledDropdownDecoration)
+                    dropdownDecoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        color: Colors.white,
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 1)),
+
+                    disabledDropdownDecoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        color: Colors.grey.shade300,
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 1)),
+
+                    countrySearchPlaceholder: "Country",
+                    stateSearchPlaceholder: "State",
+                    citySearchPlaceholder: "City",
+                    defaultCountry: CscCountry.India,
+                    countryDropdownLabel: "*Country",
+                    stateDropdownLabel: "*State",
+                    cityDropdownLabel: "*City",
+                    dropdownHeadingStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold),
+
+                    ///DropdownDialog Item style [OPTIONAL PARAMETER]
+                    dropdownItemStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+
+                    ///triggers once country selected in dropdown
+                    onCountryChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          ///store value in country variable
+                          countryValue = value;
+                        });
+                      }
+                    },
+
+                    ///triggers once state selected in dropdown
+                    onStateChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          ///store value in country variable
+                          stateValue = value;
+                        });
+                      }
+                    },
+
+                    ///triggers once city selected in dropdown
+                    onCityChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          ///store value in country variable
+                          cityValue = value;
+                        });
+                      }
+                    },
                   ),
-                  AuthTextField(
-                    controller: _cityController,
-                    hintText: 'Enter City/Village',
-                    keyboardType: TextInputType.text,
-                    onChange: (val) {},
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      hintText: widget.mobileNumber,
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4.0),
+                        ),
+                      ),
+                    ),
                   ),
-                  const SizedBox(
-                    height: 20,
+                  const SizedBox(height: 20),
+                  DropDownTextField(
+                    controller: _dropDownController,
+                    validator: (String? value) {
+                      if (value != null) {
+                        bloodGroup = value;
+                        CustomSnackBar(
+                          content: value.toString(),
+                          context: context,
+                        ).displaySnackBar();
+                      }
+                      return value;
+                    },
+                    dropDownItemCount: 9,
+                    onChanged: (dynamic value) {
+                      bloodGroup = value
+                          .toString()
+                          .replaceAll('DropDownValueModel', '')
+                          .replaceAll('(', '')
+                          .replaceAll(')', '');
+                      bloodGroup = bloodGroup
+                          .substring(bloodGroup.indexOf(',') + 1)
+                          .trim()
+                          .toString();
+                      setState(() {});
+                    },
+                    textFieldDecoration: InputDecoration(
+                      hintText: 'Select Blood',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                          12,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                          12,
+                        ),
+                      ),
+                    ),
+                    dropDownList: const [
+                      DropDownValueModel(
+                        name: 'A+ve',
+                        value: 'A+ve',
+                      ),
+                      DropDownValueModel(
+                        name: 'B+ve',
+                        value: 'B+ve',
+                      ),
+                      DropDownValueModel(
+                        name: 'AB+ve',
+                        value: 'AB+ve',
+                      ),
+                      DropDownValueModel(
+                        name: 'A-ve',
+                        value: 'A-ve',
+                      ),
+                      DropDownValueModel(
+                        name: 'A+ve',
+                        value: 'A+ve',
+                      ),
+                      DropDownValueModel(
+                        name: 'B-ve',
+                        value: 'B-ve',
+                      ),
+                      DropDownValueModel(
+                        name: 'AB-ve',
+                        value: 'AB-ve',
+                      ),
+                      DropDownValueModel(
+                        name: 'O+ve',
+                        value: 'O+ve',
+                      ),
+                      DropDownValueModel(
+                        name: 'O-ve',
+                        value: 'O-ve',
+                      ),
+                    ],
                   ),
-                  AuthTextField(
-                    controller: _districtController,
-                    hintText: 'Enter District',
-                    onChange: (val) {},
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AuthTextField(
-                    controller: _addressController,
-                    hintText: 'Enter Full Address',
-                    onChange: (val) {},
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AuthTextField(
-                    controller: _MobileController,
-                    hintText: 'Enter Mobile Number',
-                    onChange: (val) {},
-                    keyboardType: TextInputType.phone,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AuthTextField(
-                    controller: _passwordController,
-                    hintText: 'Enter Password',
-                    keyboardType: TextInputType.visiblePassword,
-                    isObcureTrue: true,
-                    onChange: (val) {},
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   InkWell(
                     onTap: () {
                       String name = _nameController.text.trim();
-                      String mobileNumber =
-                          '+91${_MobileController.text.trim()}';
-                      String passWord = _passwordController.text.trim();
-                      String city = _cityController.text.trim();
-                      String district = _districtController.text.trim();
-                      String address = _addressController.text.trim();
+                      String city = cityValue;
+                      String district = stateValue;
                       if (name.length < 5) {
                         CustomSnackBar(
                           content: 'Enter Full Name',
@@ -155,31 +284,14 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           content: 'Enter Full District Name',
                           context: context,
                         ).displaySnackBar();
-                      } else if (address.length < 10) {
-                        CustomSnackBar(
-                          content: 'Enter Full Address Name',
-                          context: context,
-                        ).displaySnackBar();
-                      } else if (mobileNumber.length != 13) {
-                        CustomSnackBar(
-                          content: 'Check the Mobile Number',
-                          context: context,
-                        ).displaySnackBar();
-                      } else if (passWord.length < 6) {
-                        CustomSnackBar(
-                          content:
-                              'Password Length Should be length of 6 or more',
-                          context: context,
-                        ).displaySnackBar();
                       } else {
                         UserModel userModel = UserModel(
                           name: name,
                           uid: FirebaseAuth.instance.currentUser!.uid,
-                          mobileNumber: mobileNumber,
+                          mobileNumber: widget.mobileNumber!,
                           district: district,
-                          village: city,
-                          password: passWord,
-                          address: '',
+                          city: city,
+                          isAvailable: false,
                         );
 
                         uploadUserModel(

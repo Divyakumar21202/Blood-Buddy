@@ -1,12 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
 import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart';
 
 class OtpScreen extends ConsumerStatefulWidget {
+  final String mobileNumber;
   final String IdentificationId;
   bool isLogin;
-  OtpScreen({super.key, required this.IdentificationId, required this.isLogin});
+  OtpScreen({
+    required this.mobileNumber,
+    required this.IdentificationId,
+    required this.isLogin,
+  });
 
   @override
   ConsumerState<OtpScreen> createState() => _OtpScreenState();
@@ -26,6 +33,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
           widget.IdentificationId,
           Code,
           widget.isLogin,
+          widget.mobileNumber,
         );
   }
 

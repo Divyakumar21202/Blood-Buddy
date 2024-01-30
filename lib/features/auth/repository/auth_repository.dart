@@ -42,12 +42,13 @@ class AuthRepository {
           CustomSnackBar(content: e.toString(), context: context)
               .displaySnackBar();
         },
-        codeSent: (String identificationId, int? code) async {
+        codeSent: (String identificationId, int? code,) async {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => OtpScreen(
                 isLogin: false,
                 IdentificationId: identificationId,
+                mobileNumber: phoneNumber,
               ),
             ),
           );
@@ -67,6 +68,7 @@ class AuthRepository {
     required String VerificationId,
     required String SmsCode,
     required bool isLogin,
+   required String mobileNumber,
   }) async {
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
@@ -82,7 +84,7 @@ class AuthRepository {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) =>
-                isLogin ? const HomeScreen() : const SignUpScreen(),
+                isLogin ? const HomeScreen() :  SignUpScreen(mobileNumber: mobileNumber,),
           ),
         );
       });
@@ -125,7 +127,7 @@ class AuthRepository {
     required BuildContext context,
     required String mobileNumber,
   }) async {
-    Map<String, dynamic> doc=UserModel(name: '', uid: '', mobileNumber: '', district: '', village: '', password: '', address: '').toMap();
+    Map<String, dynamic> doc=UserModel(name: '', uid: '', mobileNumber: '', district: '', city: '', isAvailable: false,).toMap();
     try {
       await firestore.collection('users').get().then((value) {
         doc = value.docs
@@ -164,8 +166,10 @@ class AuthRepository {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => OtpScreen(
+                
                 isLogin: true,
                 IdentificationId: IdentificationId,
+                mobileNumber: phoneNumber,
               ),
             ),
           );
