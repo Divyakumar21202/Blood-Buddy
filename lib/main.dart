@@ -10,7 +10,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-    
   );
   runApp(
     const ProviderScope(
@@ -32,6 +31,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title:'Blood Buddy',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: const TextTheme(

@@ -7,12 +7,14 @@ class DonorModel {
   final String City;
   final String District;
   final String mobileNumber;
+  final bool isAvailable;
   DonorModel({
     required this.DonorName,
     required this.BloodGroup,
     required this.City,
     required this.District,
     required this.mobileNumber,
+    required this.isAvailable,
   });
 
   Map<String, dynamic> toMap() {
@@ -22,6 +24,7 @@ class DonorModel {
       'City': City,
       'District': District,
       'mobileNumber': mobileNumber,
+      'isAvailable': isAvailable,
     };
   }
 
@@ -32,10 +35,12 @@ class DonorModel {
       City: map['City'] as String,
       District: map['District'] as String,
       mobileNumber: map['mobileNumber'] as String,
+      isAvailable: map['isAvailable'] as bool,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory DonorModel.fromJson(String source) => DonorModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory DonorModel.fromJson(String source) =>
+      DonorModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

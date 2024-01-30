@@ -1,17 +1,32 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_odisha_blood/features/Blood-Request/controller/blood_request_controller.dart';
+import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DonorCardWidget extends StatelessWidget {
-  bool isRequested = false;
+class DonorCardWidget extends ConsumerWidget {
   final Map<String, dynamic> singleDonor;
-  DonorCardWidget({
+  const DonorCardWidget({
     Key? key,
     required this.singleDonor,
-    required this.isRequested,
   }) : super(key: key);
+  void sendRequest(WidgetRef ref, BuildContext context, String number,
+      String blood, String name) async {
+    var model = await ref.read(authRepositoryControllerProvider).getUserModel(
+          context: context,
+          mobileNumber: number,
+        );
+    if (model != null) {
+      String receiverUid = model['uid'];
+
+      ref
+          .read(bloodRequestControllerProvider)
+          .sendRequest(receiverUid, blood, number, name);
+    }
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 12,
@@ -100,14 +115,46 @@ class DonorCardWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'Available',
-                        style: TextStyle(
-                          color: Colors.green,
+                      singleDonor['isAvailable']
+                          ? const Text(
+                              'Available',
+                              style: TextStyle(
+                                color: Colors.green,
+                              ),
+                            )
+                          : const Text(
+                              'Not Available',
+                              style: TextStyle(
+                                color: Colors.blueGrey,
+                              ),
+                            ),
+                      TextButton(
+                        onPressed: () {
+                          ref
+                              .watch(bloodRequestControllerProvider)
+                              .storeUserRequests(
+                                context: context,
+                                number: singleDonor['mobileNumber'],
+                                blood: singleDonor['BloodGroup'],
+                              );
+                        },
+                        child: const Text(
+                          'Want to\nnotify Donor >',
+                          style: TextStyle(
+                            color: Colors.red,
+                          ),
                         ),
                       ),
                       TextButton(
-                        onPressed: (){
+                        onPressed: () async {
+                          final Uri url = Uri(
+                            scheme: 'sms',
+                            path: '${singleDonor['mobileNumber']}',
+                          );
+
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url);
+                          }
                         },
                         child: const Text(
                           'Send Request',

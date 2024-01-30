@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_odisha_blood/Constant-Widgets/cards/blood_group_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_odisha_blood/Constant-Widgets/cards/blood_group_home_card.dart';
+import 'package:smart_odisha_blood/features/Blood-Donate/controller/blood_donate_controller.dart';
+import 'package:smart_odisha_blood/models/blood_info.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,10 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   CarouselController buttonCarouselController = CarouselController();
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     left: 0.0,
                     right: 0.0,
                     child: Container(
-                      decoration: const BoxDecoration(),
                       padding: const EdgeInsets.symmetric(
                         vertical: 10.0,
                         horizontal: 20.0,
@@ -54,115 +52,126 @@ class _HomeScreenState extends State<HomeScreen> {
         .toList();
 
     return Scaffold(
-      body: DecoratedBox(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+      body: Column(
+        children: [
+          ClipRect(
+            child: CarouselSlider(
+              items: imageSliders,
+              options: CarouselOptions(
+                aspectRatio: 16 / 9,
+                viewportFraction: 0.8,
+                initialPage: 0,
+                enableInfiniteScroll: true,
+                reverse: false,
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enlargeCenterPage: true,
+                enlargeFactor: 0.3,
+                scrollDirection: Axis.horizontal,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 12),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.horizontal(left: Radius.circular(23)),
+              gradient: LinearGradient(
                 colors: [
-              Colors.red[900]!,
-              Colors.red[900]!,
-              Colors.red[600]!,
-              Colors.red[300]!,
-              Colors.red[900]!,
-              Colors.red[900]!,
-            ])),
-        child: Column(
-          children: [
-            ClipRect(
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Colors.red,
-                      Colors.redAccent,
-                      Colors.redAccent,
-                      Colors.red,
+                  Color.fromARGB(255, 48, 39, 42),
+                  Colors.red,
+                ],
+              ),
+            ),
+            child: const Row(
+              children: [
+                SizedBox(
+                  width: 23,
+                ),
+                Text(
+                  'Available Blood',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    fontSize: 30,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Consumer(builder: (context, ref, child) {
+            ref
+                .watch(bloodDonateRepositoryControllerProvider)
+                .updateBloodCount();
+            BloodInfoModel model = ref.watch(bloodInfoModelProvider);
+
+            return Column(
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      BloodGroupHomeCard(
+                        bloodType: 'A+ve',
+                        count: model.ap.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'B+ve',
+                        count: model.bp.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'AB+ve',
+                        count: model.abp.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'O+ve',
+                        count: model.op.toString(),
+                      ),
                     ],
                   ),
                 ),
-                child: CarouselSlider(
-                  items: imageSliders,
-                  options: CarouselOptions(
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 0.8,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    enlargeFactor: 0.3,
-                    scrollDirection: Axis.horizontal,
-                  ),
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  'Available Blood\n300',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700,
+                const SizedBox(
+                  height: 10,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      BloodGroupHomeCard(
+                        bloodType: 'A-ve ',
+                        count: model.an.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'B-ve ',
+                        count: model.bn.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'AB-ve ',
+                        count: model.abn.toString(),
+                      ),
+                      BloodGroupHomeCard(
+                        bloodType: 'O-ve ',
+                        count: model.on.toString(),
+                      ),
+                    ],
                   ),
                 ),
               ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                BloodGroupCard(
-                  cardName: 'A+',
-                ),
-                BloodGroupCard(
-                  cardName: 'B+',
-                ),
-                BloodGroupCard(
-                  cardName: 'AB+',
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                BloodGroupCard(
-                  cardName: 'A-',
-                ),
-                BloodGroupCard(
-                  cardName: 'B-',
-                ),
-                BloodGroupCard(
-                  cardName: 'AB-',
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                BloodGroupCard(
-                  cardName: 'O+',
-                ),
-                BloodGroupCard(
-                  cardName: 'O-',
-                ),
-              ],
-            ),
-          ],
-        ),
+            );
+          }),
+        ],
       ),
     );
   }

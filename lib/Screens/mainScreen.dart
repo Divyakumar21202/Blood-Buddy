@@ -3,6 +3,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:smart_odisha_blood/Screens/homeScreen.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_screen.dart';
 import 'package:smart_odisha_blood/Screens/home_screen_drawer.dart';
+import 'package:smart_odisha_blood/features/Blood-Request/screen/blood_request_screen.dart';
+import 'package:smart_odisha_blood/features/Chat/scree.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -15,11 +17,21 @@ Widget CurrentPage(int curr) {
     case 0:
       return const HomeScreen();
     case 1:
-      return const Center(child: Text('Donor List'));
-    case 2:
       return const DonateListScreenX();
+    case 2:
+      return const BloodRequestScreen();
+    case 3:
+      return const ChatScreen();
     default:
-      return const Center(child: Text('Extra Screen'));
+      return const Center(
+          child: Text(
+        'Oop\'s Page Not Found 😕',
+        style: TextStyle(
+          color: Colors.red,
+          fontWeight: FontWeight.bold,
+          fontSize: 28,
+        ),
+      ));
   }
 }
 
@@ -51,22 +63,28 @@ class _MainScreenState extends State<MainScreen> {
               text: 'Home',
             ),
             GButton(
-              icon: Icons.library_books_sharp,
-              text: 'Donor List',
-            ),
-            GButton(
               icon: Icons.search_sharp,
-              text: 'Search',
+              text: 'Donor List',
             ),
             GButton(
               icon: Icons.message_rounded,
               text: 'Requests',
               textSize: 12,
             ),
+            GButton(
+              icon: Icons.mark_chat_read,
+              text: 'Chats',
+            ),
           ],
         ),
         appBar: AppBar(
-          backgroundColor: Colors.redAccent,
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.red, Colors.pink],
+              ),
+            ),
+          ),
           actions: const [
             Icon(
               Icons.loop_rounded,
@@ -77,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ],
           title: Text(
-            'Odisha Blood Camp',
+            'Blood Buddy',
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),

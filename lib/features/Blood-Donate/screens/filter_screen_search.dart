@@ -2,15 +2,15 @@
 import 'dart:ui';
 
 import 'package:csc_picker_i18n/csc_picker.dart';
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:smart_odisha_blood/features/Blood-Donate/widgets/filter_option_card_blood_selectBtn.dart';
+import 'package:smart_odisha_blood/common/customSnackbar.dart';
 import 'package:smart_odisha_blood/models/selected_filter_data.dart';
 
 class FilterScreenSearch extends ConsumerStatefulWidget {
   final VoidCallback onClose;
-  final VoidCallback onApply;
+  final ValueChanged onApply;
   const FilterScreenSearch({
     Key? key,
     required this.onClose,
@@ -33,25 +33,18 @@ class _FilterScreenSearchState extends ConsumerState<FilterScreenSearch> {
   bool isABn = false;
   bool isOn = false;
   bool isBn = false;
+  String bloodGroup = '';
+  SingleValueDropDownController dropDownController =
+      SingleValueDropDownController();
 
   void changeApply() {
-    SelectFilterData selectFilterData = SelectFilterData(
-      aPpositive: {'A+ve': isAp},
-      bPositive: {'B+ve': isBp},
-      abPositive: {'AB+ve': isABp},
-      oPositive: {'O+ve': isOp},
-      aNegative: {'A-ve': isAn},
-      bNegative: {'B-ve': isBn},
-      abNegative: {'AB-ve': isABn},
-      oNegative: {'O-ve': isOn},
-      country: countryValue,
-      state: stateValue,
-      city: cityValue,
-    );
-    ref.read(SelectFilterDataProvider.notifier).update(
-          (state) => selectFilterData,
-        );
-    widget.onApply();
+    widget.onApply(bloodGroup);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    dropDownController.dispose();
   }
 
   @override
@@ -62,12 +55,16 @@ class _FilterScreenSearchState extends ConsumerState<FilterScreenSearch> {
           child: Container(
             margin: const EdgeInsets.symmetric(
               horizontal: 30,
+              vertical: 12,
             ),
             padding: const EdgeInsets.symmetric(
               horizontal: 11,
             ),
             decoration: BoxDecoration(
-              color: Colors.blueGrey,
+              gradient: LinearGradient(colors: [
+                Colors.red[200]!,
+                Colors.pink,
+              ]),
               borderRadius: BorderRadius.circular(
                 12,
               ),
@@ -78,90 +75,81 @@ class _FilterScreenSearchState extends ConsumerState<FilterScreenSearch> {
                 const ListTile(
                   title: Text('Filter Options'),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    BloodFilterButton(
-                      buttonName: 'A+ve',
-                      isSelected: isAp,
-                      onTap: () {
-                        isAp = !isAp;
-                        setState(() {});
-                      },
+                DropDownTextField(
+                  controller: dropDownController,
+                  validator: (String? value) {
+                    if (value != null) {
+                      bloodGroup = value;
+                      CustomSnackBar(
+                        content: value.toString(),
+                        context: context,
+                      ).displaySnackBar();
+                    }
+                    return value;
+                  },
+                  dropDownItemCount: 9,
+                  onChanged: (dynamic value) {
+                    bloodGroup = value
+                        .toString()
+                        .replaceAll('DropDownValueModel', '')
+                        .replaceAll('(', '')
+                        .replaceAll(')', '');
+                    bloodGroup = bloodGroup
+                        .substring(bloodGroup.indexOf(',') + 1)
+                        .trim()
+                        .toString();
+                    setState(() {});
+                  },
+                  textFieldDecoration: InputDecoration(
+                    hintText: 'Select Blood',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                        12,
+                      ),
                     ),
-                    BloodFilterButton(
-                      buttonName: 'B+ve',
-                      isSelected: isBp,
-                      onTap: () {
-                        isBp = !isBp;
-                        setState(() {});
-                      },
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                        12,
+                      ),
                     ),
-                    BloodFilterButton(
-                      buttonName: 'AB+ve',
-                      isSelected: isABp,
-                      onTap: () {
-                        isABp = !isABp;
-                        setState(() {});
-                      },
+                  ),
+                  dropDownList: const [
+                    DropDownValueModel(
+                      name: 'A+ve',
+                      value: 'A+ve',
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    BloodFilterButton(
-                      buttonName: 'A-ve',
-                      isSelected: isAn,
-                      onTap: () {
-                        isAn = !isAn;
-                        setState(() {});
-                      },
+                    DropDownValueModel(
+                      name: 'B+ve',
+                      value: 'B+ve',
                     ),
-                    BloodFilterButton(
-                      buttonName: 'B-ve',
-                      isSelected: isBn,
-                      onTap: () {
-                        isBn = !isBn;
-                        setState(() {});
-                      },
+                    DropDownValueModel(
+                      name: 'AB+ve',
+                      value: 'AB+ve',
                     ),
-                    BloodFilterButton(
-                      buttonName: 'AB-ve',
-                      isSelected: isABn,
-                      onTap: () {
-                        isABn = !isABn;
-                        setState(() {});
-                      },
+                    DropDownValueModel(
+                      name: 'A-ve',
+                      value: 'A-ve',
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    BloodFilterButton(
-                      buttonName: 'O+ve',
-                      isSelected: isOp,
-                      onTap: () {
-                        isOp = !isOp;
-                        setState(() {});
-                      },
+                    DropDownValueModel(
+                      name: 'A+ve',
+                      value: 'A+ve',
                     ),
-                    BloodFilterButton(
-                      buttonName: 'O-ve',
-                      isSelected: isOn,
-                      onTap: () {
-                        isOn = !isOn;
-                        setState(() {});
-                      },
+                    DropDownValueModel(
+                      name: 'B-ve',
+                      value: 'B-ve',
                     ),
-                    Container(),
+                    DropDownValueModel(
+                      name: 'AB-ve',
+                      value: 'AB-ve',
+                    ),
+                    DropDownValueModel(
+                      name: 'O+ve',
+                      value: 'O+ve',
+                    ),
+                    DropDownValueModel(
+                      name: 'O-ve',
+                      value: 'O-ve',
+                    ),
                   ],
                 ),
                 const SizedBox(
