@@ -82,8 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.horizontal(left: Radius.circular(23)),
               gradient: LinearGradient(
                 colors: [
+                  Color.fromARGB(255, 48, 39, 42),
                   Colors.red,
-                  Colors.pink,
                 ],
               ),
             ),

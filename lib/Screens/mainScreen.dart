@@ -41,16 +41,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.red,
-        gradient: RadialGradient(
-          radius: 500,
-          colors: [
+          color: Colors.red,
+          gradient: RadialGradient(radius: 500, colors: [
             Colors.red,
             Colors.white,
             Colors.red[800]!,
-          ],
-        ),
-      ),
+          ])),
       child: Scaffold(
         body: CurrentPage(curr),
         drawer: const HomeDrawer(),
