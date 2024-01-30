@@ -75,8 +75,11 @@ class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return CustomLoader();
                   }
-                  List<DonorModel> list = snapshot.data!;
-                 
+                  List<DonorModel> list = [];
+                  if (snapshot.hasData) {
+                    list = snapshot.data!;
+                  }
+
                   List<DonorModel> filterList1 = [];
                   List<DonorModel> filterList2 = [];
                   List<DonorModel> filterList3 = [];

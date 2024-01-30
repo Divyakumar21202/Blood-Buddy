@@ -40,87 +40,90 @@ class _DonateScreenState extends ConsumerState<DonateScreen> {
         ],
       ),
       body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 600),
-            child: StreamBuilder(
-                stream: ref
-                    .watch(bloodDonateRepositoryControllerProvider)
-                    .getDonorDetail(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: Text(
-                        'Loading ...',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    );
-                  }
-                  String name = snapshot.data!.DonorName.trim();
-                  String bloodType = snapshot.data!.BloodGroup;
-                  String city = snapshot.data!.City;
-                  String district = snapshot.data!.District;
-                  bool isAvailable = snapshot.data!.isAvailable;
-                  return name.isNotEmpty
-                      ? DonorUserDataWidget(
-                          isAvailable: isAvailable,
-                          name: name,
-                          city: city,
-                          district: district,
-                          bloodType: bloodType,
-                        )
-                      : Container(
-                          height: 500,
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                          ),
-                          padding: const EdgeInsets.all(40),
-                          decoration: BoxDecoration(
-                            color: Colors.redAccent,
-                            borderRadius: BorderRadius.circular(
-                              18,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 600),
+              child: StreamBuilder(
+                  stream: ref
+                      .watch(bloodDonateRepositoryControllerProvider)
+                      .getDonorDetail(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: Text(
+                          'Loading ...',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      );
+                    }
+                    String name = '';
+                    String bloodType = '';
+                    String city = '';
+                    String district = '';
+                    bool isAvailable = false;
+                    if (snapshot.hasData) {
+                      name = snapshot.data!.DonorName.trim();
+                      bloodType = snapshot.data!.BloodGroup;
+                      city = snapshot.data!.City;
+                      district = snapshot.data!.District;
+                      isAvailable = snapshot.data!.isAvailable;
+                    }
+
+                    return name.isNotEmpty
+                        ? DonorUserDataWidget(
+                            isAvailable: isAvailable,
+                            name: name,
+                            city: city,
+                            district: district,
+                            bloodType: bloodType,
+                          )
+                        : Container(
+                            height: 500,
+                            margin: const EdgeInsets.symmetric(horizontal: 12),
+                            padding: const EdgeInsets.all(40),
+                            decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(18),
                             ),
-                          ),
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(maxHeight: 500),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'Oops😕\nYou are Not Donate Yet !',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 34,
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxHeight: 500),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'Oops😕\nYou are Not Donate Yet !',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 34,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 28,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DonateEditWidget(),
-                                      ),
-                                    );
-                                  },
-                                  child: const Text(
-                                    'Click Here to Donate',
+                                  const SizedBox(height: 28),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const DonateEditWidget(),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text(
+                                      'Click Here to Donate',
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                }),
-          )
-        ],
-      )),
+                          );
+                  }),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

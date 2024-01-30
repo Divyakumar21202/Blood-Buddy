@@ -17,7 +17,7 @@ class HomeDrawer extends StatelessWidget {
             DrawerHeader(
               decoration: const BoxDecoration(color: Colors.white),
               child: Text(
-                'Welcome To\nSmart Odisha Blood Camp',
+                ' Welcome To\n Blood Buddy 🩸',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
