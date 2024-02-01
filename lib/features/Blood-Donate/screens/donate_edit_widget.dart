@@ -25,17 +25,20 @@ class _DonateEditWidgetState extends ConsumerState<DonateEditWidget> {
   final SingleValueDropDownController _dropDownController =
       SingleValueDropDownController();
   void uploadDonorInfo({
-    DonorName,
-    BloodGroup,
+    donorName,
+    bloodGroup,
     city,
-    District,
+    district,
+    
   }) {
     ref.read(bloodDonateRepositoryControllerProvider).uploadDonorInfo(
           context: context,
-          DonorName: DonorName,
-          BloodGroup: BloodGroup,
+          DonorName: donorName,
+          BloodGroup: bloodGroup,
           city: city,
-          District: District,
+          District: district,
+          password: '',
+
         );
     Navigator.pop(context);
   }
@@ -261,10 +264,11 @@ class _DonateEditWidgetState extends ConsumerState<DonateEditWidget> {
                     city.isNotEmpty &&
                     District.isNotEmpty) {
                   uploadDonorInfo(
-                    DonorName: DonorName,
-                    BloodGroup: Blood,
+                    donorName: DonorName,
+                    bloodGroup: Blood,
                     city: city,
-                    District: District,
+                    district: District,
+                    
                   );
                 } else {
                   CustomSnackBar(

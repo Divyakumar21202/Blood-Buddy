@@ -64,10 +64,10 @@ class _DonateScreenState extends ConsumerState<DonateScreen> {
                   String district = '';
                   bool isAvailable = false;
                   if (snapshot.hasData) {
-                    name = snapshot.data!.DonorName.trim();
-                    bloodType = snapshot.data!.BloodGroup;
-                    city = snapshot.data!.City;
-                    district = snapshot.data!.District;
+                    name = snapshot.data!.name.trim();
+                    bloodType = snapshot.data!.bloodGroup;
+                    city = snapshot.data!.city;
+                    district = snapshot.data!.district;
                     isAvailable = snapshot.data!.isAvailable;
                   }
                   return name.isNotEmpty

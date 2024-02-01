@@ -1,7 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
 import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart';
 
@@ -44,9 +42,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
-            height: size.height * 0.2,
-          ),
+          SizedBox(height: size.height * 0.2),
           const Text(
             'We have Sent SMS with Code',
             textAlign: TextAlign.center,
@@ -75,9 +71,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           TextButton(
             onPressed: () {
               String code = _controller.text.trim();

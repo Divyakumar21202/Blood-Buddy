@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:smart_odisha_blood/features/Blood-Donate/Repository/blood_donate_repository.dart';
-import 'package:smart_odisha_blood/models/donor_model.dart';
+import 'package:smart_odisha_blood/models/user_model.dart';
 
 final bloodDonateRepositoryControllerProvider = Provider((ref) {
   BloodDonateRepository bloodDonateRepository = ref.watch(
@@ -25,21 +25,23 @@ class bloodDonateRepositoryController {
     required String BloodGroup,
     required String city,
     required String District,
+    required String password,
   }) {
     bloodDonateRepository.uploadDonorInfo(
       context: context,
       DonorName: DonorName,
-      BloodGroup: BloodGroup,
+      bloodGroup: BloodGroup,
       City: city,
       District: District,
+      password: password,
     );
   }
 
-  Stream<List<DonorModel>> getDonorList() {
+  Stream<List<UserModel>> getDonorList() {
     return bloodDonateRepository.getDonorList();
   }
 
-  Stream<DonorModel> getDonorDetail() {
+  Stream<UserModel> getDonorDetail() {
     return bloodDonateRepository.getDonorDetail();
   }
 

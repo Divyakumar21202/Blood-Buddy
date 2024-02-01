@@ -29,11 +29,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final TextEditingController _MobileController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _districtController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   String stateValue = '';
   String countryValue = '';
   String cityValue = '';
-  String bloodGroup = 'A+ve';
+  String bloodGroup = '';
   final SingleValueDropDownController _dropDownController =
       SingleValueDropDownController();
   FocusNode searchFocusNode = FocusNode();
@@ -48,7 +49,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
   @override
   void setState(VoidCallback fn) {
-    _MobileController.text = widget.mobileNumber!;
+    // _MobileController.text = widget.mobileNumber!;
     super.setState(fn);
   }
 
@@ -61,6 +62,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     _districtController.dispose();
     _cityController.dispose();
     _dropDownController.dispose();
+    _passwordController.dispose();
   }
 
   @override
@@ -82,9 +84,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   const Text(
                     'Fill the Detail',
                     style: TextStyle(
@@ -93,9 +93,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     ),
                     textAlign: TextAlign.start,
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   AuthTextField(
                     controller: _nameController,
                     hintText: 'Username',
@@ -190,10 +188,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     validator: (String? value) {
                       if (value != null) {
                         bloodGroup = value;
-                        CustomSnackBar(
-                          content: value.toString(),
-                          context: context,
-                        ).displaySnackBar();
+                        setState(() {});
                       }
                       return value;
                     },
@@ -263,25 +258,36 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     ],
                   ),
                   const SizedBox(height: 20),
+                  AuthTextField(
+                      controller: _passwordController,
+                      onChange: (val) {},
+                      hintText: 'Enter Password',
+                      keyboardType: TextInputType.text),
                   const SizedBox(height: 20),
                   InkWell(
                     onTap: () {
                       String name = _nameController.text.trim();
                       String city = cityValue;
                       String district = stateValue;
+                      String password = _passwordController.text.trim();
                       if (name.length < 5) {
                         CustomSnackBar(
                           content: 'Enter Full Name',
                           context: context,
                         ).displaySnackBar();
-                      } else if (city.length < 4) {
+                      } else if (city.isEmpty) {
                         CustomSnackBar(
                           content: 'Enter Full City Name',
                           context: context,
                         ).displaySnackBar();
-                      } else if (district.length < 5) {
+                      } else if (district.isEmpty) {
                         CustomSnackBar(
                           content: 'Enter Full District Name',
+                          context: context,
+                        ).displaySnackBar();
+                      } else if (password.length <= 5) {
+                        CustomSnackBar(
+                          content: 'Enter Password with length more than 5',
                           context: context,
                         ).displaySnackBar();
                       } else {
@@ -292,8 +298,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           district: district,
                           city: city,
                           isAvailable: false,
+                          password: password,
+                          bloodGroup: bloodGroup,
                         );
-
                         uploadUserModel(
                           userModel,
                         );
@@ -336,9 +343,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    width: 20,
-                  ),
+                  const SizedBox(width: 20),
                 ],
               ),
             ),

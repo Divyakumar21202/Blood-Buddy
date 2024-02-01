@@ -5,14 +5,14 @@ import 'package:smart_odisha_blood/Constant-Widgets/cards/blood_group_home_card.
 import 'package:smart_odisha_blood/features/Blood-Donate/controller/blood_donate_controller.dart';
 import 'package:smart_odisha_blood/models/blood_info.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   final List<String> imgList = [
     'https://img.freepik.com/free-vector/happy-world-blood-donor-day-red-white-black-background-social-media-design-banner-free-vector_1340-21636.jpg?size=626&ext=jpg&uid=R107090669&ga=GA1.1.1948187877.1675699674&semt=ais',
     'https://img.freepik.com/free-vector/happy-world-blood-donor-day-red-black-white-background-social-media-design-banner-free-vector_1340-21497.jpg?size=626&ext=jpg&uid=R107090669&ga=GA1.1.1948187877.1675699674&semt=ais',
@@ -24,6 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(bloodDonateRepositoryControllerProvider).updateBloodCount();
+    BloodInfoModel model = ref.watch(bloodInfoModelProvider);
     final List<Widget> imageSliders = imgList
         .map(
           (item) => Container(
@@ -106,71 +108,64 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             height: 20,
           ),
-          Consumer(builder: (context, ref, child) {
-            ref
-                .watch(bloodDonateRepositoryControllerProvider)
-                .updateBloodCount();
-            BloodInfoModel model = ref.watch(bloodInfoModelProvider);
-
-            return Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      BloodGroupHomeCard(
-                        bloodType: 'A+ve',
-                        count: model.ap.toString(),
-                      ),
-                      BloodGroupHomeCard(
-                        bloodType: 'B+ve',
-                        count: model.bp.toString(),
-                      ),
-                      BloodGroupHomeCard(
-                        bloodType: 'AB+ve',
-                        count: model.abp.toString(),
-                      ),
-                      BloodGroupHomeCard(
-                        bloodType: 'O+ve',
-                        count: model.op.toString(),
-                      ),
-                    ],
-                  ),
+          Column(
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    BloodGroupHomeCard(
+                      bloodType: 'A+ve',
+                      count: model.ap.toString(),
+                    ),
+                    BloodGroupHomeCard(
+                      bloodType: 'B+ve',
+                      count: model.bp.toString(),
+                    ),
+                    BloodGroupHomeCard(
+                      bloodType: 'AB+ve',
+                      count: model.abp.toString(),
+                    ),
+                    BloodGroupHomeCard(
+                      bloodType: 'O+ve',
+                      count: model.op.toString(),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 10,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    BloodGroupHomeCard(
+                      bloodType: 'A-ve ',
+                      count: model.an.toString(),
+                    ),
+                    BloodGroupHomeCard(
+                      bloodType: 'B-ve ',
+                      count: model.bn.toString(),
+                    ),
+                    BloodGroupHomeCard(
+                      bloodType: 'AB-ve ',
+                      count: model.abn.toString(),
+                    ),
+                    BloodGroupHomeCard(
+                      bloodType: 'O-ve ',
+                      count: model.on.toString(),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      BloodGroupHomeCard(
-                        bloodType: 'A-ve ',
-                        count: model.an.toString(),
-                      ),
-                      BloodGroupHomeCard(
-                        bloodType: 'B-ve ',
-                        count: model.bn.toString(),
-                      ),
-                      BloodGroupHomeCard(
-                        bloodType: 'AB-ve ',
-                        count: model.abn.toString(),
-                      ),
-                      BloodGroupHomeCard(
-                        bloodType: 'O-ve ',
-                        count: model.on.toString(),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          }),
+              ),
+            ],
+          ),
         ],
       ),
     );

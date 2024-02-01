@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
 import 'package:smart_odisha_blood/models/blood_info.dart';
-import 'package:smart_odisha_blood/models/donor_model.dart';
+import 'package:smart_odisha_blood/models/user_model.dart';
 
 final BloodDonateRepositoryProvider = Provider(
   (ref) => BloodDonateRepository(
@@ -27,18 +27,23 @@ class BloodDonateRepository {
   void uploadDonorInfo({
     required BuildContext context,
     required String DonorName,
-    required String BloodGroup,
     required String City,
     required String District,
+    required String password,
+    required String bloodGroup,
   }) async {
     try {
-      DonorModel donorModel = DonorModel(
-        DonorName: DonorName,
-        BloodGroup: BloodGroup,
-        City: City,
-        District: District,
+      UserModel donorModel = UserModel(
+        name: DonorName,
+        bloodGroup: bloodGroup,
+        city: City,
+        district: District,
         mobileNumber: auth.currentUser!.phoneNumber.toString(),
         isAvailable: false,
+        uid: auth.currentUser!.uid,
+        password: password,
+
+
       );
       await firestore
           .collection('users')
@@ -62,13 +67,13 @@ class BloodDonateRepository {
     }
   }
 
-  Stream<List<DonorModel>> getDonorList() {
+  Stream<List<UserModel>> getDonorList() {
     return firestore.collection('users').snapshots().asyncMap((event) async {
-      List<DonorModel> list = [];
+      List<UserModel> list = [];
       for (var document in event.docs) {
         if (document.data()['mobileNumber'] != auth.currentUser!.phoneNumber) {
           list.add(
-            DonorModel.fromMap(
+            UserModel.fromMap(
               document.data(),
             ),
           );
@@ -78,15 +83,18 @@ class BloodDonateRepository {
     });
   }
 
-  Stream<DonorModel> getDonorDetail() {
+  Stream<UserModel> getDonorDetail() {
     try {
-      DonorModel currentDonor = DonorModel(
-        DonorName: '',
-        BloodGroup: '',
-        City: '',
-        District: '',
+      UserModel currentDonor = UserModel(
+        name: '',
+      bloodGroup: '',
+        city: '',
+        district: '',
         mobileNumber: '',
         isAvailable: false,
+        uid: '',
+        password: '',
+
       );
 
       return firestore
@@ -95,7 +103,7 @@ class BloodDonateRepository {
           .snapshots()
           .asyncMap((event) {
         var map = event.data()!;
-        currentDonor = DonorModel.fromMap(map);
+        currentDonor = UserModel.fromMap(map);
         return currentDonor;
       });
     } catch (e) {
@@ -130,7 +138,7 @@ class BloodDonateRepository {
     );
     await firestore.collection('users').get().then((event) {
       for (var document in event.docs) {
-        switch (document.data()['BloodGroup']) {
+        switch (document.data()['bloodGroup']) {
           case 'A+ve':
             model.ap = model.ap + 1;
             break;

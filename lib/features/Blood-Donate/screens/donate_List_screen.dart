@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/common/custom_loader.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/controller/blood_donate_controller.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/widgets/donor_card_widget.dart';
-import 'package:smart_odisha_blood/models/donor_model.dart';
+import 'package:smart_odisha_blood/models/user_model.dart';
 
 class DonateListScreenX extends ConsumerStatefulWidget {
   const DonateListScreenX({super.key});
@@ -75,22 +75,22 @@ class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return CustomLoader();
                   }
-                  List<DonorModel> list = snapshot.data!;
+                  List<UserModel> list = snapshot.data!;
                  
-                  List<DonorModel> filterList1 = [];
-                  List<DonorModel> filterList2 = [];
-                  List<DonorModel> filterList3 = [];
-                  List<DonorModel> filterList4 = [];
+                  List<UserModel> filterList1 = [];
+                  List<UserModel> filterList2 = [];
+                  List<UserModel> filterList3 = [];
+                  List<UserModel> filterList4 = [];
                   if (_searchController.text.isNotEmpty) {
                     filterList1 = list.where((element) {
-                      return element.DonorName.toString()
+                      return element.name.toString()
                           .toLowerCase()
                           .contains(
                             _searchController.text.toString().toLowerCase(),
                           );
                     }).toList();
                     filterList2 = list.where((element) {
-                      return element.BloodGroup.toString()
+                      return element.bloodGroup.toString()
                           .toLowerCase()
                           .contains(
                             _searchController.text.toString().toLowerCase(),
@@ -98,12 +98,12 @@ class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
                     }).toList();
 
                     filterList3 = list.where((element) {
-                      return element.City.toString().toLowerCase().contains(
+                      return element.city.toString().toLowerCase().contains(
                             _searchController.text.toString().toLowerCase(),
                           );
                     }).toList();
                     filterList4 = list.where((element) {
-                      return element.District.toString().toLowerCase().contains(
+                      return element.district.toString().toLowerCase().contains(
                             _searchController.text.toString().toLowerCase(),
                           );
                     }).toList();

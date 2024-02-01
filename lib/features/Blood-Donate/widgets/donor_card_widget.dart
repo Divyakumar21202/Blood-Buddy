@@ -54,7 +54,7 @@ class DonorCardWidget extends ConsumerWidget {
                         'Patient Name :  ',
                       ),
                       Text(
-                        '${singleDonor['DonorName']}',
+                        '${singleDonor['name']}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
@@ -86,7 +86,7 @@ class DonorCardWidget extends ConsumerWidget {
                         'City/Village :  ',
                       ),
                       Text(
-                        '${singleDonor['City']}',
+                        '${singleDonor['city']}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
@@ -102,7 +102,7 @@ class DonorCardWidget extends ConsumerWidget {
                         'District :  ',
                       ),
                       Text(
-                        '${singleDonor['District']}',
+                        '${singleDonor['district']}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
@@ -135,7 +135,7 @@ class DonorCardWidget extends ConsumerWidget {
                               .storeUserRequests(
                                 context: context,
                                 number: singleDonor['mobileNumber'],
-                                blood: singleDonor['BloodGroup'],
+                                blood: singleDonor['bloodGroup'],
                               );
                         },
                         child: const Text(
@@ -177,7 +177,7 @@ class DonorCardWidget extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Text(
-                  singleDonor['BloodGroup'],
+                  singleDonor['bloodGroup'],
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,

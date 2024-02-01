@@ -30,7 +30,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     CustomSnackBar(
       content: mobileNumber,
       context: context,
-    );
+    ).displaySnackBar();
 
     var model = ref.watch(authRepositoryControllerProvider).getUserModel(
           context: context,
@@ -68,11 +68,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           alignment: Alignment.topRight,
           children: [
             Positioned(
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: const Image(
                   image: NetworkImage(
-                      'https://st.depositphotos.com/1035986/2121/v/380/depositphotos_21214343-stock-illustration-blood-donation.jpg'),
+                    'https://st.depositphotos.com/1035986/2121/v/380/depositphotos_21214343-stock-illustration-blood-donation.jpg',
+                  ),
                 ),
               ),
             ),
