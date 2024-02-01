@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_odisha_blood/Colors/colors.dart';
 
 class AuthButton extends StatelessWidget {
   final String nameButton;
@@ -10,10 +11,16 @@ class AuthButton extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Colors.red[300],
+        color: primaryColor,
       ),
       child: Center(
-        child: Text(nameButton),
+        child: Text(
+          nameButton,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 21,
+          ),
+        ),
       ),
     );
   }
