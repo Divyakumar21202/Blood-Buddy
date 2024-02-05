@@ -2,9 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_odisha_blood/Screens/homeScreen.dart';
 import 'package:smart_odisha_blood/Screens/landingScreen.dart';
-import 'package:smart_odisha_blood/Screens/mainScreen.dart';
+import 'package:smart_odisha_blood/Screens/split_app_screen.dart';
 import 'package:smart_odisha_blood/firebase_options.dart';
 
 void main() async {
@@ -42,14 +41,13 @@ class _MyAppState extends State<MyApp> {
               color: Colors.black54, fontSize: 16, fontWeight: FontWeight.bold),
         ),
       ),
-    
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.data == null) {
             return const LandingScreen();
           }
-          return const MainScreen();
+          return const SplitAppScreen();
         },
       ),
     );

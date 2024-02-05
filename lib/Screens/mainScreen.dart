@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:smart_odisha_blood/Screens/homeScreen.dart';
-import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_screen.dart';
 import 'package:smart_odisha_blood/Screens/home_screen_drawer.dart';
+import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_screen.dart';
 import 'package:smart_odisha_blood/features/Blood-Request/screen/blood_request_screen.dart';
 import 'package:smart_odisha_blood/features/Chat/scree.dart';
 
@@ -41,12 +41,16 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.red,
-          gradient: RadialGradient(radius: 500, colors: [
+        color: Colors.red,
+        gradient: RadialGradient(
+          radius: 500,
+          colors: [
             Colors.red,
             Colors.white,
             Colors.red[800]!,
-          ])),
+          ],
+        ),
+      ),
       child: Scaffold(
         body: CurrentPage(curr),
         drawer: const HomeDrawer(),

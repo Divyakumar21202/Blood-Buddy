@@ -12,17 +12,17 @@ class DonorCardWidget extends ConsumerWidget {
   }) : super(key: key);
   void sendRequest(WidgetRef ref, BuildContext context, String number,
       String blood, String name) async {
-    var model = await ref.read(authRepositoryControllerProvider).getUserModel(
-          context: context,
-          mobileNumber: number,
-        );
-    if (model != null) {
-      String receiverUid = model['uid'];
+    // var model = await ref.read(authRepositoryControllerProvider).getUserModel(
+    //       context: context,
+    //       mobileNumber: number,
+    //     );
+    // if (model != null) {
+    //   String receiverUid = model['uid'];
 
-      ref
-          .read(bloodRequestControllerProvider)
-          .sendRequest(receiverUid, blood, number, name);
-    }
+    //   ref
+    //       .read(bloodRequestControllerProvider)
+    //       .sendRequest(receiverUid, blood, number, name);
+    // }
   }
 
   @override
@@ -128,23 +128,23 @@ class DonorCardWidget extends ConsumerWidget {
                                 color: Colors.blueGrey,
                               ),
                             ),
-                      TextButton(
-                        onPressed: () {
-                          ref
-                              .watch(bloodRequestControllerProvider)
-                              .storeUserRequests(
-                                context: context,
-                                number: singleDonor['mobileNumber'],
-                                blood: singleDonor['bloodGroup'],
-                              );
-                        },
-                        child: const Text(
-                          'Want to\nnotify Donor >',
-                          style: TextStyle(
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
+                      // TextButton(
+                      //   onPressed: () {
+                      //     // ref
+                      //     //     .watch(bloodRequestControllerProvider)
+                      //     //     .storeUserRequests(
+                      //     //       context: context,
+                      //     //       uid: singleDonor['uid'],
+                      //     //       blood: singleDonor['bloodGroup'],
+                      //     //     );
+                      //   },
+                      //   child: const Text(
+                      //     'Want to\nnotify Donor >',
+                      //     style: TextStyle(
+                      //       color: Colors.red,
+                      //     ),
+                      //   ),
+                      // ),
                       TextButton(
                         onPressed: () async {
                           final Uri url = Uri(

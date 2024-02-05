@@ -84,7 +84,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               borderRadius: BorderRadius.horizontal(left: Radius.circular(23)),
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 48, 39, 42),
+                  Colors.pink,
                   Colors.red,
                 ],
               ),
