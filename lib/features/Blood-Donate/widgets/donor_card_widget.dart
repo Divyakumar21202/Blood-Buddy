@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_odisha_blood/features/Blood-Request/controller/blood_request_controller.dart';
-import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DonorCardWidget extends ConsumerWidget {

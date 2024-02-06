@@ -25,6 +25,20 @@ class _DonateHomeScreenState extends State<DonateHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.red,
+                Colors.pink,
+              ],
+            ),
+          ),
+        ),
+        centerTitle: true,
+        title: const Text('Donate Here'),
+      ),
       bottomNavigationBar: GNav(
         onTabChange: (val) {
           btmIndex = val;
