@@ -14,22 +14,43 @@ class SplitAppScreen extends StatelessWidget {
         );
       },
       child: Scaffold(
-        backgroundColor: Colors.red,
-        body: ListView(
+        appBar: AppBar(),
+        backgroundColor: Colors.white,
+        body: Column(
           children: [
             Stack(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height / 2,
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  height: MediaQuery.of(context).size.height / 2 - 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      image: const DecorationImage(
-                          image: NetworkImage(
-                              'https://img.freepik.com/free-vector/happy-world-blood-donor-day-red-white-black-background-social-media-design-banner-free-vector_1340-21622.jpg?w=826&t=st=1707243132~exp=1707243732~hmac=b859ddd87a65f1c3e2a8ef6dd26e5c54f0f151351a9f6039db81fabb6219b2f3'))),
+                    gradient: const LinearGradient(colors: [
+                      Colors.red,
+                      Colors.pink,
+                    ]),
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.red,
+                  ),
+                  child: const Image(
+                    image: NetworkImage(
+                      "https://img.freepik.com/free-vector/illustration-people-donating-blood_23-2148246357.jpg?w=1380&t=st=1707247076~exp=1707247676~hmac=ce0f39d57fa6792df9139541ce65c783861fcc439c0269a4c0827863f56e05e2",
+                    ),
+                  ),
+                ),
+                const Positioned(
+                  top: 14,
+                  left: 80,
+                  child: Text(
+                    'You Need A Blood ?',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 26,
+                    ),
+                  ),
                 ),
                 Positioned(
-                  bottom: 90,
-                  left: 140,
+                  bottom: 6,
+                  left: 134,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -42,7 +63,7 @@ class SplitAppScreen extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.all(12),
                         child: Text(
-                          'Need Blood',
+                          'Request Blood',
                         ),
                       ),
                     ),
@@ -50,19 +71,39 @@ class SplitAppScreen extends StatelessWidget {
                 )
               ],
             ),
+            const SizedBox(height: 10),
             Stack(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 12),
-                  height: MediaQuery.of(context).size.height / 2,
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  height: MediaQuery.of(context).size.height / 2 - 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      image: const DecorationImage(
-                          image: NetworkImage(
-                              'https://img.freepik.com/free-vector/happy-world-blood-donor-day-red-white-black-background-social-media-design-banner-free-vector_1340-21622.jpg?w=826&t=st=1707243132~exp=1707243732~hmac=b859ddd87a65f1c3e2a8ef6dd26e5c54f0f151351a9f6039db81fabb6219b2f3'))),
+                    gradient: const LinearGradient(colors: [
+                      Colors.red,
+                      Colors.pink,
+                    ]),
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.red,
+                  ),
+                  child: const Image(
+                    image: NetworkImage(
+                      "https://img.freepik.com/premium-vector/flat-illustration-young-girl-donating-blood-world-blood-day-donation-concept_830469-683.jpg?w=1380",
+                    ),
+                  ),
+                ),
+                const Positioned(
+                  top: 14,
+                  left: 75,
+                  child: Text(
+                    'You Want to Donate ?',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 26,
+                    ),
+                  ),
                 ),
                 Positioned(
-                  bottom: 90,
+                  bottom: 6,
                   left: 134,
                   child: GestureDetector(
                     onTap: () {

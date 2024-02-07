@@ -109,21 +109,38 @@ class RequestWidget extends StatelessWidget {
           Positioned(
             right: 40,
             top: 80,
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.call),
-            ),
-          ),
-          Positioned(
-            right: 47,
-            top: 130,
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 40, maxWidth: 40),
-              child: const Card(
-                child: Image(image: AssetImage('asset/images/whatsapp.png')),
+              constraints: const BoxConstraints(
+                maxHeight: 100,
+              ),
+              child: Column(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.call),
+                  ),
+                  InkWell(
+                    splashColor: Colors.green,
+                    borderRadius: BorderRadius.circular(50),
+                    onTap: () {},
+                    child: ConstrainedBox(
+                      constraints:
+                          const BoxConstraints(maxHeight: 40, maxWidth: 40),
+                      child: const Card(
+                        child: Image(
+                            image: AssetImage('asset/images/whatsapp.png')),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
+          // Positioned(
+          //   right: 47,
+          //   top: 130,
+          //   child:
+          // ),
           const Positioned(
             child: Card(
               elevation: 1,
