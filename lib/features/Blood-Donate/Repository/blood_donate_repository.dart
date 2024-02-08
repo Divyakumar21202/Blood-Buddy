@@ -42,8 +42,6 @@ class BloodDonateRepository {
         isAvailable: false,
         uid: auth.currentUser!.uid,
         password: password,
-
-
       );
       await firestore
           .collection('users')
@@ -87,14 +85,13 @@ class BloodDonateRepository {
     try {
       UserModel currentDonor = UserModel(
         name: '',
-      bloodGroup: '',
+        bloodGroup: '',
         city: '',
         district: '',
         mobileNumber: '',
         isAvailable: false,
         uid: '',
         password: '',
-
       );
 
       return firestore
@@ -165,6 +162,48 @@ class BloodDonateRepository {
         }
         ref.watch(bloodInfoModelProvider.notifier).update((state) => model);
       }
+    });
+  }
+
+  void makeRequest({required String mobileNumber}) {
+    String uids = '';
+    firestore.collection('users').get().then((value) async {
+      var document = value.docs;
+      for (var doc in document) {
+        if (doc['mobileNumber'] == mobileNumber) {
+          print(doc['uid']);
+          uids = doc['uid'];
+        }
+      }
+      UserModel userModel = UserModel(
+        name: 'name',
+        uid: 'uid',
+        mobileNumber: mobileNumber,
+        district: 'district',
+        city: 'city',
+        isAvailable: true,
+        password: 'password',
+        bloodGroup: 'bloodGroup',
+      );
+      firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .get()
+          .then((value) {
+        userModel = UserModel.fromMap(value.data()!);
+      });
+      await firestore
+          .collection('users')
+          .doc(uids)
+          .collection('requests')
+          .doc(userModel.uid)
+          .set({
+        "name": userModel.name,
+        "bloodGroup": userModel.bloodGroup,
+        "mobileNumber": userModel.mobileNumber,
+        "address": "At this ${userModel.city}, ${userModel.district}",
+      });
+      print('suceedddddddddddddddddd');
     });
   }
 }

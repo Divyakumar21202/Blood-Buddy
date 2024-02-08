@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_odisha_blood/features/Blood-Donate/Repository/blood_donate_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DonorCardWidget extends ConsumerWidget {
@@ -59,22 +60,22 @@ class DonorCardWidget extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    children: [
-                      const Text(
-                        'Contact Number :  ',
-                      ),
-                      Text(
-                        '${singleDonor['mobileNumber']}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // const SizedBox(
+                  //   height: 12,
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     const Text(
+                  //       'Contact Number :  ',
+                  //     ),
+                  //     // Text(
+                  //     //   '${singleDonor['mobileNumber']}',
+                  //     //   style: const TextStyle(
+                  //     //     fontWeight: FontWeight.bold,
+                  //     //   ),
+                  //     // ),
+                  //   ],
+                  // ),
                   const SizedBox(
                     height: 12,
                   ),
@@ -145,6 +146,9 @@ class DonorCardWidget extends ConsumerWidget {
                       // ),
                       TextButton(
                         onPressed: () async {
+                          ref.read(BloodDonateRepositoryProvider).makeRequest(
+                              mobileNumber: singleDonor['mobileNumber']);
+                              
                           final Uri url = Uri(
                             scheme: 'sms',
                             path: '${singleDonor['mobileNumber']}',
