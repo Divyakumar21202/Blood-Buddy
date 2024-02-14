@@ -7,7 +7,7 @@
 - In this application user get benefits of updation and notification for the blood realted query.</br>
 - User specially Blood Reciever can search & check the avialablity for the needed blood packet.</br>
 - Users can send text messages and make a call to get the Donor Info and taking blood with the near-by searching option's.</br>
-# *Download Apk* : <a href="https://github.com/Divyakumar21202/Blood-Buddy/releases/download/v2.6.1/app-release.apk">Android Here</a>
+# *Download Apk* : <a href="https://github.com/Divyakumar21202/Blood-Buddy/releases/download/version2.7/app-armeabi-v7a-release.apk">Android Here</a>
 ## Features :
 ### Mobile Authentication & SignUp Features.
 ### Effective Blood Searching.
