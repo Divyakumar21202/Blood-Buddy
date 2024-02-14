@@ -49,14 +49,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
   @override
   void setState(VoidCallback fn) {
-    // _MobileController.text = widget.mobileNumber!;
     super.setState(fn);
   }
 
   @override
   void dispose() {
     super.dispose();
-    // _passwordController.dispose();
     _nameController.dispose();
     _MobileController.dispose();
     _districtController.dispose();

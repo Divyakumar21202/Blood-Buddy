@@ -76,21 +76,20 @@ class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
                     return CustomLoader();
                   }
                   List<UserModel> list = snapshot.data!;
-                 
+
                   List<UserModel> filterList1 = [];
                   List<UserModel> filterList2 = [];
                   List<UserModel> filterList3 = [];
                   List<UserModel> filterList4 = [];
                   if (_searchController.text.isNotEmpty) {
                     filterList1 = list.where((element) {
-                      return element.name.toString()
-                          .toLowerCase()
-                          .contains(
+                      return element.name.toString().toLowerCase().contains(
                             _searchController.text.toString().toLowerCase(),
                           );
                     }).toList();
                     filterList2 = list.where((element) {
-                      return element.bloodGroup.toString()
+                      return element.bloodGroup
+                          .toString()
                           .toLowerCase()
                           .contains(
                             _searchController.text.toString().toLowerCase(),

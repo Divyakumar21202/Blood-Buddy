@@ -167,6 +167,16 @@ class BloodDonateRepository {
 
   void makeRequest({required String mobileNumber}) {
     String uids = '';
+    UserModel userModel = UserModel(
+      name: 'name',
+      uid: 'uid',
+      mobileNumber: mobileNumber,
+      district: 'district',
+      city: 'city',
+      isAvailable: true,
+      password: 'password',
+      bloodGroup: 'bloodGroup',
+    );
     firestore.collection('users').get().then((value) async {
       var document = value.docs;
       for (var doc in document) {
@@ -175,16 +185,7 @@ class BloodDonateRepository {
           uids = doc['uid'];
         }
       }
-      UserModel userModel = UserModel(
-        name: 'name',
-        uid: 'uid',
-        mobileNumber: mobileNumber,
-        district: 'district',
-        city: 'city',
-        isAvailable: true,
-        password: 'password',
-        bloodGroup: 'bloodGroup',
-      );
+      // Sender and receiver both
       firestore
           .collection('users')
           .doc(auth.currentUser!.uid)
@@ -192,18 +193,51 @@ class BloodDonateRepository {
           .then((value) {
         userModel = UserModel.fromMap(value.data()!);
       });
+
       await firestore
           .collection('users')
-          .doc(uids)
+          .doc(auth.currentUser!.uid)
           .collection('requests')
-          .doc(userModel.uid)
+          .doc(mobileNumber)
           .set({
         "name": userModel.name,
         "bloodGroup": userModel.bloodGroup,
         "mobileNumber": userModel.mobileNumber,
+        "sender": auth.currentUser!.uid,
+        "receiver": uids,
         "address": "At this ${userModel.city}, ${userModel.district}",
       });
-      print('suceedddddddddddddddddd');
+
+      await firestore
+          .collection('users')
+          .doc(uids)
+          .collection('requests')
+          .doc(auth.currentUser!.phoneNumber)
+          .set({
+        "name": userModel.name,
+        "bloodGroup": userModel.bloodGroup,
+        "mobileNumber": userModel.mobileNumber,
+        "sender": auth.currentUser!.uid,
+        "receiver": uids,
+        "address": "At this ${userModel.city}, ${userModel.district}",
+      });
     });
+  }
+
+  List<Map<String, dynamic>> getRequests() {
+    List<Map<String, dynamic>> list = [];
+    firestore
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('requests')
+        .get()
+        .then((value) {
+      for (var doc in value.docs) {
+        if (doc.id != auth.currentUser!.uid) {
+          list.add(doc.data());
+        }
+      }
+    });
+    return list;
   }
 }
