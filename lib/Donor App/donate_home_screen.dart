@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:smart_odisha_blood/Donor%20App/features/Request%20Lists/screens/requests_list_screen.dart';
+import 'package:smart_odisha_blood/features/maps/location_searching_screen.dart';
 
 class DonateHomeScreen extends StatefulWidget {
   const DonateHomeScreen({super.key});
@@ -11,13 +12,7 @@ class DonateHomeScreen extends StatefulWidget {
 
 List<Widget> screens = const [
   RequestListScreen(),
-  Scaffold(
-    body: Center(
-      child: Text(
-        'Search Screen',
-      ),
-    ),
-  ),
+  LocationSearchingScreen(),
 ];
 
 class _DonateHomeScreenState extends State<DonateHomeScreen> {
