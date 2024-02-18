@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
-
+import 'package:smart_odisha_blood/api_keys.dart';
 class LocationSearchingScreen extends StatefulWidget {
   const LocationSearchingScreen({super.key});
 
@@ -14,7 +14,7 @@ class LocationSearchingScreen extends StatefulWidget {
 
 class _LocationSearchingScreenState extends State<LocationSearchingScreen> {
   final TextEditingController _controller = TextEditingController();
-  String _sessionToken = '12432354';
+  String? _sessionToken;
   List<dynamic> _placesList = [];
   Uuid uuid = Uuid();
   @override
@@ -35,7 +35,7 @@ class _LocationSearchingScreenState extends State<LocationSearchingScreen> {
   }
 
   void getSuggestion(String input) async {
-    String kPLACES_API_KEY = 'AIzaSyDdAF48P3qUd21gCVfQAisRbOnAYxyz2Os';
+    String kPLACES_API_KEY = kPlaceApiKey;
     String baseURL =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json';
     String request = '$baseURL?input=$input&key=$kPLACES_API_KEY';
