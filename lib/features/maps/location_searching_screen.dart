@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
@@ -16,7 +15,7 @@ class _LocationSearchingScreenState extends State<LocationSearchingScreen> {
   final TextEditingController _controller = TextEditingController();
   String? _sessionToken;
   List<dynamic> _placesList = [];
-  Uuid uuid = Uuid();
+  Uuid uuid =const Uuid();
   @override
   void initState() {
     super.initState();
