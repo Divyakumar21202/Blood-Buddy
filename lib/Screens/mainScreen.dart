@@ -24,14 +24,15 @@ Widget CurrentPage(int curr) {
       return const ChatScreen();
     default:
       return const Center(
-          child: Text(
-        'Oop\'s Page Not Found 😕',
-        style: TextStyle(
-          color: Colors.red,
-          fontWeight: FontWeight.bold,
-          fontSize: 28,
+        child: Text(
+          'Oop\'s Page Not Found 😕',
+          style: TextStyle(
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+            fontSize: 28,
+          ),
         ),
-      ));
+      );
   }
 }
 
