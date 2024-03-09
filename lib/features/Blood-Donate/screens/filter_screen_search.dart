@@ -1,12 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ui';
-
 import 'package:csc_picker_i18n/csc_picker.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
-import 'package:smart_odisha_blood/models/selected_filter_data.dart';
 
 class FilterScreenSearch extends ConsumerStatefulWidget {
   final VoidCallback onClose;

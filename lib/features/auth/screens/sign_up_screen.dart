@@ -298,6 +298,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           isAvailable: false,
                           password: password,
                           bloodGroup: bloodGroup,
+                          latitude: '',
+                          longitude: ''
                         );
                         uploadUserModel(
                           userModel,

@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/Screens/homeScreen.dart';
@@ -141,6 +140,8 @@ class AuthRepository {
       isAvailable: false,
       password: '',
       bloodGroup: '',
+      latitude: '',
+      longitude: '',
     ).toMap();
     try {
       await firestore.collection('users').get().then((value) {
@@ -193,7 +194,25 @@ class AuthRepository {
       CustomSnackBar(
         content: e.toString(),
         context: context,
-      );
+      ).displaySnackBar();
+    }
+  }
+
+  void uploadUserlocation({
+    required String latitude,
+    required String longitude,
+    required BuildContext context,
+  }) async {
+    try {
+      await firestore.collection('users').doc(auth.currentUser!.uid).update({
+        'latitude': latitude,
+        'longitude': longitude,
+      });
+    } catch (e) {
+      CustomSnackBar(
+        content: e.toString(),
+        context: context,
+      ).displaySnackBar();
     }
   }
 }

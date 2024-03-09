@@ -42,6 +42,8 @@ class BloodDonateRepository {
         isAvailable: false,
         uid: auth.currentUser!.uid,
         password: password,
+        latitude: '',
+        longitude: '',
       );
       await firestore
           .collection('users')
@@ -92,6 +94,8 @@ class BloodDonateRepository {
         isAvailable: false,
         uid: '',
         password: '',
+        latitude: '',
+        longitude: '',
       );
 
       return firestore
@@ -176,6 +180,8 @@ class BloodDonateRepository {
       isAvailable: true,
       password: 'password',
       bloodGroup: 'bloodGroup',
+      latitude: '',
+      longitude: '',
     );
     firestore.collection('users').get().then((value) async {
       var document = value.docs;

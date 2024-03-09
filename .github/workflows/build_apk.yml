@@ -1,0 +1,24 @@
+name: Blood Buddy Apk Workflow
+on:
+    push:
+        branches:
+            - main
+            - master
+            - maps
+jobs:
+    build-apk:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+
+            - name: Set-up Flutter
+              uses: subosito/flutter-action@v1
+            
+            - name: Clean Gradle Build
+              run: flutter clean
+            
+            - name: Get Dependencies
+              run: flutter pub get
+              
+            - name: Flutter Build Release Apk
+              run: flutter build apk --split-per-abi
