@@ -1,24 +1,73 @@
-name: Blood Buddy Apk Workflow
-on:
-    push:
-        branches:
-            - main
-            - master
-            - maps
-jobs:
-    build-apk:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
+# name: Blood Buddy Apk Workflow
+# on:
+#     push:
+#         branches:
+#             - main
+#             - master
+#             - maps
+# jobs:
+#     build-apk:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - uses: actions/checkout@v1
 
-            - name: Set-up Flutter
-              uses: subosito/flutter-action@v1
+#             - name: Set-up Flutter
+#               uses: subosito/flutter-action@v1
             
-            - name: Clean Gradle Build
-              run: flutter clean
+#             - name: Clean Gradle Build
+#               run: flutter clean
             
-            - name: Get Dependencies
-              run: flutter pub get
+#             - name: Get Dependencies
+#               run: flutter pub get
               
-            - name: Flutter Build Release Apk
-              run: flutter build apk --split-per-abi
+#             - name: Flutter Build Release Apk
+#               run: flutter build apk --split-per-abi
+on:
+  push:
+    branches:
+      - maps
+      - main
+      - master
+
+jobs:
+  Build-Apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check-Repository
+        run: actions/checkout@v1
+      - name: Set-Up-Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '3.19'
+      
+      - name: Clean-Gradle-Build
+        run: flutter clean
+      
+      - name: Get-Dependencies
+        run: flutter pub get
+
+      - name: Build-Apk
+        run: flutter build apk --split-per-abi
+
+
+      - name: Release-Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Blood-Buddy-Aritfacts
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+
+      # - name: Create-Tagging
+      #   id: tag_commit
+      #   run: 
+      #     git tag -a v${{ github.run_number }} -m "Release v${{ github.run_number }}"
+      #     git push origin v${{ github.run_number }}
+      
+      - name: Create-Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB-TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: "Release v${{ github.run_number }}"
