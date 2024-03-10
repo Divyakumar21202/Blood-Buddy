@@ -77,5 +77,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.BLOOD_BUDDY_ACCESS_TOKEN }}
-          artifacts: build/app/output/flutter-apk/app-release.apk
+          artifacts: "build/app/output/flutter-apk/app-release.apk"
           tag: v.3.0.${{ github.run_number }}
