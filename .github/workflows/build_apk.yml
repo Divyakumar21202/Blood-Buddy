@@ -49,14 +49,14 @@ jobs:
         run: flutter pub get
 
       - name: Build-Apk
-        run: flutter build apk --split-per-abi
+        run: flutter build apk --release
 
 
       - name: Release-Artifacts
         uses: actions/upload-artifact@v1
         with:
           name: Blood-Buddy-Aritfacts
-          path: "build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk"
+          path: "build/app/outputs/flutter-apk/app-release.apk"
 
 
       # - name: Create-Tagging
@@ -77,5 +77,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.BLOOD_BUDDY_ACCESS_TOKEN }}
-          artifacts: build/app/output/flutter-apk/armeabi-v7a-release.apk
+          artifacts: build/app/output/flutter-apk/app-release.apk
           tag: v.3.0.${{ github.run_number }}
