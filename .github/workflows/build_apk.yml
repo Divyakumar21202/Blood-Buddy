@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Blood-Buddy-Aritfacts
-          path: build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+          path: "build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk"
 
 
       # - name: Create-Tagging
@@ -65,11 +65,17 @@ jobs:
       #     git tag -a v${{ github.run_number }} -m "Release v${{ github.run_number }}"
       #     git push origin v${{ github.run_number }}
       
+      # - name: Create-Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB-TOKEN: ${{ secrets.BLOOD_BUDDY_ACCESS_TOKEN }}
+      #   with:
+      #     tag_name: v${{ github.run_number }}
+      #     release_name: "Release v${{ github.run_number }}"
       - name: Create-Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB-TOKEN: ${{secrets.BLOOD_BUDDY_ACCESS_TOKEN }}
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: v${{ github.run_number }}
-          release_name: "Release v${{ github.run_number }}"
+          token: ${{ secrets.BLOOD_BUDDY_ACCESS_TOKEN }}
+          artifacts: build/app/output/flutter-apk/armeabi-v7a-release.apk
+          tag: v.3.0.${{ github.run_number }}
