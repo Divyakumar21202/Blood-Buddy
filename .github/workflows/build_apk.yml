@@ -73,18 +73,18 @@ jobs:
       #   with:
       #     tag_name: v${{ github.run_number }}
       #     release_name: "Release v${{ github.run_number }}"
-      # - name: Create-Release
-      #   uses: ncipollo/release-action@v1
-      #   with:
-      #     token: ${{ secrets.BLOOD_BUDDY_ACCESS_TOKEN }}
-      #     artifacts: "build/app/output/flutter-apk/app-release.apk"
-      #     tag: v.3.0.${{ github.run_number }}
-      - name: Release the Apk
+      - name: Create-Release
         uses: ncipollo/release-action@v1
         with:
-            artifacts: "build/app/outputs/flutter-apk/app-arm64-v8a-release.apk"
-            tag: v1.0.${{ github.run_number }}
-            token: ${{ secrets.BLOOD_BUDDDY_ACCESS_TOKEN }}
+          token: ${{ secrets.BLOOD_BUDDY_ACCESS_TOKEN }}
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk"
+          tag: v.3.0.${{ github.run_number }}
+      # - name: Release the Apk
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #       artifacts: "build/app/outputs/flutter-apk/app-arm64-v8a-release.apk"
+      #       tag: v1.0.${{ github.run_number }}
+      #       token: ${{ secrets.BLOOD_BUDDDY_ACCESS_TOKEN }}
       # - name: Upload-Release
       #   uses: actions/upload-release-asset@v1
       #   with:
