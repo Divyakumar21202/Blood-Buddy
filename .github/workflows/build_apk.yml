@@ -69,7 +69,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB-TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB-TOKEN: ${{secrets.BLOOD_BUDDY_ACCESS_TOKEN }}
         with:
           tag_name: v${{ github.run_number }}
           release_name: "Release v${{ github.run_number }}"
