@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_odisha_blood/Screens/homeScreen.dart';
-import 'package:smart_odisha_blood/Screens/mainScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_odisha_blood/Screens/split_app_screen.dart';
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
 import 'package:smart_odisha_blood/features/auth/screens/otp_screen.dart';
 import 'package:smart_odisha_blood/features/auth/screens/sign_up_screen.dart';
@@ -81,11 +81,15 @@ class AuthRepository {
           .signInWithCredential(
         credential,
       )
-          .then((value) {
+          .then((value) async {
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.setString('uid', auth.currentUser!.uid.toString());
+
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => isLogin
-                ? const HomeScreen()
+                ? const SplitAppScreen()
                 : SignUpScreen(
                     mobileNumber: mobileNumber,
                   ),
@@ -112,11 +116,12 @@ class AuthRepository {
             userModel.toMap(),
           )
           .whenComplete(
-            () => Navigator.push(
+            () => Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => const MainScreen(),
+                builder: (context) => const SplitAppScreen(),
               ),
+              (route) => false,
             ),
           );
     } catch (e) {

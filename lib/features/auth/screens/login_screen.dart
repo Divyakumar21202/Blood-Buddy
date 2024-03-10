@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/text_field.dart';
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
 import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart';
@@ -10,6 +11,7 @@ class LoginScreen extends ConsumerStatefulWidget {
   @override
   ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
+
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
@@ -127,7 +129,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   height: 12,
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     String password = _passwordController.text.trim();
                     String mobileNumber = _MobileController.text.trim();
                     if (mobileNumber.length != 10) {
@@ -141,10 +143,29 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         context: context,
                       ).displaySnackBar();
                     } else {
-                      confirmUser(
-                        mobileNumber,
-                        password,
-                      );
+                      // confirmUser(
+                      //   mobileNumber,
+                      //   password,
+                      // );
+                      SharedPreferences sharedPreferences =
+                          await SharedPreferences.getInstance();
+                      final String? mobileNumber =
+                          sharedPreferences.getString('mobileNumber');
+                      final String? password =
+                          sharedPreferences.getString('password');
+
+                      if (mobileNumber == null && password == null) {
+                        CustomSnackBar(
+                                content: 'User Does not Exist',
+                                context: context)
+                            .displaySnackBar();
+                      } else if (password !=
+                          _passwordController.text.trim().toString()) {
+                        CustomSnackBar(
+                                content: 'Invalid Password | Please Try Again',
+                                context: context)
+                            .displaySnackBar();
+                      }
                     }
                   },
                   style: ElevatedButton.styleFrom(

@@ -52,11 +52,7 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (bool val) {
-        const AlertDialog(
-          title: Text('Are U sure to Exit ?'),
-        );
-      },
+      onPopInvoked: (bool val) async {},
       child: Scaffold(
         appBar: AppBar(),
         backgroundColor: Colors.white,
@@ -132,7 +128,7 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
                     color: Colors.red,
                   ),
                   child: const Image(
-                    image: AssetImage('asset/images/need.jpg'),
+                    image: AssetImage('asset/images/donate.jpg'),
                   ),
                 ),
                 const Positioned(
@@ -147,7 +143,7 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: 6,
+                  bottom: -3,
                   left: 134,
                   child: GestureDetector(
                     onTap: () {
@@ -166,7 +162,7 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ],

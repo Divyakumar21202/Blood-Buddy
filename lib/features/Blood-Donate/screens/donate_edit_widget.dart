@@ -3,7 +3,8 @@ import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_odisha_blood/Screens/mainScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_odisha_blood/Screens/split_app_screen.dart';
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/controller/blood_donate_controller.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/widgets/widget_textField.dart';
@@ -29,7 +30,6 @@ class _DonateEditWidgetState extends ConsumerState<DonateEditWidget> {
     bloodGroup,
     city,
     district,
-    
   }) {
     ref.read(bloodDonateRepositoryControllerProvider).uploadDonorInfo(
           context: context,
@@ -38,7 +38,6 @@ class _DonateEditWidgetState extends ConsumerState<DonateEditWidget> {
           city: city,
           District: district,
           password: '',
-
         );
     Navigator.pop(context);
   }
@@ -268,7 +267,6 @@ class _DonateEditWidgetState extends ConsumerState<DonateEditWidget> {
                     bloodGroup: Blood,
                     city: city,
                     district: District,
-                    
                   );
                 } else {
                   CustomSnackBar(
@@ -312,6 +310,13 @@ class DonorUserDataWidget extends ConsumerStatefulWidget {
 }
 
 class _DonorUserDataWidgetState extends ConsumerState<DonorUserDataWidget> {
+  void showShared() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? password = sharedPreferences.get('uid') as String;
+    CustomSnackBar(content: password ?? 'password not stored', context: context)
+        .displaySnackBar();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -451,9 +456,9 @@ class _DonorUserDataWidgetState extends ConsumerState<DonorUserDataWidget> {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => const MainScreen(),
-                                ),
+                                MaterialPageRoute(builder: (context) {
+                                  return const SplitAppScreen();
+                                }),
                                 (route) => false,
                               );
                             },

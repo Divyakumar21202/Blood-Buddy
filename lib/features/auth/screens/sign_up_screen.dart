@@ -3,6 +3,7 @@ import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/button.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/text_field.dart';
 import 'package:smart_odisha_blood/common/customSnackbar.dart';
@@ -40,7 +41,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   FocusNode searchFocusNode = FocusNode();
   FocusNode textFieldFocusNode = FocusNode();
 
-  void uploadUserModel(UserModel userModel) {
+  void uploadUserModel(UserModel userModel) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString('password', userModel.password.trim());
     ref.read(authRepositoryControllerProvider).uploadUserModel(
           userModel: userModel,
           context: context,
@@ -290,17 +293,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         ).displaySnackBar();
                       } else {
                         UserModel userModel = UserModel(
-                          name: name,
-                          uid: FirebaseAuth.instance.currentUser!.uid,
-                          mobileNumber: widget.mobileNumber!,
-                          district: district,
-                          city: city,
-                          isAvailable: false,
-                          password: password,
-                          bloodGroup: bloodGroup,
-                          latitude: '',
-                          longitude: ''
-                        );
+                            name: name,
+                            uid: FirebaseAuth.instance.currentUser!.uid,
+                            mobileNumber: widget.mobileNumber!,
+                            district: district,
+                            city: city,
+                            isAvailable: false,
+                            password: password,
+                            bloodGroup: bloodGroup,
+                            latitude: '',
+                            longitude: '');
+
                         uploadUserModel(
                           userModel,
                         );
