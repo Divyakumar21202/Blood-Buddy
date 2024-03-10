@@ -36,7 +36,7 @@ jobs:
       - name: Check-Repository
         uses: actions/checkout@v1
 
-        
+
       - name: Set-Up-Flutter
         uses: subosito/flutter-action@v1
         with:
@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Blood-Buddy-Aritfacts
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
 
 
       # - name: Create-Tagging
