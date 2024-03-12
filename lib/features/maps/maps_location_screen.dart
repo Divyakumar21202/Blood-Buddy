@@ -16,7 +16,7 @@ class MapSampleState extends State<MapSample> {
       Completer<GoogleMapController>();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(20.28828828828829 , 85.75253410478031),
+    target: LatLng(20.28828828828829, 85.75253410478031),
     zoom: 14.4746,
   );
 
@@ -40,17 +40,20 @@ class MapSampleState extends State<MapSample> {
   }
 
   var markers = <Marker>{
-    Marker(markerId: MarkerId('user1'), position: LatLng(20.2, 85.8)),
-    Marker(markerId: MarkerId('user2'), position: LatLng(20.3, 85.7)),
-    Marker(markerId: MarkerId('user3'), position: LatLng(20.4, 85.75)),
-    Marker(markerId: MarkerId('user4'), position: LatLng(20.5, 85.6)),
-    Marker(markerId: MarkerId('user5'), position: LatLng(20.6, 85.55)),
-    Marker(markerId: MarkerId('user6'), position: LatLng(20.7, 85.65)),
-    Marker(markerId: MarkerId('user7'), position: LatLng(20.8, 85.5)),
-    Marker(markerId: MarkerId('user8'), position: LatLng(20.9, 85.45)),
-    Marker(markerId: MarkerId('user9'), position: LatLng(21.0, 85.55)),
-    Marker(markerId: MarkerId('user10'), position: LatLng(21.1, 85.4)),
-    Marker(markerId: MarkerId('user11'), position: LatLng(21.2, 85.35)),
+    const Marker(markerId: MarkerId('user1'), position: LatLng(20.2, 85.8)),
+    const Marker(
+        markerId: MarkerId('user111'),
+        position: LatLng(20.28828828828829, 85.75253410478031)),
+    const Marker(markerId: MarkerId('user2'), position: LatLng(20.3, 85.7)),
+    const Marker(markerId: MarkerId('user3'), position: LatLng(20.4, 85.75)),
+    const Marker(markerId: MarkerId('user4'), position: LatLng(20.5, 85.6)),
+    const Marker(markerId: MarkerId('user5'), position: LatLng(20.6, 85.55)),
+    const Marker(markerId: MarkerId('user6'), position: LatLng(20.7, 85.65)),
+    const Marker(markerId: MarkerId('user7'), position: LatLng(20.8, 85.5)),
+    const Marker(markerId: MarkerId('user8'), position: LatLng(20.9, 85.45)),
+    const Marker(markerId: MarkerId('user9'), position: LatLng(21.0, 85.55)),
+    const Marker(markerId: MarkerId('user10'), position: LatLng(21.1, 85.4)),
+    const Marker(markerId: MarkerId('user11'), position: LatLng(21.2, 85.35)),
   };
   @override
   Widget build(BuildContext context) {
