@@ -5,14 +5,14 @@ import 'package:smart_odisha_blood/features/Blood-Donate/controller/blood_donate
 import 'package:smart_odisha_blood/features/Blood-Donate/widgets/donor_card_widget.dart';
 import 'package:smart_odisha_blood/models/user_model.dart';
 
-class DonateListScreenX extends ConsumerStatefulWidget {
-  const DonateListScreenX({super.key});
+class donateListScreenX extends ConsumerStatefulWidget {
+  const donateListScreenX({super.key});
 
   @override
-  ConsumerState<DonateListScreenX> createState() => _DonateListScreenXState();
+  ConsumerState<donateListScreenX> createState() => _DonateListScreenXState();
 }
 
-class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
+class _DonateListScreenXState extends ConsumerState<donateListScreenX> {
   final TextEditingController _searchController = TextEditingController();
   final ScrollController scrollController = ScrollController();
 
@@ -73,7 +73,7 @@ class _DonateListScreenXState extends ConsumerState<DonateListScreenX> {
                     .getDonorList(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CustomLoader();
+                    return customLoader();
                   }
                   List<UserModel> list = snapshot.data!;
 

@@ -5,12 +5,13 @@ import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart
 
 class OtpScreen extends ConsumerStatefulWidget {
   final String mobileNumber;
-  final String IdentificationId;
-  bool isLogin;
-  OtpScreen({
+  final String identificationId;
+  final bool isLogin;
+  const OtpScreen({
+    super.key,
     required this.mobileNumber,
-    required this.IdentificationId,
-    required this.isLogin,
+    required this.identificationId,
+     this.isLogin = true ,
   });
 
   @override
@@ -28,7 +29,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
   void verifyOtp(String Code) {
     ref.watch(authRepositoryControllerProvider).verifyOtp(
           context,
-          widget.IdentificationId,
+          widget.identificationId,
           Code,
           widget.isLogin,
           widget.mobileNumber,

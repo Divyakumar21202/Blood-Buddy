@@ -48,7 +48,7 @@ class AuthRepository {
             MaterialPageRoute(
               builder: (context) => OtpScreen(
                 isLogin: false,
-                IdentificationId: identificationId,
+                identificationId: identificationId,
                 mobileNumber: phoneNumber,
               ),
             ),
@@ -187,7 +187,7 @@ class AuthRepository {
             MaterialPageRoute(
               builder: (context) => OtpScreen(
                 isLogin: true,
-                IdentificationId: IdentificationId,
+                identificationId: IdentificationId,
                 mobileNumber: phoneNumber,
               ),
             ),

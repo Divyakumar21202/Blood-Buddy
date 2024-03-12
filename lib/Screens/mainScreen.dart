@@ -6,10 +6,10 @@ import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_scr
 import 'package:smart_odisha_blood/features/Blood-Request/screen/blood_request_screen.dart';
 import 'package:smart_odisha_blood/features/Chat/scree.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+class mainScreen extends StatefulWidget {
+  const mainScreen({super.key});
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<mainScreen> createState() => _MainScreenState();
 }
 
 Widget CurrentPage(int curr) {
@@ -17,7 +17,7 @@ Widget CurrentPage(int curr) {
     case 0:
       return const HomeScreen();
     case 1:
-      return const DonateListScreenX();
+      return const donateListScreenX();
     case 2:
       return const BloodRequestScreen();
     case 3:
@@ -36,7 +36,7 @@ Widget CurrentPage(int curr) {
   }
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<mainScreen> {
   int curr = 0;
   @override
   Widget build(BuildContext context) {

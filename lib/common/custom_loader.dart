@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget CustomLoader() {
+Widget customLoader() {
   return const Center(
       child: CircularProgressIndicator(
     color: Colors.redAccent,

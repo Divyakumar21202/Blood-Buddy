@@ -25,9 +25,6 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.deniedForever) {
-        // Handle the case where the user denies permission forever
-        print(
-            'Location permission denied forever. Please enable it in app settings.');
         return;
       }
     }
@@ -42,10 +39,8 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
             latitude: position.latitude.toString(),
             longitude: position.longitude.toString(),
           );
-      print('Latitude: ${position.latitude}, Longitude: ${position.longitude}');
     } catch (e) {
-      // Handle any errors that occur while getting the location
-      print('Error getting location: $e');
+      rethrow;
     }
   }
 
@@ -54,118 +49,112 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
     return PopScope(
       onPopInvoked: (bool val) async {},
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: const Text('Blood Buddy'),
+          flexibleSpace: Container(
+            decoration:const BoxDecoration(color: Colors.red),
+          ),
+          centerTitle: true,
+        ),
         backgroundColor: Colors.white,
-        body: Column(
-          children: [
-            Stack(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  height: MediaQuery.of(context).size.height / 2 - 50,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [
-                        Colors.red,
-                        Colors.pink,
-                      ],
+        body: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
+                    height: MediaQuery.of(context).size.height / 3,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.red[600],
                     ),
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.red,
-                  ),
-                  child: const Image(
-                    image: AssetImage('asset/images/need.jpg'),
-                  ),
-                ),
-                const Positioned(
-                  top: 14,
-                  left: 80,
-                  child: Text(
-                    'You Need A Blood ?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 26,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 6,
-                  left: 134,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const MainScreen(),
+                    child: Center(
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: const Color.fromRGBO(29, 16, 86, 1),
                         ),
-                      );
-                    },
-                    child: const Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Text(
-                          'Request Blood',
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const mainScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'REQUEST BLOOD',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 30,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Stack(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  height: MediaQuery.of(context).size.height / 2 - 50,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [
-                        Colors.red,
-                        Colors.pink,
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.red,
-                  ),
-                  child: const Image(
-                    image: AssetImage('asset/images/donate.jpg'),
-                  ),
-                ),
-                const Positioned(
-                  top: 14,
-                  left: 75,
-                  child: Text(
-                    'You Want to Donate ?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 26,
+                  const Positioned(
+                    top: 14,
+                    left: 80,
+                    child: Text(
+                      'You Need A Blood ?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 26,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                Positioned(
-                  bottom: -3,
-                  left: 134,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const DonateHomeScreen(),
+                ],
+              ),
+              Stack(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
+                    height: MediaQuery.of(context).size.height / 3,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.red,
+                    ),
+                    child: Center(
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: const Color.fromRGBO(29, 16, 86, 1),
                         ),
-                      );
-                    },
-                    child: const Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Text(
-                          'Donate Blood',
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const DonateHomeScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'DONATE BLOOD',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 30,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const Positioned(
+                    top: 14,
+                    left: 100,
+                    child: Text(
+                      'Want to Donate ?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 26,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
