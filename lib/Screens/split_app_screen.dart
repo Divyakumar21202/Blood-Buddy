@@ -52,7 +52,9 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
         appBar: AppBar(
           title: const Text('Blood Buddy'),
           flexibleSpace: Container(
-            decoration:const BoxDecoration(color: Colors.red),
+            decoration: const BoxDecoration(
+              color: Colors.red,
+            ),
           ),
           centerTitle: true,
         ),
