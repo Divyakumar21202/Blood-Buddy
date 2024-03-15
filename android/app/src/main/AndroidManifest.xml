@@ -20,7 +20,7 @@
   </intent>
 </queries>
     <application
-        android:label="smart_odisha_blood"
+        android:label="Blood Buddy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
