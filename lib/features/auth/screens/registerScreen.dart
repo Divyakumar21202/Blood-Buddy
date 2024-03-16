@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/button.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/text_field.dart';
-import 'package:smart_odisha_blood/common/customSnackbar.dart';
+import 'package:smart_odisha_blood/common/custom_snackbar.dart';
 import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {

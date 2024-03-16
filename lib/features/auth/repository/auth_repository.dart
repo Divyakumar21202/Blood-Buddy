@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_odisha_blood/Screens/split_app_screen.dart';
-import 'package:smart_odisha_blood/common/customSnackbar.dart';
+import 'package:smart_odisha_blood/common/custom_snackbar.dart';
 import 'package:smart_odisha_blood/features/auth/screens/otp_screen.dart';
 import 'package:smart_odisha_blood/features/auth/screens/sign_up_screen.dart';
 import 'package:smart_odisha_blood/models/user_model.dart';
