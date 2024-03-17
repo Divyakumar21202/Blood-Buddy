@@ -16,7 +16,9 @@ class BloodGroupHomeCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const donateListScreenX(),
+            builder: (context) => donateListScreenX(
+              bloodGroup: bloodType,
+            ),
           ),
         );
       },

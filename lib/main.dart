@@ -36,6 +36,13 @@ class _MyAppState extends State<MyApp> {
       title: 'Blood Buddy',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          color: Colors.red,
+          foregroundColor: Colors.black,
+          centerTitle: true,
+          elevation: 0.0,
+        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         textTheme: const TextTheme(
           titleLarge: TextStyle(
               color: Colors.black, fontSize: 24, fontWeight: FontWeight.w500),

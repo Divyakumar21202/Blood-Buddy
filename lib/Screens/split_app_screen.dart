@@ -69,6 +69,11 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 12),
                     height: MediaQuery.of(context).size.height / 3,
                     decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            "https://t3.ftcdn.net/jpg/04/87/84/26/240_F_487842611_55ZVQQaUFupM4aR6M5pgvq2ODV1nNB8a.jpg"),
+                      ),
                       borderRadius: BorderRadius.circular(12),
                       color: Colors.red[600],
                     ),
@@ -115,6 +120,11 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 12),
                     height: MediaQuery.of(context).size.height / 3,
                     decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            "https://t3.ftcdn.net/jpg/04/87/84/26/240_F_487842611_55ZVQQaUFupM4aR6M5pgvq2ODV1nNB8a.jpg"),
+                      ),
                       borderRadius: BorderRadius.circular(12),
                       color: Colors.red,
                     ),

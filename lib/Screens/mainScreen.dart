@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:smart_odisha_blood/Screens/homeScreen.dart';
 import 'package:smart_odisha_blood/Screens/home_screen_drawer.dart';
-import 'package:smart_odisha_blood/features/Blood-Donate/screens/donate_List_screen.dart';
 import 'package:smart_odisha_blood/features/Blood-Request/screen/blood_request_screen.dart';
 import 'package:smart_odisha_blood/features/Chat/scree.dart';
 
@@ -17,10 +16,8 @@ Widget CurrentPage(int curr) {
     case 0:
       return const HomeScreen();
     case 1:
-      return const donateListScreenX();
-    case 2:
       return const BloodRequestScreen();
-    case 3:
+    case 2:
       return const ChatScreen();
     default:
       return const Center(
@@ -66,10 +63,6 @@ class _MainScreenState extends State<mainScreen> {
             GButton(
               icon: Icons.home,
               text: 'Home',
-            ),
-            GButton(
-              icon: Icons.search_sharp,
-              text: 'Donor List',
             ),
             GButton(
               icon: Icons.message_rounded,
