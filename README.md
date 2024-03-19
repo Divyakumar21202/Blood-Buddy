@@ -7,12 +7,11 @@
 - In this application user get benefits of updation and notification for the blood realted query.</br>
 - User specially Blood Reciever can search & check the avialablity for the needed blood packet.</br>
 - Users can send text messages and make a call to get the Donor Info and taking blood with the near-by searching option's.</br>
-# *Download Apk* : <a href="https://github.com/Divyakumar21202/Blood-Buddy/releases/download/version2.7/app-armeabi-v7a-release.apk">Android Here</a>
+# *Download Apk* : <a href="https://github.com/Divyakumar21202/Blood-Buddy/releases/">Android Here</a>
 ## Features :
 ### Mobile Authentication & SignUp Features.
 ### Effective Blood Searching.
 ### Live Blood Updation.
-
 ## Some ScreenShot of the Application
 
 <img src="https://github.com/Divyakumar21202/smart_odisha_blood/assets/124331485/b998dd0a-d391-48a7-b0e6-f26e9b1cc481" width="200" height="500">
@@ -27,12 +26,12 @@
 
 ## Prerequisite for Installing this App :
 1. Install Android studio or Vs-Code in your system.
-2. Flutter & Dart Sdk
+2. Flutter & Dart Sdk of Similar version
 3. Setup flutter sdk in environment with Flutter Doctor by run command in cmd : flutter doctor 
 
 ## How to install in your system : 
-1. First forked my Repository by reach at this site : https://github.com/Divyakumar21202/smart_odisha_blood/</br>
-2. Clone this repository in your local system by follow the command in cmd : git clone https://github.com/Divyakumar21202/smart_odisha_blood/</br>
+1. First forked my Repository by reach at this site : https://github.com/Divyakumar21202/Blood-Buddy</br>
+2. Clone this repository in your local system by follow the command in cmd : git clone https://github.com/Divyakumar21202/Blood-Buddy/</br>
 **Note : First reach to your preferred location folder then clone the repository**.</br>
 3. Add all the dependencies by running the command in cmd : flutter pub get</br>
 **Note** : **first go to main directory of project then you have to run it,otherwise it will not run**</br>
