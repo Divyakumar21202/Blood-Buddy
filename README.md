@@ -7,7 +7,7 @@
 - In this application user get benefits of updation and notification for the blood realted query.</br>
 - User specially Blood Reciever can search & check the avialablity for the needed blood packet.</br>
 - Users can send text messages and make a call to get the Donor Info and taking blood with the near-by searching option's.</br>
-# *Download Apk* : <a href="https://github.com/Divyakumar21202/Blood-Buddy/releases/download/version2.7/app-armeabi-v7a-release.apk">Android Here</a>
+# *Download Apk* : <a href="https://github.com/Divyakumar21202/Blood-Buddy/releases">Android Here</a>
 ## Features :
 ### Mobile Authentication & SignUp Features.
 ### Effective Blood Searching.
@@ -18,12 +18,19 @@
 <img src="https://github.com/Divyakumar21202/smart_odisha_blood/assets/124331485/b998dd0a-d391-48a7-b0e6-f26e9b1cc481" width="200" height="500">
 <img src="https://github.com/Divyakumar21202/smart_odisha_blood/assets/124331485/4e967282-471c-429c-882b-133d3d701421" width="200" height="500">
 <img src="https://github.com/Divyakumar21202/smart_odisha_blood/assets/124331485/5992a806-3fb6-450d-9a89-48f7cfd6e916" width="200" height="500">
+
 <img src="https://github.com/Divyakumar21202/smart_odisha_blood/assets/124331485/e7277912-8990-4da7-a939-d4ae1f669750" width="200" height="500">
+
+<img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/323ef5ec-a422-45fd-a7c0-f6f146c87817" width="200" height="500">
+<img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/268acff2-0edd-4cdc-be8d-39a4ad5da600" height="500" width="200">
 <img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/17390775-07b3-4e0b-a8c7-c73a6bae418e" width="200" height="500">
 <img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/aa931748-59bf-4b75-bc2b-e4f81855ebee" height="500" width="200">
 <img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/ea5d11be-598c-4cbf-9196-d662b17acc5a" height="500" width="200">
 <img src="https://github.com/Divyakumar21202/smart_odisha_blood/assets/124331485/32b72703-2c94-4419-b3da-214d0fd43cb6" width="200" height="500">
 <img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/0141f3f6-a438-4a94-a56f-e892f4db98f9" height='500' width='200'>
+
+<img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/600099ad-f77f-4aaf-b859-96fd306e0ea7" height="500" width="200">
+<img src="https://github.com/Divyakumar21202/Blood-Buddy/assets/124331485/ef1d550f-e5ab-4c4d-aa3b-935c7efc0e1c" height='500' width='200'>
 
 ## Prerequisite for Installing this App :
 1. Install Android studio or Vs-Code in your system.
