@@ -26,9 +26,9 @@ class BloodRequestScreen extends ConsumerWidget {
           itemCount: mpp.length,
           itemBuilder: ((context, index) {
             // String name = mpp[index]['DonorName'];
-            String bloodGroup = mpp[index]['blood'];
+            String bloodGroup = mpp[index]['bloodGroup'];
             String name = mpp[index]['name'];
-            String contact = mpp[index]['contact'];
+            String contact = mpp[index]['mobileNumber'];
             return Container(
               margin: const EdgeInsets.only(
                 top: 12,

@@ -59,6 +59,12 @@ class MapSampleState extends State<MapSample> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
+        circles: {
+          const Circle(
+            circleId: CircleId('user1'),
+            center: LatLng(20.28828828828829, 85.75253410478031),
+          )
+        },
         markers: markers,
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex,

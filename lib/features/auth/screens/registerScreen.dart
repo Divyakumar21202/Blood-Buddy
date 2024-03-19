@@ -47,6 +47,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     return Scaffold(
       body: Center(
         child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
             const SizedBox(
               height: 200,

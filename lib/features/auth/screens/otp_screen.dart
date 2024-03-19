@@ -81,7 +81,6 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                   content: code,
                   context: context,
                 );
-
                 verifyOtp(
                   code,
                 );

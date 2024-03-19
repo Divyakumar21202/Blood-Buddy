@@ -58,7 +58,6 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
           ),
           centerTitle: true,
         ),
-        backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

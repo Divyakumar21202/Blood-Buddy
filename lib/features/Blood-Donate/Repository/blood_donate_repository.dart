@@ -187,19 +187,14 @@ class BloodDonateRepository {
       var document = value.docs;
       for (var doc in document) {
         if (doc['mobileNumber'] == mobileNumber) {
-          print(doc['uid']);
           uids = doc['uid'];
         }
       }
       // Sender and receiver both
-      firestore
-          .collection('users')
-          .doc(auth.currentUser!.uid)
-          .get()
-          .then((value) {
-        userModel = UserModel.fromMap(value.data()!);
-      });
-
+      var docmm =
+          await firestore.collection('users').doc(auth.currentUser!.uid).get();
+      Map<String, dynamic> model = docmm.data()!;
+      userModel = UserModel.fromMap(model);
       await firestore
           .collection('users')
           .doc(auth.currentUser!.uid)
@@ -216,7 +211,7 @@ class BloodDonateRepository {
 
       await firestore
           .collection('users')
-          .doc(uids)
+          .doc(userModel.uid)
           .collection('requests')
           .doc(auth.currentUser!.phoneNumber)
           .set({
@@ -224,8 +219,8 @@ class BloodDonateRepository {
         "bloodGroup": userModel.bloodGroup,
         "mobileNumber": userModel.mobileNumber,
         "sender": auth.currentUser!.uid,
-        "receiver": uids,
-        "address": "At this ${userModel.city}, ${userModel.district}",
+        "receiver": userModel.uid,
+        "address": "${userModel.city}, ${userModel.district}",
       });
     });
   }

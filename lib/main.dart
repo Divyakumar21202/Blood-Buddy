@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Blood Buddy',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
           color: Colors.red,
           foregroundColor: Colors.black,

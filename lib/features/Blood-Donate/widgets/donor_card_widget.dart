@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/Repository/blood_donate_repository.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class DonorCardWidget extends ConsumerWidget {
   final Map<String, dynamic> singleDonor;
@@ -147,16 +146,17 @@ class DonorCardWidget extends ConsumerWidget {
                       TextButton(
                         onPressed: () async {
                           ref.read(BloodDonateRepositoryProvider).makeRequest(
-                              mobileNumber: singleDonor['mobileNumber']);
-                              
-                          final Uri url = Uri(
-                            scheme: 'sms',
-                            path: '${singleDonor['mobileNumber']}',
-                          );
+                                mobileNumber: singleDonor['mobileNumber'],
+                              );
 
-                          if (await canLaunchUrl(url)) {
-                            await launchUrl(url);
-                          }
+                          // final Uri url = Uri(
+                          //   scheme: 'sms',
+                          //   path: '${singleDonor['mobileNumber']}',
+                          // );
+
+                          // if (await canLaunchUrl(url)) {
+                          //   await launchUrl(url);
+                          // }
                         },
                         child: const Text(
                           'Send Request',
@@ -175,7 +175,7 @@ class DonorCardWidget extends ConsumerWidget {
             child: Card(
               elevation: 1,
               surfaceTintColor: Colors.red,
-              color: Color.fromARGB(255, 255, 43, 28),
+              color: const Color.fromARGB(255, 255, 43, 28),
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Text(

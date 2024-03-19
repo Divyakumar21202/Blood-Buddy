@@ -143,10 +143,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         context: context,
                       ).displaySnackBar();
                     } else {
-                      // confirmUser(
-                      //   mobileNumber,
-                      //   password,
-                      // );
                       SharedPreferences sharedPreferences =
                           await SharedPreferences.getInstance();
                       final String? mobileNumber =
@@ -155,16 +151,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           sharedPreferences.getString('password');
 
                       if (mobileNumber == null && password == null) {
-                        CustomSnackBar(
-                                content: 'User Does not Exist',
-                                context: context)
-                            .displaySnackBar();
+                        confirmUser(
+                            _MobileController.text, _passwordController.text);
                       } else if (password !=
                           _passwordController.text.trim().toString()) {
                         CustomSnackBar(
-                                content: 'Invalid Password | Please Try Again',
-                                context: context)
-                            .displaySnackBar();
+                          content: 'Invalid Password | Please Try Again',
+                          context: context,
+                        ).displaySnackBar();
                       }
                     }
                   },

@@ -75,14 +75,14 @@ class BloodRequestRepository {
 
   Stream<List<Map<String, dynamic>>> getDonorRequestList() {
     return firestore
-        .collection('Donors')
-        .doc(auth.currentUser!.phoneNumber)
-        .collection('Requests')
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('requests')
         .snapshots()
         .asyncMap((event) {
       List<Map<String, dynamic>> mpp = [];
       for (var document in event.docs) {
-        if (document.data()['sender'] != auth.currentUser!.uid) {
+        if (document.data()['mobileNumber'] != auth.currentUser!.phoneNumber) {
           mpp.add(document.data());
         }
       }
