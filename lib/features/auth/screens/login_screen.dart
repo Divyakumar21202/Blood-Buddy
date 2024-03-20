@@ -123,7 +123,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   hintText: 'Enter Password',
                   keyboardType: TextInputType.visiblePassword,
                   onChange: (value) {},
-                  isObcureTrue: true,
+                  isPassword: true,
                 ),
                 const SizedBox(
                   height: 12,

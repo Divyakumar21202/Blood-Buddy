@@ -260,10 +260,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   ),
                   const SizedBox(height: 20),
                   AuthTextField(
-                      controller: _passwordController,
-                      onChange: (val) {},
-                      hintText: 'Enter Password',
-                      keyboardType: TextInputType.text),
+                    controller: _passwordController,
+                    onChange: (val) {},
+                    hintText: 'Enter Password',
+                    keyboardType: TextInputType.text,
+                    isPassword: true,
+                  ),
                   const SizedBox(height: 20),
                   InkWell(
                     onTap: () {
@@ -303,7 +305,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             bloodGroup: bloodGroup,
                             latitude: '',
                             longitude: '');
-
                         uploadUserModel(
                           userModel,
                         );
@@ -313,9 +314,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       nameButton: 'Sign Up',
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
