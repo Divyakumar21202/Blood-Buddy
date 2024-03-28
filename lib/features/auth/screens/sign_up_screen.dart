@@ -35,7 +35,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   String stateValue = '';
   String countryValue = '';
   String cityValue = '';
-  String bloodGroup = '';
+  String? bloodGroup;
   final SingleValueDropDownController _dropDownController =
       SingleValueDropDownController();
   FocusNode searchFocusNode = FocusNode();
@@ -191,19 +191,15 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         bloodGroup = value;
                         setState(() {});
                       }
-                      return value;
+                      return 'Required Field';
                     },
                     dropDownItemCount: 9,
                     onChanged: (dynamic value) {
-                      bloodGroup = value
-                          .toString()
-                          .replaceAll('DropDownValueModel', '')
-                          .replaceAll('(', '')
-                          .replaceAll(')', '');
-                      bloodGroup = bloodGroup
-                          .substring(bloodGroup.indexOf(',') + 1)
-                          .trim()
-                          .toString();
+                      if (value.runtimeType == DropDownValueModel) {
+                        bloodGroup = value.value;
+                      } else {
+                        bloodGroup = null;
+                      }
                       setState(() {});
                     },
                     textFieldDecoration: InputDecoration(
@@ -293,6 +289,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           content: 'Enter Password with length more than 5',
                           context: context,
                         ).displaySnackBar();
+                      } else if (bloodGroup == null) {
+                        CustomSnackBar(
+                          content: 'Pls Select Your Blood',
+                          context: context,
+                        ).displaySnackBar();
                       } else {
                         UserModel userModel = UserModel(
                             name: name,
@@ -302,7 +303,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             city: city,
                             isAvailable: false,
                             password: password,
-                            bloodGroup: bloodGroup,
+                            bloodGroup: bloodGroup!,
                             latitude: '',
                             longitude: '');
                         uploadUserModel(
