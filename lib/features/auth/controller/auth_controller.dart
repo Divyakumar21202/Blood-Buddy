@@ -18,12 +18,12 @@ class AuthRepositoryController {
     authRepository.verifyUser(phoneNumber, context);
   }
 
-  void verifyOtp(BuildContext context, String VerificationId, String SmsCode,
+  void verifyOtp(BuildContext context, String verificationId, String smsCode,
       bool isLogin, String mobileNumber) {
     authRepository.verifyOtp(
       context: context,
-      VerificationId: VerificationId,
-      SmsCode: SmsCode,
+      VerificationId: verificationId,
+      SmsCode: smsCode,
       isLogin: isLogin,
       mobileNumber: mobileNumber,
     );
@@ -49,11 +49,11 @@ class AuthRepositoryController {
     );
   }
 
-  void LoginWithPhone({
+  Future loginWithPhone({
     required BuildContext context,
     required String phoneNumber,
-  }) {
-    authRepository.LoginWithPhone(
+  }) async{
+  await  authRepository.LoginWithPhone(
       context: context,
       phoneNumber: phoneNumber,
     );

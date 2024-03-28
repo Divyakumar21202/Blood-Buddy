@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:202281554853:android:f9b8de62118e1f17988e4c",
+        "mobilesdk_app_id": "1:202281554853:android:558b8bfd15c95356988e4c",
         "android_client_info": {
-          "package_name": "com.example.smart_odisha_blood"
+          "package_name": "com.example.blood_buddy"
         }
       },
       "oauth_client": [],

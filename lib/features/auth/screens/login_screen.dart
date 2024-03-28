@@ -17,6 +17,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   final TextEditingController _MobileController = TextEditingController();
 
+  bool _isConfirming = false;
   @override
   void dispose() {
     super.dispose();
@@ -24,15 +25,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     _MobileController.dispose();
   }
 
-  void confirmUser(
+  Future confirmUser(
     String mobileNumber,
     String password,
   ) async {
-    CustomSnackBar(
-      content: mobileNumber,
-      context: context,
-    ).displaySnackBar();
-
     var model = ref.watch(authRepositoryControllerProvider).getUserModel(
           context: context,
           mobileNumber: '+91${mobileNumber}',
@@ -46,7 +42,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       }
       if (value != null) {
         if (value['password'] == password) {
-          ref.read(authRepositoryControllerProvider).LoginWithPhone(
+          ref.read(authRepositoryControllerProvider).loginWithPhone(
                 context: context,
                 phoneNumber: '+91${mobileNumber}',
               );
@@ -153,6 +149,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       if (mobileNumber == null && password == null) {
                         confirmUser(
                             _MobileController.text, _passwordController.text);
+                      
                       } else if (password !=
                           _passwordController.text.trim().toString()) {
                         CustomSnackBar(

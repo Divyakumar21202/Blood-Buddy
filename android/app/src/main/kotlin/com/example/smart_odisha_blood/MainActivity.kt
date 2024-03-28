@@ -1,4 +1,4 @@
-package com.example.smart_odisha_blood
+package com.example.blood_buddy
 
 import io.flutter.embedding.android.FlutterActivity
 

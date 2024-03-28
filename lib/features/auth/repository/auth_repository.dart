@@ -28,7 +28,6 @@ class AuthRepository {
     required this.firestore,
     required this.ref,
   });
-
   void verifyUser(String phoneNumber, BuildContext context) async {
     try {
       await auth.verifyPhoneNumber(
@@ -164,7 +163,7 @@ class AuthRepository {
     return doc;
   }
 
-  void LoginWithPhone({
+  Future LoginWithPhone({
     required BuildContext context,
     required String phoneNumber,
   }) async {
