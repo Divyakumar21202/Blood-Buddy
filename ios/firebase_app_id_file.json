@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:714933171498:ios:7822ec1c95c00835481a53",
-  "FIREBASE_PROJECT_ID": "odisha-blood-camp",
-  "GCM_SENDER_ID": "714933171498"
+  "GOOGLE_APP_ID": "1:202281554853:ios:59f1a67fe8681cc1988e4c",
+  "FIREBASE_PROJECT_ID": "blood-buddy-d514a",
+  "GCM_SENDER_ID": "202281554853"
 }

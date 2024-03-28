@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/Screens/landingScreen.dart';
-import 'package:smart_odisha_blood/Screens/split_app_screen.dart';
 import 'package:smart_odisha_blood/firebase_options.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -34,6 +35,14 @@ class _MyAppState extends State<MyApp> {
       title: 'Blood Buddy',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          color: Colors.red,
+          foregroundColor: Colors.black,
+          centerTitle: true,
+          elevation: 0.0,
+        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         textTheme: const TextTheme(
           titleLarge: TextStyle(
               color: Colors.black, fontSize: 24, fontWeight: FontWeight.w500),
@@ -47,7 +56,7 @@ class _MyAppState extends State<MyApp> {
           if (snapshot.data == null) {
             return const LandingScreen();
           }
-          return const SplitAppScreen();
+          return const LandingScreen();
         },
       ),
     );

@@ -3,9 +3,10 @@ import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/button.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/text_field.dart';
-import 'package:smart_odisha_blood/common/customSnackbar.dart';
+import 'package:smart_odisha_blood/common/custom_snackbar.dart';
 import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart';
 import 'package:smart_odisha_blood/features/auth/screens/login_screen.dart';
 import 'package:smart_odisha_blood/models/user_model.dart';
@@ -34,13 +35,15 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   String stateValue = '';
   String countryValue = '';
   String cityValue = '';
-  String bloodGroup = '';
+  String? bloodGroup;
   final SingleValueDropDownController _dropDownController =
       SingleValueDropDownController();
   FocusNode searchFocusNode = FocusNode();
   FocusNode textFieldFocusNode = FocusNode();
 
-  void uploadUserModel(UserModel userModel) {
+  void uploadUserModel(UserModel userModel) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString('password', userModel.password.trim());
     ref.read(authRepositoryControllerProvider).uploadUserModel(
           userModel: userModel,
           context: context,
@@ -188,19 +191,15 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         bloodGroup = value;
                         setState(() {});
                       }
-                      return value;
+                      return 'Required Field';
                     },
                     dropDownItemCount: 9,
                     onChanged: (dynamic value) {
-                      bloodGroup = value
-                          .toString()
-                          .replaceAll('DropDownValueModel', '')
-                          .replaceAll('(', '')
-                          .replaceAll(')', '');
-                      bloodGroup = bloodGroup
-                          .substring(bloodGroup.indexOf(',') + 1)
-                          .trim()
-                          .toString();
+                      if (value.runtimeType == DropDownValueModel) {
+                        bloodGroup = value.value;
+                      } else {
+                        bloodGroup = null;
+                      }
                       setState(() {});
                     },
                     textFieldDecoration: InputDecoration(
@@ -257,10 +256,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   ),
                   const SizedBox(height: 20),
                   AuthTextField(
-                      controller: _passwordController,
-                      onChange: (val) {},
-                      hintText: 'Enter Password',
-                      keyboardType: TextInputType.text),
+                    controller: _passwordController,
+                    onChange: (val) {},
+                    hintText: 'Enter Password',
+                    keyboardType: TextInputType.text,
+                    isPassword: true,
+                  ),
                   const SizedBox(height: 20),
                   InkWell(
                     onTap: () {
@@ -288,17 +289,23 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           content: 'Enter Password with length more than 5',
                           context: context,
                         ).displaySnackBar();
+                      } else if (bloodGroup == null) {
+                        CustomSnackBar(
+                          content: 'Pls Select Your Blood',
+                          context: context,
+                        ).displaySnackBar();
                       } else {
                         UserModel userModel = UserModel(
-                          name: name,
-                          uid: FirebaseAuth.instance.currentUser!.uid,
-                          mobileNumber: widget.mobileNumber!,
-                          district: district,
-                          city: city,
-                          isAvailable: false,
-                          password: password,
-                          bloodGroup: bloodGroup,
-                        );
+                            name: name,
+                            uid: FirebaseAuth.instance.currentUser!.uid,
+                            mobileNumber: widget.mobileNumber!,
+                            district: district,
+                            city: city,
+                            isAvailable: false,
+                            password: password,
+                            bloodGroup: bloodGroup!,
+                            latitude: '',
+                            longitude: '');
                         uploadUserModel(
                           userModel,
                         );
@@ -308,9 +315,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       nameButton: 'Sign Up',
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

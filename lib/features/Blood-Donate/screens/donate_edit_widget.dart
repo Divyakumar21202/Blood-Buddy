@@ -3,8 +3,8 @@ import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_odisha_blood/Screens/mainScreen.dart';
-import 'package:smart_odisha_blood/common/customSnackbar.dart';
+import 'package:smart_odisha_blood/Screens/split_app_screen.dart';
+import 'package:smart_odisha_blood/common/custom_snackbar.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/controller/blood_donate_controller.dart';
 import 'package:smart_odisha_blood/features/Blood-Donate/widgets/widget_textField.dart';
 
@@ -29,7 +29,6 @@ class _DonateEditWidgetState extends ConsumerState<DonateEditWidget> {
     bloodGroup,
     city,
     district,
-    
   }) {
     ref.read(bloodDonateRepositoryControllerProvider).uploadDonorInfo(
           context: context,
@@ -38,7 +37,6 @@ class _DonateEditWidgetState extends ConsumerState<DonateEditWidget> {
           city: city,
           District: district,
           password: '',
-
         );
     Navigator.pop(context);
   }
@@ -255,20 +253,19 @@ class _DonateEditWidgetState extends ConsumerState<DonateEditWidget> {
             ),
             TextButton(
               onPressed: () {
-                String DonorName = _nameController.text.trim();
-                String Blood = bloodGroup;
+                String donorName = _nameController.text.trim();
+                String blood = bloodGroup;
                 String city = cityValue;
-                String District = stateValue;
-                if (DonorName.isNotEmpty &&
-                    Blood.isNotEmpty &&
+                String district = stateValue;
+                if (donorName.isNotEmpty &&
+                    blood.isNotEmpty &&
                     city.isNotEmpty &&
-                    District.isNotEmpty) {
+                    district.isNotEmpty) {
                   uploadDonorInfo(
-                    donorName: DonorName,
-                    bloodGroup: Blood,
+                    donorName: donorName,
+                    bloodGroup: blood,
                     city: city,
-                    district: District,
-                    
+                    district: district,
                   );
                 } else {
                   CustomSnackBar(
@@ -292,14 +289,14 @@ class _DonateEditWidgetState extends ConsumerState<DonateEditWidget> {
 }
 
 class DonorUserDataWidget extends ConsumerStatefulWidget {
-  bool isAvailable;
+  final bool isAvailable;
   final String name;
   final String bloodType;
   final String city;
   final String district;
-  DonorUserDataWidget({
+  const DonorUserDataWidget({
     Key? key,
-    required this.isAvailable,
+    this.isAvailable = false,
     required this.name,
     required this.bloodType,
     required this.city,
@@ -451,9 +448,9 @@ class _DonorUserDataWidgetState extends ConsumerState<DonorUserDataWidget> {
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => const MainScreen(),
-                                ),
+                                MaterialPageRoute(builder: (context) {
+                                  return const SplitAppScreen();
+                                }),
                                 (route) => false,
                               );
                             },

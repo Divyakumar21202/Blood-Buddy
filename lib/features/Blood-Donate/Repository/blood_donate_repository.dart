@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_odisha_blood/common/customSnackbar.dart';
+import 'package:smart_odisha_blood/common/custom_snackbar.dart';
 import 'package:smart_odisha_blood/models/blood_info.dart';
 import 'package:smart_odisha_blood/models/user_model.dart';
 
@@ -42,6 +42,8 @@ class BloodDonateRepository {
         isAvailable: false,
         uid: auth.currentUser!.uid,
         password: password,
+        latitude: '',
+        longitude: '',
       );
       await firestore
           .collection('users')
@@ -92,6 +94,8 @@ class BloodDonateRepository {
         isAvailable: false,
         uid: '',
         password: '',
+        latitude: '',
+        longitude: '',
       );
 
       return firestore
@@ -176,24 +180,21 @@ class BloodDonateRepository {
       isAvailable: true,
       password: 'password',
       bloodGroup: 'bloodGroup',
+      latitude: '',
+      longitude: '',
     );
     firestore.collection('users').get().then((value) async {
       var document = value.docs;
       for (var doc in document) {
         if (doc['mobileNumber'] == mobileNumber) {
-          print(doc['uid']);
           uids = doc['uid'];
         }
       }
       // Sender and receiver both
-      firestore
-          .collection('users')
-          .doc(auth.currentUser!.uid)
-          .get()
-          .then((value) {
-        userModel = UserModel.fromMap(value.data()!);
-      });
-
+      var docmm =
+          await firestore.collection('users').doc(auth.currentUser!.uid).get();
+      Map<String, dynamic> model = docmm.data()!;
+      userModel = UserModel.fromMap(model);
       await firestore
           .collection('users')
           .doc(auth.currentUser!.uid)
@@ -210,7 +211,7 @@ class BloodDonateRepository {
 
       await firestore
           .collection('users')
-          .doc(uids)
+          .doc(userModel.uid)
           .collection('requests')
           .doc(auth.currentUser!.phoneNumber)
           .set({
@@ -218,8 +219,8 @@ class BloodDonateRepository {
         "bloodGroup": userModel.bloodGroup,
         "mobileNumber": userModel.mobileNumber,
         "sender": auth.currentUser!.uid,
-        "receiver": uids,
-        "address": "At this ${userModel.city}, ${userModel.district}",
+        "receiver": userModel.uid,
+        "address": "${userModel.city}, ${userModel.district}",
       });
     });
   }

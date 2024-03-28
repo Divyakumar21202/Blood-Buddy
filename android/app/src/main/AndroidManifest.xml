@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 <uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <!-- Provide required visibility configuration for API level 30 and above -->
 <queries>
   <!-- If your app checks for SMS support -->
@@ -18,11 +20,13 @@
   </intent>
 </queries>
     <application
-        android:label="smart_odisha_blood"
+        android:label="Blood Buddy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+         android:value="AIzaSyBqsTFON6LePpPX7iE4gW7c0pK7K3F0LG4"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

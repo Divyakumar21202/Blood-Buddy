@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_odisha_blood/common/customSnackbar.dart';
-import 'package:uuid/uuid.dart';
 
 final bloodRequestRepositoryProvider = Provider(
   (ref) => BloodRequestRepository(
@@ -78,14 +75,14 @@ class BloodRequestRepository {
 
   Stream<List<Map<String, dynamic>>> getDonorRequestList() {
     return firestore
-        .collection('Donors')
-        .doc(auth.currentUser!.phoneNumber)
-        .collection('Requests')
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('requests')
         .snapshots()
         .asyncMap((event) {
       List<Map<String, dynamic>> mpp = [];
       for (var document in event.docs) {
-        if (document.data()['sender'] != auth.currentUser!.uid) {
+        if (document.data()['mobileNumber'] != auth.currentUser!.phoneNumber) {
           mpp.add(document.data());
         }
       }

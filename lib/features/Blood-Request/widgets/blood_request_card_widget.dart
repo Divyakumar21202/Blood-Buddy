@@ -17,7 +17,6 @@ class RequestCard extends StatelessWidget {
     return Stack(
       children: [
         Card(
-          color: Colors.cyan,
           elevation: 2,
           margin: const EdgeInsets.symmetric(horizontal: 12),
           child: ConstrainedBox(
@@ -63,13 +62,13 @@ class RequestCard extends StatelessWidget {
           left: 20,
           top: -10,
           child: Card(
-            color: Colors.red[300],
+            color: Colors.red,
             child: Padding(
               padding: const EdgeInsets.all(18.0),
               child: Text(
                 bloodGroup,
                 style: const TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

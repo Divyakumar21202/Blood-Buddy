@@ -1,0 +1,97 @@
+# name: Blood Buddy Apk Workflow
+# on:
+#     push:
+#         branches:
+#             - main
+#             - master
+#             - maps
+# jobs:
+#     build-apk:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - uses: actions/checkout@v1
+
+#             - name: Set-up Flutter
+#               uses: subosito/flutter-action@v1
+            
+#             - name: Clean Gradle Build
+#               run: flutter clean
+            
+#             - name: Get Dependencies
+#               run: flutter pub get
+              
+#             - name: Flutter Build Release Apk
+#               run: flutter build apk --split-per-abi
+on:
+  push:
+    branches:
+      - maps
+      - main
+      - master
+
+jobs:
+  Build-Apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check-Repository
+        uses: actions/checkout@v1
+      - name: Making .env 
+        run: echo "gMapsPlaceApiKey=${{ secrets.gMapsPlaceApiKey }}" >> .env
+
+      - name: Set-Up-Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '3.19'
+      
+      - name: Clean-Gradle-Build
+        run: flutter clean
+      
+      - name: Get-Dependencies
+        run: flutter pub get
+
+      - name: Build-Apk
+        run: flutter build apk --release
+
+
+      - name: Release-Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Blood-Buddy-Aritfacts
+          path: "build/app/outputs/flutter-apk/app-release.apk"
+      
+      # - name: Create-Tagging
+      #   id: tag_commit
+      #   run: 
+      #     git tag -a v${{ github.run_number }} -m "Release v${{ github.run_number }}"
+      #     git push origin v${{ github.run_number }}
+      
+      # - name: Create-Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB-TOKEN: ${{ secrets.BLOOD_BUDDY_ACCESS_TOKEN }}
+      #   with:
+      #     tag_name: v${{ github.run_number }}
+      #     release_name: "Release v${{ github.run_number }}"
+      - name: Create-Release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.BLOOD_BUDDY_ACCESS_TOKEN }}
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk"
+          tag: v.3.0.${{ github.run_number }}
+      # - name: Release the Apk
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #       artifacts: "build/app/outputs/flutter-apk/app-arm64-v8a-release.apk"
+      #       tag: v1.0.${{ github.run_number }}
+      #       token: ${{ secrets.BLOOD_BUDDDY_ACCESS_TOKEN }}
+      # - name: Upload-Release
+      #   uses: actions/upload-release-asset@v1
+      #   with:
+      #     # token: ${{secrets.BLOOD_BUDDY_ACCESS_TOKEN}}
+      #     asset_name: release-app
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: "${{github.workflow}}/build/app/outputs/flutter-apk/app-release.apk"
+      #     asset_content_type: application/vnd.android.package-archive
+
+        

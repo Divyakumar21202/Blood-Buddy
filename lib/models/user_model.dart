@@ -7,6 +7,9 @@ class UserModel {
   final bool isAvailable;
   final String password;
   final String bloodGroup;
+  final String latitude;
+  final String longitude;
+
   UserModel({
     required this.name,
     required this.uid,
@@ -16,6 +19,8 @@ class UserModel {
     required this.isAvailable,
     required this.password,
     required this.bloodGroup,
+    required this.latitude,
+    required this.longitude,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,6 +33,8 @@ class UserModel {
       'isAvailable': isAvailable,
       'password': password,
       'bloodGroup': bloodGroup,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 
@@ -41,7 +48,8 @@ class UserModel {
       isAvailable: map['isAvailable'] as bool,
       password: map['password'] as String,
       bloodGroup: map['bloodGroup'] as String,
+      latitude: map['latitude'] as String,
+      longitude: map['longitude'] as String,
     );
   }
 }
-//

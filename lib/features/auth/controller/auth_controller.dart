@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:smart_odisha_blood/features/auth/repository/auth_repository.dart';
 import 'package:smart_odisha_blood/models/user_model.dart';
 
@@ -19,13 +18,14 @@ class AuthRepositoryController {
     authRepository.verifyUser(phoneNumber, context);
   }
 
-  void verifyOtp(BuildContext context, String VerificationId, String SmsCode,bool isLogin,String mobileNumber) {
+  void verifyOtp(BuildContext context, String VerificationId, String SmsCode,
+      bool isLogin, String mobileNumber) {
     authRepository.verifyOtp(
       context: context,
       VerificationId: VerificationId,
       SmsCode: SmsCode,
-      isLogin:isLogin, 
-      mobileNumber:mobileNumber,
+      isLogin: isLogin,
+      mobileNumber: mobileNumber,
     );
   }
 
@@ -56,6 +56,18 @@ class AuthRepositoryController {
     authRepository.LoginWithPhone(
       context: context,
       phoneNumber: phoneNumber,
+    );
+  }
+
+  void uploadUserlocation({
+    required String latitude,
+    required String longitude,
+    required BuildContext context,
+  }) {
+    authRepository.uploadUserlocation(
+      latitude: latitude,
+      longitude: longitude,
+      context: context,
     );
   }
 }

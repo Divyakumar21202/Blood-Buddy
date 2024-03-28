@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/button.dart';
 import 'package:smart_odisha_blood/Constant-Widgets/Auth-Screen-Widgets/text_field.dart';
-import 'package:smart_odisha_blood/common/customSnackbar.dart';
+import 'package:smart_odisha_blood/common/custom_snackbar.dart';
 import 'package:smart_odisha_blood/features/auth/controller/auth_controller.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -20,9 +21,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     _controller.dispose();
   }
 
-  void register() {
+  void register() async {
     String phoneNumber = '+91${_controller.text.trim()}';
     if (phoneNumber.length == 13) {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      sharedPreferences.setString(
+        'mobileNumber',
+        _controller.text.trim().toString(),
+      );
       ref.read(authRepositoryControllerProvider).verifyUserMobile(
             phoneNumber,
             context,
@@ -40,6 +47,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     return Scaffold(
       body: Center(
         child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
             const SizedBox(
               height: 200,
