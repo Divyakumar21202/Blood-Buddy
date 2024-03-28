@@ -17,16 +17,16 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -49,20 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDdAF48P3qUd21gCVfQAisRbOnAYxyz2Os',
-    appId: '1:714933171498:web:fff161520798eeff481a53',
-    messagingSenderId: '714933171498',
-    projectId: 'odisha-blood-camp',
-    authDomain: 'odisha-blood-camp.firebaseapp.com',
-    storageBucket: 'odisha-blood-camp.appspot.com',
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyDSEncrLHbmNTS5cVJIdVG66_uwohUbO4U',
+    appId: '1:202281554853:android:f9b8de62118e1f17988e4c',
+    messagingSenderId: '202281554853',
+    projectId: 'blood-buddy-d514a',
+    storageBucket: 'blood-buddy-d514a.appspot.com',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBqsTFON6LePpPX7iE4gW7c0pK7K3F0LG4',
-    appId: '1:714933171498:android:5df6853a4f621d6c481a53',
-    messagingSenderId: '714933171498',
-    projectId: 'odisha-blood-camp',
-    storageBucket: 'odisha-blood-camp.appspot.com',
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCb1AFyjFp-9L5Als3koYYo2C9UCPgASQ0',
+    appId: '1:202281554853:ios:59f1a67fe8681cc1988e4c',
+    messagingSenderId: '202281554853',
+    projectId: 'blood-buddy-d514a',
+    storageBucket: 'blood-buddy-d514a.appspot.com',
+    iosBundleId: 'com.example.smartOdishaBlood',
   );
 }
