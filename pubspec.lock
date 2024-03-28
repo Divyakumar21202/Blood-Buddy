@@ -469,7 +469,6 @@ packages:
     description:
       name: leak_tracker
       sha256: cdd14e3836065a1f6302a236ec8b5f700695c803c57ae11a1c84df31e6bcf831
-      sha256: cdd14e3836065a1f6302a236ec8b5f700695c803c57ae11a1c84df31e6bcf831
       url: "https://pub.dev"
     source: hosted
     version: "10.0.3"
@@ -479,7 +478,6 @@ packages:
     description:
       name: leak_tracker_flutter_testing
       sha256: "9b2ef90589911d665277464e0482b209d39882dffaaf4ef69a3561a3354b2ebc"
-      sha256: "9b2ef90589911d665277464e0482b209d39882dffaaf4ef69a3561a3354b2ebc"
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
@@ -488,7 +486,6 @@ packages:
     dependency: transitive
     description:
       name: leak_tracker_testing
-      sha256: fd3cd66cb2bcd7b50dcd3b413af49d78051f809c8b3f6e047962765c15a0d23d
       sha256: fd3cd66cb2bcd7b50dcd3b413af49d78051f809c8b3f6e047962765c15a0d23d
       url: "https://pub.dev"
     source: hosted
