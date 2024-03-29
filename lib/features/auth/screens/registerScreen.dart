@@ -75,7 +75,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 height: 23,
               ),
               InkWell(
-                onTap: () async {},
+                onTap: () async {
+                  register();
+                },
                 child: const AuthButton(
                   nameButton: 'Confirm',
                 ),

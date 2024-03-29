@@ -87,14 +87,14 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
                       }).onError((error, stackTrace) {
                         context.loaderOverlay.hide();
                         CustomSnackBar(
-                                content: 'Google Sign-In Failed',
+                                content: error.toString(),
                                 context: context)
                             .displaySnackBar();
                       });
                     } catch (e) {
                       context.loaderOverlay.hide();
                       CustomSnackBar(
-                              content: 'Google Sign-In Failed',
+                              content: e.toString(),
                               context: context)
                           .displaySnackBar();
                     }
