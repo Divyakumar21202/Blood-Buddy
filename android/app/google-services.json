@@ -12,7 +12,28 @@
           "package_name": "com.example.blood_buddy"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "202281554853-h5k61irskc43g0f2rv5397q1diue5s9d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.blood_buddy",
+            "certificate_hash": "b6a4856115c313c151680c2e995276bb7b3b1a98"
+          }
+        },
+        {
+          "client_id": "202281554853-m634bb7bnqlr191q7cs2ab22kmup9524.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.blood_buddy",
+            "certificate_hash": "43f21dfb7657fab6b43c898d093c91841d18f206"
+          }
+        },
+        {
+          "client_id": "202281554853-difevg1iet09bk8q0sk65bolvhg72ghj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDSEncrLHbmNTS5cVJIdVG66_uwohUbO4U"
@@ -20,7 +41,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202281554853-difevg1iet09bk8q0sk65bolvhg72ghj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
