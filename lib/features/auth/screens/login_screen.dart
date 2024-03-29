@@ -17,7 +17,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   final TextEditingController _MobileController = TextEditingController();
 
-  bool _isConfirming = false;
   @override
   void dispose() {
     super.dispose();
@@ -149,7 +148,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       if (mobileNumber == null && password == null) {
                         confirmUser(
                             _MobileController.text, _passwordController.text);
-                      
                       } else if (password !=
                           _passwordController.text.trim().toString()) {
                         CustomSnackBar(

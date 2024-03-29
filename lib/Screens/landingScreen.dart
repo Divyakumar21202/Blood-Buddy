@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -75,7 +76,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
                         if (value != null) {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
-                                  builder: (context) => const SignUpScreen()),
+                                  builder: (context) =>  SignUpScreen(mobileNumber: FirebaseAuth.instance.currentUser!.email,)),
                               (route) => false);
                         } else {
                           CustomSnackBar(

@@ -19,6 +19,16 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
     _getLocation();
   }
 
+  Future<void> _openAppSettings() async {
+    // const uri = 'app-settings:';
+    // Uri url = Uri.parse(uri);
+    // if (await canLaunchUrl(url)) {
+    //   await launchUrl(url);
+    // } else {
+    // }
+    await _openAppSettings();
+  }
+
   void _getLocation() async {
     // Request location
     LocationPermission permission = await Geolocator.checkPermission();
@@ -28,7 +38,6 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
         return;
       }
     }
-
     try {
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
@@ -40,7 +49,25 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
             longitude: position.longitude.toString(),
           );
     } catch (e) {
-      throw Exception(e.toString());
+      AlertDialog(
+        title: Text('Location Permission Required'),
+        content: Text('Please enable location permissions in app settings.'),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text('Open Settings'),
+            onPressed: () {
+              _openAppSettings(); // Open app settings when button is pressed
+              Navigator.of(context).pop(); // Close the dialog
+            },
+          ),
+        ],
+      );
     }
   }
 
