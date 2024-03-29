@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,11 +33,22 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         'mobileNumber',
         _controller.text.trim().toString(),
       );
-      ref.read(authRepositoryControllerProvider).verifyUserMobile(
+      context.loaderOverlay.show();
+      ref
+          .read(authRepositoryControllerProvider)
+          .verifyUserMobile(
             phoneNumber,
             context,
-          );
+          )
+          .whenComplete(() {
+        context.loaderOverlay.hide();
+      }).onError((error, stackTrace) {
+        context.loaderOverlay.hide();
+        CustomSnackBar(content: error.toString(), context: context)
+            .displaySnackBar();
+      });
     } else {
+      context.loaderOverlay.hide();
       CustomSnackBar(
         content: 'Enter Valid Mobile Number',
         context: context,
@@ -47,9 +58,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: Colors.transparent,
+      ),
+    );
     return Scaffold(
       body: GlobalLoaderOverlay(
-        overlayColor: Colors.grey.withOpacity(0.8),
+        overlayColor: Colors.black.withOpacity(0.8),
         useDefaultLoading: false,
         overlayWidgetBuilder: (_) {
           //ignored progress for the moment
@@ -85,24 +101,31 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               const SizedBox(
                 height: 23,
               ),
+              const Divider(
+                height: 40,
+                color: Colors.grey,
+                indent: 20,
+                endIndent: 20,
+              ),
               SignInButton(
                 Buttons.google,
                 onPressed: () async {
                   context.loaderOverlay.show();
                   try {
-                    UserCredential? credential = await ref
+                    await ref
                         .read(authRepositoryControllerProvider)
-                        .signInWithGoogle();
-                    if (credential != null) {
-                      context.loaderOverlay.hide();
-                    } else {
-                      context.loaderOverlay.hide();
-
-                      CustomSnackBar(
-                              content: 'Google Sign-In Failed',
-                              context: context)
-                          .displaySnackBar();
-                    }
+                        .signInWithGoogle()
+                        .then((value) {
+                      if (value != null) {
+                        context.loaderOverlay.hide();
+                      } else {
+                        context.loaderOverlay.hide();
+                        CustomSnackBar(
+                                content: 'Google Sign-In Failed',
+                                context: context)
+                            .displaySnackBar();
+                      }
+                    });
                   } catch (e) {
                     context.loaderOverlay.hide();
 
@@ -111,21 +134,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             context: context)
                         .displaySnackBar();
                   }
-                  // context.loaderOverlay.hide();
-                  // if (userCredential != null) {
-
-                  //   Navigator.of(context).pushAndRemoveUntil(
-                  //       MaterialPageRoute(
-                  //           builder: (context) => SignUpScreen(
-                  //                 mobileNumber:
-                  //                     FirebaseAuth.instance.currentUser!.email,
-                  //               )),
-                  //       (route) => false);
-                  // } else {
-                  //   CustomSnackBar(
-                  //           content: 'Google Sign-In Failed', context: context)
-                  //       .displaySnackBar();
-                  // }
                 },
               ),
             ],

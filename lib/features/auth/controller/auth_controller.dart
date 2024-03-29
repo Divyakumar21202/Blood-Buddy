@@ -15,8 +15,8 @@ class AuthRepositoryController {
     required this.authRepository,
   });
 
-  void verifyUserMobile(String phoneNumber, BuildContext context) {
-    authRepository.verifyUser(phoneNumber, context);
+  Future verifyUserMobile(String phoneNumber, BuildContext context) {
+    return authRepository.verifyUser(phoneNumber, context);
   }
 
   void verifyOtp(BuildContext context, String verificationId, String smsCode,
@@ -30,12 +30,10 @@ class AuthRepositoryController {
     );
   }
 
-  void uploadUserModel({
-    required BuildContext context,
+  Future uploadUserModel({
     required UserModel userModel,
   }) {
-    authRepository.uploadUserModel(
-      context: context,
+    return authRepository.uploadUserModel(
       userModel: userModel,
     );
   }
@@ -61,7 +59,7 @@ class AuthRepositoryController {
   }
 
   Future<UserCredential?> signInWithGoogle() {
-    return  authRepository.signInWithGoogle();
+    return authRepository.signInWithGoogle();
   }
 
   void uploadUserlocation({

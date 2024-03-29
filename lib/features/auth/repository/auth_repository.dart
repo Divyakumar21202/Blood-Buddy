@@ -54,7 +54,7 @@ class AuthRepository {
     }
   }
 
-  void verifyUser(String phoneNumber, BuildContext context) async {
+  Future verifyUser(String phoneNumber, BuildContext context) async {
     try {
       await auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
@@ -129,31 +129,15 @@ class AuthRepository {
     }
   }
 
-  void uploadUserModel({
+  Future uploadUserModel({
     required UserModel userModel,
-    required BuildContext context,
   }) async {
     try {
-      await firestore
-          .collection('users')
-          .doc(userModel.uid)
-          .set(
+      await firestore.collection('users').doc(userModel.uid).set(
             userModel.toMap(),
-          )
-          .whenComplete(
-            () => Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SplitAppScreen(),
-              ),
-              (route) => false,
-            ),
           );
     } catch (e) {
-      CustomSnackBar(
-        content: e.toString(),
-        context: context,
-      );
+      throw Exception(e.toString());
     }
   }
 

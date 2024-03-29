@@ -25,7 +25,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
     return Scaffold(
       body: SafeArea(
         child: GlobalLoaderOverlay(
-          overlayColor: Colors.grey.withOpacity(0.8),
+          overlayColor: Colors.black.withOpacity(0.8),
           useDefaultLoading: false,
           overlayWidgetBuilder: (_) {
             //ignored progress for the moment
@@ -74,10 +74,14 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
                           .then((value) {
                         context.loaderOverlay.hide();
                         if (value != null) {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) =>  SignUpScreen(mobileNumber: FirebaseAuth.instance.currentUser!.email,)),
-                              (route) => false);
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => SignUpScreen(
+                                mobileNumber:
+                                    FirebaseAuth.instance.currentUser!.email,
+                              ),
+                            ),
+                          );
                         } else {
                           CustomSnackBar(
                                   content: 'Google Sign-In Failed',
@@ -87,15 +91,12 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
                       }).onError((error, stackTrace) {
                         context.loaderOverlay.hide();
                         CustomSnackBar(
-                                content: error.toString(),
-                                context: context)
+                                content: error.toString(), context: context)
                             .displaySnackBar();
                       });
                     } catch (e) {
                       context.loaderOverlay.hide();
-                      CustomSnackBar(
-                              content: e.toString(),
-                              context: context)
+                      CustomSnackBar(content: e.toString(), context: context)
                           .displaySnackBar();
                     }
                   },

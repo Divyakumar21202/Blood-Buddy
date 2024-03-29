@@ -51,15 +51,15 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDSEncrLHbmNTS5cVJIdVG66_uwohUbO4U',
-    appId: '1:202281554853:android:f9b8de62118e1f17988e4c',
+    appId: '1:202281554853:android:558b8bfd15c95356988e4c',
     messagingSenderId: '202281554853',
     projectId: 'blood-buddy-d514a',
     storageBucket: 'blood-buddy-d514a.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCb1AFyjFp-9L5Als3koYYo2C9UCPgASQ0',
-    appId: '1:202281554853:ios:59f1a67fe8681cc1988e4c',
+    apiKey: 'AIzaSyDSEncrLHbmNTS5cVJIdVG66_uwohUbO4U',
+    appId: '1:202281554853:android:558b8bfd15c95356988e4c',
     messagingSenderId: '202281554853',
     projectId: 'blood-buddy-d514a',
     storageBucket: 'blood-buddy-d514a.appspot.com',
