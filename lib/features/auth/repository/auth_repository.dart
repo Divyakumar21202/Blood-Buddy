@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_odisha_blood/Screens/split_app_screen.dart';
 import 'package:smart_odisha_blood/common/custom_snackbar.dart';
@@ -28,6 +29,31 @@ class AuthRepository {
     required this.firestore,
     required this.ref,
   });
+
+  Future<UserCredential?> signInWithGoogle() async {
+    final _googleSignIn = GoogleSignIn();
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        final OAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        UserCredential cd =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+
+        print(FirebaseAuth.instance.currentUser!.uid.toString());
+        return cd;
+      }
+      return null; // User canceled Google sign-in
+    } catch (e) {
+      print('Error signing in with Google: $e');
+      return null;
+    }
+  }
+
   void verifyUser(String phoneNumber, BuildContext context) async {
     try {
       await auth.verifyPhoneNumber(

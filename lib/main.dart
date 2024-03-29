@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_odisha_blood/Screens/landingScreen.dart';
-import 'package:smart_odisha_blood/features/auth/screens/login_screen.dart';
+import 'package:smart_odisha_blood/Screens/split_app_screen.dart';
+import 'package:smart_odisha_blood/features/auth/screens/registerScreen.dart';
 import 'package:smart_odisha_blood/firebase_options.dart';
 
 void main() async {
@@ -57,7 +58,7 @@ class _MyAppState extends State<MyApp> {
           if (snapshot.data == null) {
             return const LandingScreen();
           }
-          return const LoginScreen();
+          return const SplitAppScreen();
         },
       ),
     );

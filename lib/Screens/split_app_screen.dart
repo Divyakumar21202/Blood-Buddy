@@ -40,7 +40,7 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
             longitude: position.longitude.toString(),
           );
     } catch (e) {
-      rethrow;
+      throw Exception(e.toString());
     }
   }
 
