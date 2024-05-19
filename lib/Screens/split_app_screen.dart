@@ -50,17 +50,17 @@ class _SplitAppScreenState extends ConsumerState<SplitAppScreen> {
           );
     } catch (e) {
       AlertDialog(
-        title: Text('Location Permission Required'),
-        content: Text('Please enable location permissions in app settings.'),
+        title:const Text('Location Permission Required'),
+        content:const Text('Please enable location permissions in app settings.'),
         actions: <Widget>[
           TextButton(
-            child: Text('Cancel'),
+            child:const Text('Cancel'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: Text('Open Settings'),
+            child:const Text('Open Settings'),
             onPressed: () {
               _openAppSettings(); // Open app settings when button is pressed
               Navigator.of(context).pop(); // Close the dialog

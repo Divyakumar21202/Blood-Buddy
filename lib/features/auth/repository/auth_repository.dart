@@ -43,13 +43,10 @@ class AuthRepository {
         );
         UserCredential cd =
             await FirebaseAuth.instance.signInWithCredential(credential);
-
-        print(FirebaseAuth.instance.currentUser!.uid.toString());
         return cd;
       }
       return null; // User canceled Google sign-in
     } catch (e) {
-      print('Error signing in with Google: $e');
       return null;
     }
   }

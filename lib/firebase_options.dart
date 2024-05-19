@@ -26,7 +26,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -50,19 +53,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDSEncrLHbmNTS5cVJIdVG66_uwohUbO4U',
-    appId: '1:202281554853:android:558b8bfd15c95356988e4c',
-    messagingSenderId: '202281554853',
-    projectId: 'blood-buddy-d514a',
-    storageBucket: 'blood-buddy-d514a.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDSEncrLHbmNTS5cVJIdVG66_uwohUbO4U',
-    appId: '1:202281554853:android:558b8bfd15c95356988e4c',
-    messagingSenderId: '202281554853',
-    projectId: 'blood-buddy-d514a',
-    storageBucket: 'blood-buddy-d514a.appspot.com',
-    iosBundleId: 'com.example.smartOdishaBlood',
+    apiKey: 'AIzaSyDAaKWVbesT_EJVJ1eSdwrUwXCURcWK5Xc',
+    appId: '1:483216111867:android:459dbfa8ac6a761cfa985e',
+    messagingSenderId: '483216111867',
+    projectId: 'blood-buddy-21dr',
+    storageBucket: 'blood-buddy-21dr.appspot.com',
   );
 }

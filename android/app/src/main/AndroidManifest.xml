@@ -22,7 +22,7 @@
     <application
         android:label="Blood Buddy"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true">
         <meta-data android:name="com.google.android.geo.API_KEY"

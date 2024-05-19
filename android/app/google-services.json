@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "202281554853",
-    "project_id": "blood-buddy-d514a",
-    "storage_bucket": "blood-buddy-d514a.appspot.com"
+    "project_number": "483216111867",
+    "project_id": "blood-buddy-21dr",
+    "storage_bucket": "blood-buddy-21dr.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:202281554853:android:558b8bfd15c95356988e4c",
+        "mobilesdk_app_id": "1:483216111867:android:459dbfa8ac6a761cfa985e",
         "android_client_info": {
           "package_name": "com.example.blood_buddy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "202281554853-h5k61irskc43g0f2rv5397q1diue5s9d.apps.googleusercontent.com",
+          "client_id": "483216111867-tq6d2md3g3imo065pufq6nl81lm45v4f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.blood_buddy",
@@ -22,28 +22,20 @@
           }
         },
         {
-          "client_id": "202281554853-m634bb7bnqlr191q7cs2ab22kmup9524.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.blood_buddy",
-            "certificate_hash": "43f21dfb7657fab6b43c898d093c91841d18f206"
-          }
-        },
-        {
-          "client_id": "202281554853-difevg1iet09bk8q0sk65bolvhg72ghj.apps.googleusercontent.com",
+          "client_id": "483216111867-mcjhqcaq5edoatm1mbbpko2jfcf0mdl4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDSEncrLHbmNTS5cVJIdVG66_uwohUbO4U"
+          "current_key": "AIzaSyDAaKWVbesT_EJVJ1eSdwrUwXCURcWK5Xc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "202281554853-difevg1iet09bk8q0sk65bolvhg72ghj.apps.googleusercontent.com",
+              "client_id": "483216111867-mcjhqcaq5edoatm1mbbpko2jfcf0mdl4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
